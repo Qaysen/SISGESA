@@ -1,0 +1,242 @@
+#beneficios
+{
+	background-image: url('../img/paper_fibers.png');
+}
+
+#descripcion
+{
+	font-size: 16pt;
+	font-family: 'Noto Sans', sans-serif;
+	color: #fff;
+	padding: 10px;
+}
+
+footer
+{
+	background-color: #1C1C1C;
+	height: 40px;
+}
+
+.grid-container
+{
+	width: 100%;
+	padding-left: 0;
+}
+
+h1
+{
+	margin: 1.5em 0 2em 1.5em;
+	color:  #393939;
+}
+
+header
+{
+	height: 140px;
+	background-image: url('../img/sisgesa.png');
+	background-repeat:no-repeat;
+	background-position:center; 
+}
+
+iframe
+{
+	width: 100%;
+}
+
+#intro
+{
+	padding: 20px 0 20px 0;
+	background-color: #EF7B00;	
+	height: 100%;
+}
+
+
+#menu a
+{
+	color: #7F7F7F;
+	font-size: 14pt;
+	font-family: 'Lato', sans-serif;
+	text-decoration: None;
+	padding-left: 40px;
+	background-size: 20px; 
+	background-repeat: no-repeat;
+}
+
+#menu li{
+	padding-bottom: 10px;
+}
+
+#menu ul {
+	list-style-type: none;
+	vertical-align: middle;
+}
+
+#menu #inicio
+{
+	background-image: url("../img/001.png");	
+	background-position: 10% 50%;
+}
+
+#menu #equipo
+{
+	background-image: url("../img/002.png");	
+	background-position: 10% 50%;
+}
+
+#menu #contacto
+{
+	background-image: url("../img/004.png");	
+	background-position: 6% 50%;
+}
+
+section .contenido
+{
+	margin: 0 3em 1em 4em;
+}
+
+.iconlist
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 0;
+	padding-right: 0;
+	list-style-type: none;
+	float: left;
+}
+
+.iconlist-3-col
+{
+	-moz-column-count:3; /* Firefox */
+	-webkit-column-count:3; /* Safari and Chrome */
+	column-count:3;
+}
+
+.iconlist-2-col
+{
+	-moz-column-count:2; /* Firefox */
+	-webkit-column-count:2; /* Safari and Chrome */
+
+	column-count:2;
+}
+
+.iconlist li
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	display: inline-block;
+	padding-left: auto;
+	padding-right: auto;
+	margin-bottom: 0;
+}
+.iconlist .imagen-centrada
+{
+	margin: 0;
+	padding: 0;
+	text-align: center;	
+}
+
+.iconlist h2
+{
+	text-align: center;
+}
+
+.iconlist figcaption p
+{
+	width: 250px;
+	text-align: justify;
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+
+@media screen and (max-width: 767px) {
+	
+	header
+	{
+		height: 260px;
+		background-position: 45% 55%; 
+		padding-bottom: 0;
+	}
+	
+	.video
+	{
+		padding: 0;
+	}
+	
+	#intro
+	{
+		padding-top: 3px;
+	}	
+	
+	#descripcion
+	{
+		height: 30px;
+		overflow: hidden;
+		padding: 0.5em 1em 0 1em;
+		margin-bottom: 0;
+		font-size: 12pt;
+		text-align: auto;
+		
+	}
+	
+	.on
+	{
+		height: 200px;
+	}
+	
+	#descripcion span:after
+	{
+		content: " >";
+	}
+	
+	li {
+		float: left;
+	}
+	
+	#menu #inicio,
+	#menu #equipo,
+	#menu #contacto
+	{
+		background-image: none;
+	}
+	
+	#menu ul a
+	{
+		padding: 0;
+		padding-right: 30px;
+	}
+	
+	#menu ul
+	{
+		margin-left: auto;
+		margin-right: auto;
+		width:100%;
+	}
+	#menu
+	{
+		margin-top: 0;
+	}
+	
+	h1
+	{
+		text-align: center;
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.iconlist
+	{
+		-moz-column-count:1; /* Firefox */
+		-webkit-column-count:1; /* Safari and Chrome */
+		column-count:1;
+	}
+	
+	.iconlist figcaption p
+	{
+		width: 100%;
+		text-align: justify;
+		margin-left: auto;
+		margin-right: auto; 
+	}

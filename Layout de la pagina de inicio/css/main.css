@@ -1,0 +1,27 @@
+.nav
+{
+	float: left;
+	width: 120px;
+	background-color: #222222;
+	text-decoration: None;
+	color: #fff;
+	padding-top: 10px;
+	padding-left: 20px;
+	margin: 0;
+	height: 900px;
+	
+}
+
+.sub-nav
+{
+	float: left;
+	width: 120px;
+	background-color: #2681DC;
+	text-decoration: None;
+	color: #fff;
+	padding-top: 10px;
+	padding-left: 20px;
+	margin: 0;
+	height: 900px;
+	
+}
