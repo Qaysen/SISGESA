@@ -29,16 +29,17 @@
 				</ul>
 			</nav>
 			
-		<div id="descripcion" class="grid-container">
-				Aplicación web para la mejora del rendimiento académico de sus alumnos
-		</div>
 		<section id="intro" class="grid-container">
 			
 			<div class="video prefix-10 grid-40">
 				<iframe src="http://player.vimeo.com/video/64114843?title=0&amp;byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen>
 				</iframe> 
-			</div>			
-
+			</div>
+			
+			<div id="descripcion" class="grid-container">
+								
+				Aplicación web para la mejora del rendimiento académico de sus alumnos
+			</div>
 			
 		</section>
 		

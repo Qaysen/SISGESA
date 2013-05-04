@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+ 
+.icon-home:before { content: '\2302'; } /* '⌂' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-users:before { content: '👥'; } /* '\1f465' */
