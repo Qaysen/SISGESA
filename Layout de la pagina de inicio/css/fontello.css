@@ -2,11 +2,11 @@
 
  @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?90697979');
-  src: url('../font/fontello.eot?90697979#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff?90697979') format('woff'),
-       url('../font/fontello.ttf?90697979') format('truetype'),
-       url('../font/fontello.svg?90697979#fontello') format('svg');
+  src: url('../font/fontello.eot?76680963');
+  src: url('../font/fontello.eot?76680963#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?76680963') format('woff'),
+       url('../font/fontello.ttf?76680963') format('truetype'),
+       url('../font/fontello.svg?76680963#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,7 +16,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?90697979#fontello') format('svg');
+    src: url('../font/fontello.svg?76680963#fontello') format('svg');
   }
 }
 */
@@ -54,4 +54,5 @@
  
 .icon-home:before { content: '\2302'; } /* '⌂' */
 .icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-right-open:before { content: '\e75e'; } /* '' */
 .icon-users:before { content: '👥'; } /* '\1f465' */

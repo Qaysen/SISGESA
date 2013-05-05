@@ -3,4 +3,5 @@
  
 .icon-home:before { content: '\2302'; } /* '⌂' */
 .icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-right-open:before { content: '\e75e'; } /* '' */
 .icon-users:before { content: '👥'; } /* '\1f465' */

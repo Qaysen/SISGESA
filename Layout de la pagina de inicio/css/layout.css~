@@ -8,6 +8,19 @@ body
 	background-image: url('../img/paper_fibers.png');
 }
 
+.boton
+{
+    display: block;
+    margin: 10px;
+    margin-top: 100px;
+    padding: 20px;
+    background-color: rgb(0, 119, 129);
+    float: left;
+    width: 25%;
+    color: #fff;
+
+}
+
 .contenido
 {
 
@@ -16,10 +29,14 @@ body
 
 #descripcion
 {
+	border-bottom-style: solid;
+	border-width: 3px;
+	border-color: rgb(161, 204, 68);
+	background-color: rgb(27, 27, 27);
 	text-align: center;
 	font-size: 16pt;
 	font-family: 'Noto Sans', sans-serif;
-	color: ;
+	color: rgb(255, 255, 255);
 	padding: 10px;
 }
 
@@ -48,6 +65,16 @@ header
 	height: 140px;
 }
 
+.video
+{
+	float: left;
+	width: 50%;
+	margin: 0 auto;
+	border-style: solid;
+	border-width: 10px;
+	border-color: #fff;
+}
+
 iframe
 {
 	width: 100%;
@@ -55,15 +82,22 @@ iframe
 
 #intro
 {
-	padding: 20px 0 20px 0;
-	background-color: #3992b9;
-	height: 100%;
+	padding: 20px 0 16px 0;
+	background-image: url("http://placekitten.com/g/1400/320");
+	background-repeat: no-repeat;
+	background-color: rgb(203, 219, 247);
+	height: 240px;
+	overflow: hidden;
 }
-
 
 /* MENU SUPERIOR*/
 .cont-menu
 {
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: rgb(223, 223, 223);
+	border-bottom-color: rgb(29, 29, 29);
+	border-width: 1px;
 	padding-top: 10px;
 	background-color: rgb(248, 248, 248);
 }
@@ -105,149 +139,49 @@ section .contenido
 	margin: 0 3em 1em 4em;
 }
 
-.iconlist
+h2
 {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 0;
-	padding-right: 0;
-	list-style-type: none;
-	float: left;
+	background-color: rgb(12, 12, 12);
+	color: #fff;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	margin: 0;
+	border-bottom-style: solid;
+	border-color: rgb(88, 168, 221);
+	border-width: 3px;
+	text-align: center;
+	font-size: 28pt;
+	font-family: 'Lato', sans-serif;
 }
 
-.iconlist-3-col
+/* LOS BLOQUES DENTRO DE BENEFICIOS Y CARACTERíSTICAS */
+.bloque-texto-interno
 {
-	-moz-column-count:3; /* Firefox */
-	-webkit-column-count:3; /* Safari and Chrome */
-	column-count:3;
+	margin: 25px;
 }
-
-.iconlist-2-col
-{
-	-moz-column-count:2; /* Firefox */
-	-webkit-column-count:2; /* Safari and Chrome */
-
-	column-count:2;
-}
-
-.iconlist li
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	display: inline-block;
-	padding-left: auto;
-	padding-right: auto;
-	margin-bottom: 0;
-}
-.iconlist .imagen-centrada
+.bloque-texto-interno h3,
+.bloque-texto-interno i
 {
 	margin: 0;
-	padding: 0;
-	text-align: center;	
+	font-size: 20pt;
+	font-family: 'Noto Sans', sans-serif;
+	color: rgb(0, 99, 112);
+	display:inline-block;
+	vertical-align: middle;
 }
 
-.iconlist h2
+.bloque-texto-interno i
 {
-	text-align: center;
+	color: rgb(214, 54, 54); 
+	font-size: 20pt;
 }
 
-.iconlist figcaption p
+.bloque-texto-interno p
 {
-	width: 250px;
-	text-align: justify;
-	margin-left: auto;
-	margin-right: auto; 
+	margin-left: 40px;
+	font-size: 14pt;
+	font-family: 'Noto Sans', sans-serif;	
 }
-
 
 /*@media screen and (max-width: 767px) {*/
-/*	*/
-/*	header*/
-/*	{*/
-/*		height: 260px;*/
-/*		background-position: 45% 55%; */
-/*		padding-bottom: 0;*/
-/*	}*/
-/*	*/
-/*	.video*/
-/*	{*/
-/*		padding: 0;*/
-/*	}*/
-/*	*/
-/*	#intro*/
-/*	{*/
-/*		padding-top: 3px;*/
-/*	}	*/
 
-/*    #descripcion*/
-/*    {*/
-/*        height: 30px;*/
-/*        overflow: hidden;*/
-/*        padding: 0.5em 1em 0 1em;*/
-/*        margin-bottom: 0;*/
-/*        font-size: 12pt;*/
-/*        text-align: auto;*/
-/*    }*/
-
-/*	.on*/
-/*	{*/
-/*		height: 200px;*/
-/*	}*/
-/*	*/
-/*	#descripcion span:after*/
-/*	{*/
-/*		content: " >";*/
-/*	}*/
-/*	*/
-/*	li {*/
-/*		float: left;*/
-/*	}*/
-/*	*/
-/*	#menu #inicio,*/
-/*	#menu #equipo,*/
-/*	#menu #contacto*/
-/*	{*/
-/*		background-image: none;*/
-/*	}*/
-/*	*/
-/*	#menu ul a*/
-/*	{*/
-/*		padding: 0;*/
-/*		padding-right: 30px;*/
-/*	}*/
-/*	*/
-/*	#menu ul*/
-/*	{*/
-/*		margin-left: auto;*/
-/*		margin-right: auto;*/
-/*		width:100%;*/
-/*	}*/
-/*	#menu*/
-/*	{*/
-/*		margin-top: 0;*/
-/*	}*/
-/*	*/
-/*	h1*/
-/*	{*/
-/*		text-align: center;*/
-/*		padding-left: 0;*/
-/*		padding-right: 0;*/
-/*		margin-left: 0;*/
-/*		margin-right: 0;*/
-/*	}*/
-/*	.iconlist*/
-/*	{*/
-/*		-moz-column-count:1; /* Firefox */*/
-/*		-webkit-column-count:1; /* Safari and Chrome */*/
-/*		column-count:1;*/
-/*	}*/
-/*	*/
-/*	.iconlist figcaption p*/
-/*	{*/
-/*		width: 100%;*/
-/*		text-align: justify;*/
-/*		margin-left: auto;*/
-/*		margin-right: auto; */
-/*	}*/

@@ -30,6 +30,19 @@
     },
     {
       "search": [
+        "arrow",
+        "right"
+      ],
+      "code": 59230,
+      "from": 59230,
+      "uid": "399ef63b1e23ab1b761dfbb5591fa4da",
+      "css": "right-open",
+      "orig_css": "right-open",
+      "orig_code": 59230,
+      "src": "fontawesome"
+    },
+    {
+      "search": [
         "users",
         "contacts",
         "friends"
