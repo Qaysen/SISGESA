@@ -150,3 +150,10 @@ LOGGING = {
         },
     }
 }
+
+# Configuracion del servidor de correo
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sisgesa@gmail.com'
+EMAIL_HOST_PASSWORD = 'qaysensisgesa'
+EMAIL_USE_TLS = True
