@@ -1,13 +1,23 @@
 <html>
 <head>
-	<title>Listaaa de Hijoss</title>
+
+	<title>Listaaa de Padres</title>
+
 </head>
 <body>
-	<table>
-		
+	<table width="400px">
+		<tr>
+			<td width="200px" align="center">Alumno</td>
+			<td width="200px" align="center">Padre</td>
+		</tr>
+		{% for i in alumnos %}
+		<tr>
+			<td width="200px" align="center">{{ i.alumno.usuario.first_name }}</td>
+			<td width="200px" align="center">{{ i.alumno.apoderado.usuario.first_name }}</td>
+		</tr>
+		{% endfor %}
 
 	</table>	
-		
 	
 </body>
 </html>

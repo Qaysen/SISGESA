@@ -46,6 +46,18 @@ def ver_hijos(request):
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
 def ver_lista_padres(request,username):
-	detalles_alumno = Matricula.objects.filter(alumno__usuario__username=username)
-	print detalles_alumno
- 	return render_to_response('lista_padres.html',context_instance=RequestContext(request))
+	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
+	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
+	ctx = {'alumnos':alumnos}
+ 	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
+
+def ver_lista_profesores(request,username):
+	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
+	profesores = Ensenia.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , cursogrado__grado__nombre=detalles_alumno.grado.nombre)
+	ctx = {'profesores':profesores}
+ 	return render_to_response('lista_profesores.html',ctx,context_instance=RequestContext(request))
+
+
+
+
+
