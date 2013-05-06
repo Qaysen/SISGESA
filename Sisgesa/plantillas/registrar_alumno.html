@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Registrar Alumnos</title>
+</head>
+<body>
+	<form method="POST">
+		<legend>Registrar Alumno</legend>
+				{% csrf_token %}
+				<div>
+					<label> Nombres: </label>
+					<input type='text' name='first_name' maxlength='20'>
+					
+				</div>
+				<div>
+					<label> Apellidos: </label>
+					<input type='text' name='last_name' maxlength='30'>
+					
+				</div>
+				<div>
+					<label>Teléfono Fijo:</label>
+					<input type='text' name='telefono' maxlength='30'>
+					
+				</div>
+				<div>
+					<label>Celular :</label>
+					<input type='text' name='celular' maxlength='30'>
+					
+				</div>
+				<div>
+					<label>DNI :</label>
+					<input type='text' name='dni' maxlength='30'>
+				</div>
+				<div>
+					<label>Email :</label>
+					<input type='email' name='email' maxlength='30'>
+				</div>
+				<div>
+					<label>Dirección :</label>
+					<input type='text' name='direccion' maxlength='30'>
+					
+				</div>
+
+				
+				
+				
+				<br>
+				<input type="submit" value="Registrar">
+	</form>
+</body>
+</html>
