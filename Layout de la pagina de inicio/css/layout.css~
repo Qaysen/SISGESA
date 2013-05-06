@@ -1,0 +1,199 @@
+body
+{
+	background-color: #464646;
+}
+
+#beneficios
+{
+	margin-top: 100px;
+}
+
+.bloque-seccion
+{
+	background-image: url('../img/paper_fibers.png');
+	margin-left:25%;
+	margin-right:24.95%;
+}
+.boton
+{
+    display: block;
+    margin: 10px;
+    margin-top: 100px;
+    padding: 20px;
+    background-color: rgb(0, 119, 129);
+    float: left;
+    width: 25%;
+    color: #fff;
+
+}
+
+.contenido
+{
+
+	background-color: #fff;
+}
+
+#descripcion
+{
+	border-bottom-style: solid;
+	border-width: 3px;
+	border-color: rgb(161, 204, 68);
+	background-color: rgb(27, 27, 27);
+	text-align: center;
+	font-size: 16pt;
+	font-family: 'Noto Sans', sans-serif;
+	color: rgb(255, 255, 255);
+	padding: 10px;
+}
+
+footer
+{
+	background-color: #1C1C1C;
+	height: 40px;
+}
+
+.logo
+{
+	margin-top: 50px;
+	color:  #393939;
+}
+
+h1.logo
+{
+	font-size: 36pt;
+	font-family: 'Lato', sans-serif;
+	text-align: center;
+}
+
+
+header
+{
+	height: 140px;
+}
+
+.video
+{
+	width: 50%;
+	margin: 0 auto;
+	border-style: solid;
+	border-width: 10px;
+	border-color: #fff;
+}
+
+iframe
+{
+	width: 100%;
+}
+
+#intro
+{
+	padding: 20px 0 16px 0;
+	background-image: url("http://placekitten.com/g/1400/360");
+	background-repeat: no-repeat;
+	background-color: rgb(203, 219, 247);
+	height: 280px;
+	
+}
+
+/* MENU SUPERIOR*/
+.cont-menu
+{
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: rgb(223, 223, 223);
+	border-bottom-color: rgb(29, 29, 29);
+	border-width: 1px;
+	padding-top: 10px;
+	background-color: rgb(248, 248, 248);
+}
+
+#menu
+{
+	margin-top: 0;
+	width:60%;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1em;
+	
+	-webkit-column-count: 3;
+	column-count: 3;
+	list-style-type: none;
+}
+
+#menu a
+{
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	color: #7F7F7F;
+	font-size: 14pt;
+	font-family: 'Lato', sans-serif;
+	text-decoration: None;
+}
+
+#menu li
+{
+	width: 33%
+	float: left;
+}
+
+/* OTRA COSA*/
+section .contenido
+{
+	margin: 0 3em 1em 4em;
+}
+
+h2
+{
+	background-color: rgb(12, 12, 12);
+	color: #fff;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	margin: 0;
+	border-bottom-style: solid;
+	border-color: rgb(88, 168, 221);
+	border-width: 3px;
+	text-align: center;
+	font-size: 28pt;
+	font-family: 'Lato', sans-serif;
+}
+
+/* LOS BLOQUES DENTRO DE BENEFICIOS Y CARACTERíSTICAS */
+.bloque-texto-interno
+{
+	margin: 25px;
+}
+.bloque-texto-interno h3,
+.bloque-texto-interno i
+{
+	margin: 0;
+	font-size: 20pt;
+	font-family: 'Noto Sans', sans-serif;
+	color: rgb(0, 99, 112);
+	display:inline-block;
+	vertical-align: middle;
+}
+
+.bloque-texto-interno h3
+{
+	display:block;
+	text-align: center;
+}
+.bloque-texto-interno i
+{
+	display: none;
+	color: rgb(214, 54, 54); 
+	font-size: 20pt;
+}
+
+.bloque-texto-interno p
+{
+	text-align: center;
+	margin-left: 40px;
+	font-size: 14pt;
+	font-family: 'Noto Sans', sans-serif;	
+}
+
+/*@media screen and (max-width: 767px) {*/
+

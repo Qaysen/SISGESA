@@ -1,0 +1,112 @@
+@font-face{font-family:'sisgesa';src:url("fonts/sisgesa.eot");src:url("fonts/sisgesa.eot?#iefix") format('embedded-opentype'),url("fonts/sisgesa.woff") format('woff'),url("fonts/sisgesa.ttf") format('truetype'),url("fonts/sisgesa.svg#sisgesa") format('svg');font-weight:normal;font-style:normal}
+[data-icon]:before{font-family:'sisgesa';content:attr(data-icon);speak:none;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
+.icono-home,.icono-users,.icono-users-2,.icono-library,.icono-book,.icono-calendar,.icono-calendar-2,.icono-user,.icono-cog,.icono-lock,.icono-aid,.icono-cog-2,.icono-spell-check,.icono-checkmark,.icono-checkmark-2,.icono-spam,.icono-close,.icono-exit,.icono-enter,.icono-plus,.icono-file,.icono-feed,.icono-camera,.icono-tag,.icono-phone,.icono-gift,.icono-list,.icono-camera-2,.icono-bookmark,.icono-calendar-3,.icono-address-book,.icono-chat-alt-stroke,.icono-chat-alt-fill,.icono-comment-alt2-stroke,.icono-mail,.icono-document-alt-stroke,.icono-battery-empty,.icono-battery-half,.icono-battery-full,.icono-battery-charging,.icono-arrow-left-alt1,.icono-arrow-right,.icono-arrow-left,.icono-arrow-right-alt1,.icono-arrow-left-alt2,.icono-arrow-right-alt2,.icono-arrow-up,.icono-move-vertical,.icono-move-vertical-alt1,.icono-arrow-down-alt1,.icono-arrow-up-alt1,.icono-reload,.icono-trash-fill,.icono-trash-stroke,.icono-plus-alt,.icono-minus-alt,.icono-list-2,.icono-book-alt2,.icono-pen,.icono-pen-alt-stroke,.icono-paperclip{font-family:'sisgesa';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
+.icono-home:before{content:"\e00c"}
+.icono-users:before{content:"\e000"}
+.icono-users-2:before{content:"\e001"}
+.icono-library:before{content:"\e002"}
+.icono-book:before{content:"\e003"}
+.icono-calendar:before{content:"\e004"}
+.icono-calendar-2:before{content:"\e005"}
+.icono-user:before{content:"\e006"}
+.icono-cog:before{content:"\e007"}
+.icono-lock:before{content:"\e008"}
+.icono-aid:before{content:"\e009"}
+.icono-cog-2:before{content:"\e00a"}
+.icono-spell-check:before{content:"\e00b"}
+.icono-checkmark:before{content:"\e00d"}
+.icono-checkmark-2:before{content:"\e00e"}
+.icono-spam:before{content:"\e00f"}
+.icono-close:before{content:"\e010"}
+.icono-exit:before{content:"\e011"}
+.icono-enter:before{content:"\e012"}
+.icono-plus:before{content:"\e013"}
+.icono-file:before{content:"\e014"}
+.icono-feed:before{content:"\e015"}
+.icono-camera:before{content:"\e016"}
+.icono-tag:before{content:"\e017"}
+.icono-phone:before{content:"\e018"}
+.icono-gift:before{content:"\e019"}
+.icono-list:before{content:"\e01a"}
+.icono-camera-2:before{content:"\e01b"}
+.icono-bookmark:before{content:"\e01c"}
+.icono-calendar-3:before{content:"\e01d"}
+.icono-address-book:before{content:"\e01e"}
+.icono-chat-alt-stroke:before{content:"\e01f"}
+.icono-chat-alt-fill:before{content:"\e020"}
+.icono-comment-alt2-stroke:before{content:"\e021"}
+.icono-mail:before{content:"\e022"}
+.icono-document-alt-stroke:before{content:"\e023"}
+.icono-battery-empty:before{content:"\e024"}
+.icono-battery-half:before{content:"\e025"}
+.icono-battery-full:before{content:"\e026"}
+.icono-battery-charging:before{content:"\e027"}
+.icono-arrow-left-alt1:before{content:"\e028"}
+.icono-arrow-right:before{content:"\e029"}
+.icono-arrow-left:before{content:"\e02a"}
+.icono-arrow-right-alt1:before{content:"\e02b"}
+.icono-arrow-left-alt2:before{content:"\e02c"}
+.icono-arrow-right-alt2:before{content:"\e02d"}
+.icono-arrow-up:before{content:"\e02e"}
+.icono-move-vertical:before{content:"\e02f"}
+.icono-move-vertical-alt1:before{content:"\e030"}
+.icono-arrow-down-alt1:before{content:"\e031"}
+.icono-arrow-up-alt1:before{content:"\e032"}
+.icono-reload:before{content:"\e033"}
+.icono-trash-fill:before{content:"\e034"}
+.icono-trash-stroke:before{content:"\e035"}
+.icono-plus-alt:before{content:"\e036"}
+.icono-minus-alt:before{content:"\e037"}
+.icono-list-2:before{content:"\e038"}
+.icono-book-alt2:before{content:"\e039"}
+.icono-pen:before{content:"\e03a"}
+.icono-pen-alt-stroke:before{content:"\e03b"}
+.icono-paperclip:before{content:"\e03c"}
+.styl,*{box-sizing:border-box}
+body{font-family:"Open Sans"}
+.login{background:#ededed;color:#404040;font-size:16px;padding:5% 0 15% 0;}
+.login header{margin:0 auto;padding:.5em 0 0 0;text-align:center;width:300px;}
+.login header h1{font-family:"Cherry Swash";font-size:3em}
+.login section{margin:30px auto;text-align:center;width:350px;}
+.login section img{width:50px}
+.login section p,.login section img{display:inline-block;vertical-align:top}
+.login form{background-color:#fefefe;border:1px solid #dde0e8;margin:0 auto;width:350px;}
+.login form .inputs{padding:25px;}
+.login form .inputs label,.login form .inputs input{display:block}
+.login form .inputs label{margin:10px 0}
+.login form .inputs input{background-color:#fbfbfb;border:1px solid #ccc;border-radius:2px;padding:7.5px 15px;width:90%;}
+.login form .inputs input:focus{border-color:rgba(82,168,236,0.8);box-shadow:inset 0 1px 3px rgba(0,0,0,0.075);outline:0}
+.login form .boton{background-color:#eff4f6;overflow:hidden;padding:20px;}
+.login form .boton button{background-color:#eeeef1;border:1px solid #d2d2d6;border-radius:2px;color:#555;float:right;padding:7.5px 15px;}
+.login form .boton button:hover{border-radius:0}
+.icono{color:#b2b2b2;font-size:1.2em}
+.borde{background-color:rgba(0,0,0,0.01);float:right;height:100%;width:6px}
+.cabecera{background-color:#54728c;border-bottom:1.5px solid #35536c;height:50px;}
+.cabecera .titulo{width:215px;height:50px;}
+.cabecera .titulo h1{color:#fff;font-family:"Cherry Swash";font-size:2em;margin:0;padding:2.5px 1em;text-shadow:1px 2px 4px #496780,0 0 0 #000,1px 2px 4px #496780,0 1px 0 #67859e}
+.cabecera .titulo h1,.cabecera .titulo .borde{display:inline-block}
+.cabecera .titulo .borde{background-color:#66829a;border-left:1px solid #466176;border-right:1px solid #466176;width:6px}
+.sidebar{background-color:#f9f9f9;height:100%;position:fixed;width:215px;}
+.sidebar section{color:#5e5e5e;width:205px;}
+.sidebar section .usuario{margin:10px 0;padding:0 10px;}
+.sidebar section .usuario img{border:2px solid #fff;border-radius:30px;opacity:.8;width:60px}
+.sidebar section .usuario h5{font-size:.8em;width:115px}
+.sidebar section .usuario img,.sidebar section .usuario h5{display:inline-block;vertical-align:middle}
+.sidebar section .perfil{background-color:#cd6560;border:1px solid #ca362f;border-radius:2px;color:#fff;font-size:.9em;margin:0 15px;padding:7.5px;text-align:center;width:170px}
+.sidebar section nav ul{padding-left:0;}
+.sidebar section nav ul li{font-size:14px;margin:0 0;padding:10px 0 10px 15px;}
+.sidebar section nav ul li.activo{background-color:#fcfcfc;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;margin-bottom:-1px;margin-top:-1px;width:215px}
+.sidebar section nav ul li:hover{background-color:#fcfcfc;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;margin-bottom:-1px;margin-top:-1px;width:209px}
+.sidebar section nav ul li .icono{color:#aaa;font-size:1.2em}
+.sidebar section nav ul li p{margin:0 0 0 5px;padding:0;width:100px}
+.sidebar section nav ul li .alertas{background-color:#cd6560;border:1px solid #ca362f;border-radius:2px;color:#fff;padding:0;position:absolute;text-align:center;right:15px;width:20px}
+.sidebar section nav ul li p,.sidebar section nav ul li .alertas,.sidebar section nav ul li .icono{display:inline-block;vertical-align:top}
+.sidebar section,.sidebar .borde{display:inline-block}
+.sidebar .borde{background-color:#ececec;border-left:1px solid #dadada;border-right:1px solid #dadada}
+.sidebar,.contenido{display:inline-block;vertical-align:top}
+.contenido{padding-left:215px;}
+.contenido menu{border:1px solid #e1e1e1;border-radius:2px;margin:10px;padding:0 4px 0 0;}
+.contenido menu span{background-color:#f5f5f5;border-right:1px solid #e1e1e1;display:inline-block;margin-right:-4px;padding:.7em;}
+.contenido menu span:nth-child(4){border-right:none !important}
+.contenido menu span .icono{font-size:1.2em}
+.contenido menu span:hover .icono-phone{color:#58ca58;-webkit-text-stroke-color:#30a230;-webkit-text-stroke-width:.75px}
