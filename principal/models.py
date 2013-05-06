@@ -76,7 +76,7 @@ class Seccion(models.Model):
 		return unicode(self.nombre)
 
 
-class SeccProCuGra(models.Model):
+class Ensenia(models.Model):
 	seccion = models.ForeignKey(Seccion)
 	profesor = models.ForeignKey(Profesor)
 	cursogrado = models.ForeignKey(CursoGrado)
@@ -97,17 +97,17 @@ class Unidad(models.Model):
 	def __unicode__(self):
 		return unicode(self.tipo)
 
-class SeccProCuGraEval(models.Model):
-	seccprocugra = models.ForeignKey(SeccProCuGra)
+class Evalua(models.Model):
+	ensenia = models.ForeignKey(Ensenia)
 	unidad = models.ForeignKey(Unidad)
 	evaluacion = models.ForeignKey(Evaluacion)
 	
 	def __unicode__(self):
-		return '%s, %s, %s' %(self.seccprocugra, self.unidad, self.evaluacion)
+		return '%s, %s, %s' %(self.ensenia, self.unidad, self.evaluacion)
 
 class Califica(models.Model):
 	alumno = models.ForeignKey(Alumno)
-	seccprocugraeval = models.ForeignKey(SeccProCuGraEval)
+	evalua = models.ForeignKey(Evalua)
 	nota = models.IntegerField(max_length=3)
 	fecha = models.DateField(auto_now=False)
 	
@@ -140,3 +140,50 @@ class Matricula(models.Model):
 
 	def __unicode__(self):
 		return '%s en %s-%s' %(self.alumno, self.grado, self.seccion)
+
+class Material(models.Model):
+	nombre =models.CharField(max_length=30)
+	descripcion =models.CharField(max_length=50)
+	
+	def __unicode__(self):
+		return unicode(self.nombre)
+
+class Sube(models.Model):
+	ensenia = models.ForeignKey(Ensenia)
+	material = models.ForeignKey(Material)
+	
+	def __unicode__(self):
+		return '%s/%s' %(self.ensenia, self.material)
+
+class Asistencia(models.Model):
+	alumno = models.ForeignKey(Alumno)
+	ensenia = models.ForeignKey(Ensenia)
+	fecha = models.DateField(auto_now=False)
+	estado =models.BooleanField(default='False')
+
+	
+	def __unicode__(self):
+		return '%s-%s' %(self.alumno, self.estado)
+
+class Comunicado(models.Model):
+	nombre =models.CharField(max_length=30)
+	descripcion =models.CharField(max_length=500)
+	
+	def __unicode__(self):
+		return unicode(self.nombre)
+
+class Comunica(models.Model):
+	comunicado = models.ForeignKey(Comunicado)
+	ensenia = models.ForeignKey(Ensenia)
+		
+	def __unicode__(self):
+		return '%s-%s' %(self.comunicado, self.ensenia)
+
+class Envia(models.Model):
+	administrador = models.ForeignKey(Administrador)
+	comunicado = models.ForeignKey(Comunicado)
+	fecha = models.DateField(auto_now=False)	
+
+	
+	def __unicode__(self):
+		return '%s-%s' %(self.administrador, self.comunicado)
