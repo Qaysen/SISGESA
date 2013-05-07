@@ -1,0 +1,36 @@
+<html>
+<head>
+
+	<title>Listaaa de Padres</title>
+
+</head>
+<body>
+
+	<table width="1050px">
+		<tr>
+			<td width="200px" align="center">Profesor</td>
+			<td width="200px" align="center">Curso</td>
+			<td width="100px" align="center">Email</td>
+			<td width="200px" align="center">Direccion</td>
+			<td width="100px" align="center">Telefono</td>
+			<td width="100px" align="center">Celular</td>
+			<td width="50px" align="center">CV</td>
+			<td width="100px" align="center">Dejar Mensaje</td>
+		</tr>
+		{% for i in profesores %}
+		<tr>
+			<td width="200px" align="center">{{ i.profesor.usuario.first_name }}</td>
+			<td width="200px" align="center">{{ i.cursogrado.curso.nombre }}</td>
+			<td width="100px" align="center">{{ i.profesor.usuario.email }}</td>
+			<td width="200px" align="center">{{ i.profesor.direccion }}</td>
+			<td width="100px" align="center">{{ i.profesor.telefono }}</td>
+			<td width="100px" align="center">{{ i.profesor.celular }}</td>
+			<td width="50px" align="center"><a href="{{MEDIA_URL}}{{i.profesor.cvitae}}">bajar</a></td>
+			<td width="100px" align="center"><a href="#">Dejar Mensaje</a></td>
+		</tr>
+		{% endfor %}
+
+	</table>	
+	
+</body>
+</html>

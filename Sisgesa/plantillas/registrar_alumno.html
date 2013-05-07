@@ -7,23 +7,25 @@
 		<legend>Registrar Alumno</legend>
 				{% csrf_token %}
 				<div>
-					<label> Nombres: </label>
+					<label> Nombres:</label>
 					<input type='text' name='first_name' maxlength='20'>
-					
+					{{ formulario.first_name.errors }}
 				</div>
 				<div>
 					<label> Apellidos: </label>
 					<input type='text' name='last_name' maxlength='30'>
-					
+
+					{{ formulario.last_name.errors }}
+
 				</div>
 				<div>
 					<label>Teléfono Fijo:</label>
-					<input type='text' name='telefono' maxlength='30'>
-					
+					<input type='tel' name='telefono' maxlength='30'>
+
 				</div>
 				<div>
 					<label>Celular :</label>
-					<input type='text' name='celular' maxlength='30'>
+					<input type='tel' name='celular' maxlength='30'>
 					
 				</div>
 				<div>
@@ -33,6 +35,9 @@
 				<div>
 					<label>Email :</label>
 					<input type='email' name='email' maxlength='30'>
+
+					{{ formulario.email.errors }}
+
 				</div>
 				<div>
 					<label>Dirección :</label>
@@ -40,8 +45,11 @@
 					
 				</div>
 
-				
-				
+				<div>
+					<label>apoderado :</label>
+					<input type='tel' name='apoderado' maxlength='30'>
+					
+				</div>
 				
 				<br>
 				<input type="submit" value="Registrar">

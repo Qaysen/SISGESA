@@ -52,28 +52,36 @@ def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEF
 	return ''.join([choice(allowed_chars) for i in range(length)])
 ##################################################################
 
+#REGISTRO DE ALUMNOS AL 100% CON ENVIO DE CREDENCIALES AL EMAIL CONSIDERO CON DEFECTO AL APODERADO DEL ALUMNO COMO 1
+#BUENO CREO Q PARA CAPTURAR EL APODERADO SE PUEDE HACER MEDIANTE HALLAS EN PLANTILLA
 def registrar_alumnos(request):
-	if request.method == 'POST':
-		usuario=User.objects.create( username =request.POST['email'],
-									first_name =request.POST['first_name'],
-									last_name =request.POST['last_name'],
-									email =request.POST['email'],
-									password =make_random_password()
-									)
-			
-		password = usuario.password
-		usuario.set_password(password)
-		usuario.save()
-	
-		Alumno.objects.create(usuario=usuario,dni=request.POST['dni'],direccion=request.POST['direccion'],telefono=request.POST['telefono'],celular=request.POST['celular'])
-		# CONFIGURACION DEL ENVIO DEL MENSAJE VIA GMAIL
-		to_alumno = usuario.email
-		html_contenido = "<p>Sus credenciales de acceso al Sistema de Gestion Academica son: </p><br><br><b>Usuario: </b> %s <br><br><b>Password: </b> %s"%(usuario.username , password)
-		msg = EmailMultiAlternatives('Correo de Contacto',html_contenido,'from@server.com',[to_alumno])
-		msg.attach_alternative(html_contenido,'text/html')#Definir el contenido como html
-		msg.send()
-		
-	return render_to_response('registrar_alumno.html',context_instance=RequestContext(request))
+	if request.method=='POST':
+		usuario = request.POST.copy()
+		usuario['username']=usuario['email']		
+		usuario['password']=usuario['username']
+		user_form = UserForm(usuario)
+		if user_form.is_valid():
+			user_form.save()
+			usur2=User.objects.get(username=usuario['username'])
+			mi_clave=make_random_password()
+			usur2.set_password(mi_clave)
+			usur2.save()
+			usuario['usuario']=usur2.id
+			usuario['apoderado']='1'
+			alumno_form=RegistrarAlumnoForm(usuario)
+			if alumno_form.is_valid():
+				alumno_form.save()
+				to_alumno = usur2.email
+				html_contenido = "<p>Sus credenciales de acceso al Sistema de Gestion Academica son: </p><br><br><b>Usuario: </b> %s <br><br><b>Password: </b> %s"%(usur2.username ,mi_clave)
+				msg = EmailMultiAlternatives('Correo de Contacto',html_contenido,'from@server.com',[to_alumno])
+				msg.attach_alternative(html_contenido,'text/html')#Definir el contenido como html
+				msg.send()
+			return HttpResponseRedirect('/')
+	else:
+		user_form = UserForm()
+		alumno_form = RegistrarAlumnoForm()
+	return render_to_response('registrar_alumno.html', {'formulario':user_form,'alumno_form': alumno_form }, context_instance=RequestContext(request))
+
 
 
 # VER TODOS LOS HIJOS DE UN PADREE , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL PADRE,
@@ -84,6 +92,78 @@ def ver_hijos(request):
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
 def ver_lista_padres(request,username):
-	detalles_alumno = Matricula.objects.filter(alumno__usuario__username=username)
-	print detalles_alumno
- 	return render_to_response('lista_padres.html',context_instance=RequestContext(request))
+
+	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
+	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
+	ctx = {'alumnos':alumnos}
+ 	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
+
+def ver_lista_profesores(request,username):
+	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
+	profesores = Ensenia.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , cursogrado__grado__nombre=detalles_alumno.grado.nombre)
+	ctx = {'profesores':profesores}
+ 	return render_to_response('lista_profesores.html',ctx,context_instance=RequestContext(request))
+
+#REGISTRO DEL APODERADO AL 100% LISTO CON ENVIO DE CLAVE A CORREO ELECTRONICO 
+def registrar_padres(request):
+	if request.method=='POST':
+		usuario = request.POST.copy()
+		usuario['username']=usuario['email']		
+		usuario['password']=usuario['username']
+		user_form = UserForm(usuario)
+		if user_form.is_valid():
+			user_form.save()
+			usur2=User.objects.get(username=usuario['username'])
+			mi_clave=make_random_password()
+			usur2.set_password(mi_clave)
+			usur2.save()
+			print usur2.id
+			usuario['usuario']=usur2.id
+			padre_form=RegistrarPadreForm(usuario)
+			if padre_form.is_valid():
+				padre_form.save()
+				to_alumno = usur2.email
+				html_contenido = "<p>Sus credenciales de acceso al Sistema de Gestion Academica son: </p><br><br><b>Usuario: </b> %s <br><br><b>Password: </b> %s"%(usur2.username ,mi_clave)
+				msg = EmailMultiAlternatives('Correo de Contacto',html_contenido,'from@server.com',[to_alumno])
+				msg.attach_alternative(html_contenido,'text/html')#Definir el contenido como html
+				msg.send()
+			return HttpResponseRedirect('/')
+	else:
+		user_form = UserForm()
+		padre_form = RegistrarPadreForm()
+	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'padre_form': padre_form }, context_instance=RequestContext(request))
+
+
+#REGISTRO DE PROFESOR 100% CON ENVIO DE CLAVE A CORREO ELECTRONICO 
+def registrar_profesor(request):
+	if request.method=='POST':
+		usuario = request.POST.copy()
+		usuario['username']=usuario['email']		
+		usuario['password']=usuario['username']
+		user_form = UserForm(usuario)
+		if user_form.is_valid():
+			user_form.save()
+			usur2=User.objects.get(username=usuario['username'])
+			mi_clave=make_random_password()
+			usur2.set_password(mi_clave)
+			usur2.save()
+			usuario['usuario']=usur2.id
+			profesor_form=RegistrarProfesorForm(usuario)
+			if profesor_form.is_valid():
+				profesor_form.save()
+				to_alumno = usur2.email
+				html_contenido = "<p>Sus credenciales de acceso al Sistema de Gestion Academica son: </p><br><br><b>Usuario: </b> %s <br><br><b>Password: </b> %s"%(usur2.username ,mi_clave)
+				msg = EmailMultiAlternatives('Correo de Contacto',html_contenido,'from@server.com',[to_alumno])
+				msg.attach_alternative(html_contenido,'text/html')#Definir el contenido como html
+				msg.send()				
+			return HttpResponseRedirect('/')
+	else:
+		user_form = UserForm()
+		profesor_form = RegistrarProfesorForm()
+	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
+
+
+def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
+    from random import choice
+    return ''.join([choice(allowed_chars) for i in range(length)])
+

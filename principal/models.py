@@ -8,7 +8,7 @@ class Profesor(models.Model):
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
-	cvitae=models.FileField(upload_to='cvitae/')
+	
 	
 	def __unicode__(self):
 		return unicode(self.usuario)
@@ -18,15 +18,19 @@ class Administrador(models.Model):
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
+
 	
 	def __unicode__(self):
 		return unicode(self.usuario)
+
+
 
 class Apoderado(models.Model):
 	usuario = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
+
 	
 	def __unicode__(self):
 		return unicode(self.usuario)
@@ -43,7 +47,17 @@ class Alumno(models.Model):
 	def __unicode__(self):
 		return unicode(self.usuario)
 
+class Alumno(models.Model):
+	usuario =models.OneToOneField(User)
+	apoderado = models.ForeignKey(Apoderado)
+	dni = models.CharField(max_length=8)
+	direccion =models.CharField(max_length=100,null=True,blank=True)
+	telefono =models.CharField(max_length=7,null=True,blank=True)
+	celular =models.CharField(max_length=10,null=True,blank=True)
 
+	def __unicode__(self):
+		return unicode(self.usuario)
+		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)
 	descripcion=models.CharField(max_length=100)
