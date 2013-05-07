@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Listaaa de Hijoss</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>Hijo</td>
+			<td>Accion</td>
+		</tr>
+		{% for hijo in hijos %}
+		<tr>
+			<td>{{ hijo.usuario.first_name }}</td>
+			<td><a href="{{hijo.usuario.username}}/lista_padres">ver lista de padres</a></td>
+		</tr>
+		{% endfor %}
+
+	</table>	
+		
+	
+</body>
+</html>
