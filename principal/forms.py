@@ -1,9 +1,17 @@
+
 from django.forms import ModelForm
 from django import forms
 from principal.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 
+
+
+def validar(value):
+	print "hola"
+	if value.isalpha()!=1:
+		raise ValidationError("Solo admite letras 'A-Z' y 'a-z'")
 
 class UserForm(forms.ModelForm):
 	class Meta:

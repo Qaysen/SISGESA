@@ -3,33 +3,47 @@ from django.contrib.auth.models import User
 from django.template import defaultfilters
 
 
-
-
 class Profesor(models.Model):
-	usuario = models.ForeignKey(User)
-	direccion = models.CharField(max_length=100,null=True,blank=True)
-	telefono = models.CharField(max_length=7,null=True,blank=True)
-	celular = models.CharField(max_length=10,null=True,blank=True)
-	# cvitae = models.FileField(upload_to='cvitae/')
+	usuario = models.OneToOneField(User)
+	direccion =models.CharField(max_length=100,null=True,blank=True)
+	telefono =models.CharField(max_length=7,null=True,blank=True)
+	celular =models.CharField(max_length=10,null=True,blank=True)
+	
 	
 	def __unicode__(self):
 		return unicode(self.usuario)
 
 class Administrador(models.Model):
-	usuario = models.ForeignKey(User)
-	direccion = models.CharField(max_length=100,null=True,blank=True)
-	telefono = models.CharField(max_length=7,null=True,blank=True)
-	celular = models.CharField(max_length=10,null=True,blank=True)
+	usuario = models.OneToOneField(User)
+	direccion =models.CharField(max_length=100,null=True,blank=True)
+	telefono =models.CharField(max_length=7,null=True,blank=True)
+	celular =models.CharField(max_length=10,null=True,blank=True)
+
 	
 	def __unicode__(self):
 		return unicode(self.usuario)
 
+
+
 class Apoderado(models.Model):
-	usuario = models.ForeignKey(User)
+	usuario = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
+
 	
+	def __unicode__(self):
+		return unicode(self.usuario)
+
+
+class Alumno(models.Model):
+	usuario =models.OneToOneField(User)
+	apoderado = models.ForeignKey(Apoderado)
+	dni = models.CharField(max_length=8)
+	direccion =models.CharField(max_length=100,null=True,blank=True)
+	telefono =models.CharField(max_length=7,null=True,blank=True)
+	celular =models.CharField(max_length=10,null=True,blank=True)
+
 	def __unicode__(self):
 		return unicode(self.usuario)
 
