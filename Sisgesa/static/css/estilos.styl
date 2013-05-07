@@ -4,6 +4,12 @@
 	box-sizing border-box
 body
 	font-family "Open Sans"
+nav, ul, li, span, p
+	margin 0
+	padding 0
+	list-style none
+a
+	text-decoration none
 .login
 	background #ededed
 	color #404040
@@ -73,24 +79,29 @@ body
 .cabecera
 	background-color #54728c
 	border-bottom 1.5px solid rgba(53, 83, 108, 1)
+	color rgba(255,255,255,1)
 	height 50px
+	overflow hidden
+	width 100%
 	.titulo
-		width 215px
+		width 100%
 		height 50px
 		h1
-			color rgba(255,255,255,1)
 			font-family "Cherry Swash"
 			font-size 2em
 			margin 0
 			padding 2.5px 1em
 			text-shadow 1px 2px 4px rgba(73, 103, 128, 1),0 0 0 #000,1px 2px 4px rgba(73, 103, 128, 1),0 1px 0 rgba(103, 133, 158, 1)
-		h1, .borde 
-			display inline-block
+		span
+			font-size 18px
+			font-weight bold
+			margin 12px 0 0 10px
 		.borde
-			background-color #66829a
-			border-left 1px solid #466176
-			border-right 1px solid #466176
-			width 6px
+			background-color #66829a !important
+			border-left 1px solid #466176 !important
+			border-right 1px solid #466176 !important
+		span, h1, .borde 
+			display inline-block
 // Sidebar
 .sidebar
 	background-color #f9f9f9
@@ -128,6 +139,7 @@ body
 				color white
 				text-decoration none
 		nav
+			margin-top 10px
 			ul
 				padding-left 0
 				li
@@ -142,12 +154,13 @@ body
 						margin-top -1px
 						width 215px
 					&:hover
-						background-color rgba(252, 252, 252, 1)
+						background-color rgba(240, 240, 240, 1)
 						border-top 1px solid rgba(228, 228, 228, 1)
 						border-bottom 1px solid rgba(228, 228, 228, 1)
+						box-shadow inset 1px 1px 3px rgba(228, 228, 228, 1), inset -1px -1px 3px rgba(228, 228, 228, 1)
 						margin-bottom -1px
 						margin-top -1px
-						width 209px
+						width 215px
 					.icono
 						color #aaaaaa
 						font-size 1.2em
@@ -174,6 +187,45 @@ body
 		background-color #ececec
 		border-left 1px solid #dadada
 		border-right 1px solid #dadada
+// Menu de cursos
+#cursos
+	background-color #f9f9f9
+	display none
+	height 100%
+	left 215px
+	position fixed
+	width 200px
+	.lista_cursos
+		width 190px
+		font-size 15px
+		.curso_grados
+			.nombre_curso
+				background-color white
+				border-top 1px solid rgba(228, 228, 228, 1)
+				border-bottom 1px solid rgba(228, 228, 228, 1)
+				box-shadow 0px 1px 1px rgba(228, 228, 228, 0.5)
+				padding 5px 10px
+				width 194px
+				.icono
+					color #aaaaaa
+					font-size 1.2em
+					width 20px
+				p
+					width 100px
+				.icono, p
+					display inline-block
+					vertical-align
+			ul
+				li
+					padding 5px 20px
+	.lista_cursos
+	.borde
+		display inline-block
+	.borde
+		background-color #ececec
+		border-left 1px solid #dadada
+		border-right 1px solid #dadada
+
 .sidebar
 .contenido
 	display inline-block
