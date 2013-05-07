@@ -14,6 +14,12 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+    # Cursos
+    url(r'^cursos/$', "principal.views.cursos"),
+
+    # Pagina de inicio (login)
     url(r'^$', "principal.views.inicio"),
+
+    # Cerrar session
     url(r'^cerrar/', "principal.views.cerrar"),
 )
