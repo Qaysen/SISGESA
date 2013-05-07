@@ -7,35 +7,25 @@
 		<legend>Registrar Alumno</legend>
 				{% csrf_token %}
 				<div>
-					<label> Nombres: </label>
+					<label> Nombres:</label>
 					<input type='text' name='first_name' maxlength='20'>
-<<<<<<< HEAD
 					{{ formulario.first_name.errors }}
-=======
-					
->>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
 				</div>
 				<div>
 					<label> Apellidos: </label>
 					<input type='text' name='last_name' maxlength='30'>
-<<<<<<< HEAD
+
 					{{ formulario.last_name.errors }}
-=======
-					
->>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
+
 				</div>
 				<div>
 					<label>Teléfono Fijo:</label>
-					<input type='text' name='telefono' maxlength='30'>
-<<<<<<< HEAD
+					<input type='tel' name='telefono' maxlength='30'>
 
-=======
-					
->>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
 				</div>
 				<div>
 					<label>Celular :</label>
-					<input type='text' name='celular' maxlength='30'>
+					<input type='tel' name='celular' maxlength='30'>
 					
 				</div>
 				<div>
@@ -45,27 +35,21 @@
 				<div>
 					<label>Email :</label>
 					<input type='email' name='email' maxlength='30'>
-<<<<<<< HEAD
+
 					{{ formulario.email.errors }}
-=======
->>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
+
 				</div>
 				<div>
 					<label>Dirección :</label>
 					<input type='text' name='direccion' maxlength='30'>
 					
 				</div>
-<<<<<<< HEAD
+
 				<div>
 					<label>apoderado :</label>
-					<input type='text' name='apoderado' maxlength='30'>
+					<input type='tel' name='apoderado' maxlength='30'>
 					
 				</div>
-=======
->>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
-
-				
-				
 				
 				<br>
 				<input type="submit" value="Registrar">

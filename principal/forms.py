@@ -24,12 +24,13 @@ class RegistrarProfesorForm(ModelForm):
         fields = ('usuario', 'direccion', 'telefono', 'celular')
         
 
-class ApoderadoForm(forms.ModelForm):
+class RegistrarPadreForm(forms.ModelForm):
 	class Meta:
 		model = Apoderado
 		fields = ('usuario', 'direccion', 'telefono', 'celular')
 
-class AlumnoForm(forms.ModelForm):
+
+class RegistrarAlumnoForm(forms.ModelForm):
 	class Meta:
 		model = Alumno
 		fields = ('usuario','apoderado','dni', 'direccion', 'telefono', 'celular')
