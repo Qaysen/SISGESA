@@ -170,7 +170,7 @@ class Asistencia(models.Model):
 
 class Comunicado(models.Model):
 	nombre =models.CharField(max_length=30)
-	descripcion =models.CharField(max_length=500)
+	descripcion =models.TextField(max_length=500)
 	
 	def __unicode__(self):
 		return unicode(self.nombre)

@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
 	url(r'^padre/(?P<username>.*)/lista_padres$','principal.views.ver_lista_padres'),
 	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
-		
+	url(r'^padre/ver_comunicados$' , 'principal.views.ver_comunicados'),	
 
 	#############################################ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

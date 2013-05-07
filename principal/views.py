@@ -78,8 +78,10 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
-def ver_lista_padres(request,username):
+def ver_comunicados(request):
+	return render_to_response('padre_ver_comunicados.html',context_instance=RequestContext(request))
 
+def ver_lista_padres(request,username):
 	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
 	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
 	ctx = {'alumnos':alumnos}
