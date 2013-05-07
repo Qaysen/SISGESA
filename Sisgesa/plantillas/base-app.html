@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link href='http://fonts.googleapis.com/css?family=Cherry+Swash' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/estilos.css">
+        <script src="{{STATIC_URL}}js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <aside class="sidebar">
+            <header class="cabecera">
+                <div class="titulo">
+                    <h1>Sisgesa</h1>
+                    <div class="borde"></div>
+                </div>
+            </header>
+        	<section>
+        		<div class="usuario">
+        			<img src="http://r22.imgfast.net/users/2215/22/81/19/avatars/108-86.jpg">
+        			<h5>Lorena Gabriela Gutierrez</h5>
+        		</div>
+        		<div class="perfil">
+    				<a href="/cerrar/">Cerrar session</a>
+    			</div>
+        		<nav>
+	        		<ul>
+	        			<li>
+                            <a href="">
+	        				   <div class="icono icono-home"></div>
+	        				   <p>General</p>
+                            </a>
+	        				<div class="alertas">3</div>
+	        			</li>
+                        <li class="submenu_cursos">
+                            <a href="#">
+                                <div class="icono icono-calendar"></div>
+                                <p>Cursos</p>
+                            </a>
+                        </li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-users-2"></div>
+	        				   <p>Profesores</p>
+                            </a>
+	        			</li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-user"></div>
+	        				   <p>Padres</p>
+                            </a>
+	        			</li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-users"></div>
+	        				   <p>Alumnos</p>
+                            </a>
+	        			</li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-mail"></div>
+	        				   <p>Comunicados</p>
+                            </a>
+	        				<div class="alertas">3</div>
+	        			</li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-address-book"></div>
+	        				   <p>Agenda</p>
+                            </a>
+	        			</li>
+	        			<li>
+                            <a href="#">
+	        				   <div class="icono icono-calendar"></div>
+	        				   <p>Calendario</p>
+                            </a>
+	        			</li>
+	        		</ul>
+	        	</nav>
+        	</section>
+        	<div class="borde"></div>
+        </aside>
+
+        <aside id="cursos">
+            <header class="cabecera">
+                <div class="titulo">
+                    <span>Cursos</span>
+                    <div class="borde"></div>
+                </div>
+            </header>
+            <div class="lista_cursos">
+                <div class="curso_grados">
+                    <div class="nombre_curso">
+                        <div class="icono icono-home"></div>
+                        <p>Matematica</p>
+                        <div class="icono icono-down"></div>
+                    </div>
+                    <ul>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                    </ul>
+                </div>
+                <div class="curso_grados">
+                    <div class="nombre_curso">
+                        <div class="icono icono-home"></div>
+                        <p>Aritmetica</p>
+                    </div>
+                    <ul>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                    </ul>
+                </div>
+                <div class="curso_grados">
+                    <div class="nombre_curso">
+                        <div class="icono icono-home"></div>
+                        <p>Algebra</p>
+                    </div>
+                    <ul>
+                        <li><a href="#">1º A - Secundaria</a></li>
+                        <li><a href="#">1º A - Secundaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                        <li><a href="#">1º A - Primaria</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="borde"></div>
+        </aside>
+
+        {% block contenido %}
+            
+        {% endblock contenido %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{STATIC_URL}}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="{{STATIC_URL}}js/plugins.js"></script>
+        <script src="{{STATIC_URL}}js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

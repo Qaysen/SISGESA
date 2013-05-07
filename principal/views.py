@@ -42,6 +42,11 @@ def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
+# Cursos
+@login_required(login_url="/")
+def cursos(request):
+	return render_to_response('cursos.html',context_instance=RequestContext(request))
+
 # GENERAR PASSWORD ALEATORIOO
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
 	return ''.join([choice(allowed_chars) for i in range(length)])
