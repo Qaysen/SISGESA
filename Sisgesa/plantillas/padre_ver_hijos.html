@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Listaaa de Hijoss</title>
+</head>
+<body>
+<<<<<<< HEAD
+	<table>
+		<tr>
+			<td>Hijo</td>
+			<td>Accion</td>
+		</tr>
+		{% for hijo in hijos %}
+		<tr>
+			<td>{{ hijo.usuario.first_name }}</td>
+			<td><a href="{{hijo.usuario.username}}/lista_padres">ver lista de padres</a></td>
+=======
+	<table width="600px">
+		<tr>
+			<td width="200px" align="center">Hijo</td>
+			<td width="400px" align="center">Accion</td>
+		</tr>
+		{% for hijo in hijos %}
+		<tr>
+			<td width="200px" align="center">{{ hijo.usuario.first_name }}</td>
+			<td width="400px" align="center"><a href="{{hijo.usuario.username}}/lista_padres">ver lista de padres   </a><a href="{{hijo.usuario.username}}/lista_profesores">ver lista de profesores</a></td>
+>>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
+		</tr>
+		{% endfor %}
+
+	</table>	
+		
+	
+</body>
+</html>

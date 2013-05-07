@@ -1,0 +1,34 @@
+<html>
+<head>
+<<<<<<< HEAD
+	<title>Listaaa de Hijoss</title>
+</head>
+<body>
+	<table>
+		
+
+	</table>	
+		
+=======
+
+	<title>Listaaa de Padres</title>
+
+</head>
+<body>
+	<table width="400px">
+		<tr>
+			<td width="200px" align="center">Alumno</td>
+			<td width="200px" align="center">Padre</td>
+		</tr>
+		{% for i in alumnos %}
+		<tr>
+			<td width="200px" align="center">{{ i.alumno.usuario.first_name }}</td>
+			<td width="200px" align="center">{{ i.alumno.apoderado.usuario.first_name }}</td>
+		</tr>
+		{% endfor %}
+
+	</table>	
+>>>>>>> 94811e53cda47bf10341b36a0f905dcc4b3629ab
+	
+</body>
+</html>

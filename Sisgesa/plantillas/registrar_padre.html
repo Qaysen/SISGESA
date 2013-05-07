@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>Registrar Padre</title>
+</head>
+<body>
+		<div >
+				<form method="POST">
+					{% csrf_token %}
+					<legend>Datos Principales</legend>
+					<br>
+					
+					<div>
+						<label> Nombres:</label>
+						<input type='text' name='first_name' maxlength='30'>
+						{{ formulario.first_name.errors }}
+					</div>
+					<br>
+					<div>
+						<label> Apellidos:</label>
+						<input type='text' name='last_name' maxlength='30'>
+						{{ formulario.last_name.errors }}
+					</div>
+					<br>
+					<div>
+						<label>Email :</label>
+						<input type='email' name='email' maxlength='30'>
+						{{ formulario.email.errors }}
+					</div>
+					<br>
+					<br>
+					<legend>Datos Secundarios</legend>
+					<br>
+					<div>
+						<label> Direccion:</label>
+						<input type='text' name='direccion' maxlength='20'>
+					</div>
+					<br>
+					<div>
+						<label> Telefono:</label>
+						<input type='tel' name='telefono' maxlength='20'>
+
+					</div>
+					<br>
+					<div>
+						<label> celular:</label>
+						<input type='tel' name='celular' maxlength='20'>
+					</div>
+					<br>
+					<button >
+	                   	Registrar
+	                    <span class="inferior"></span>
+					</button>
+				</form>
+		</div>
+	</div>
+</body>
+</html>
