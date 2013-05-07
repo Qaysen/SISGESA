@@ -1,13 +1,46 @@
 #encondig:utf-8
 from principal.models import *
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from principal.forms import *
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
 from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 import random
 from random import choice
+
+# Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
+# le envia a una pagina para loguearse
+def inicio(request):
+	if request.user.is_authenticated():
+		return render_to_response('app.html', context_instance=RequestContext(request))
+	else:
+	    if request.method == 'POST':
+	    	formulario = AuthenticationForm()
+	    	if formulario.is_valid:
+		        usuario = request.POST['username']
+		        clave = request.POST['password']
+		        acceso = authenticate(username=usuario, password=clave)
+		        if acceso is not None:
+		        	if acceso.is_active:
+		        		login(request, acceso)
+		        		return HttpResponseRedirect('/')
+		        	else:
+		        		return render_to_response('noactivo.html', context_instance=RequestContext(request))
+		        else:
+		        	return render_to_response('nousuario.html', context_instance=RequestContext(request))
+	    else:
+	        formulario = AuthenticationForm()
+	    return render_to_response('login.html',{'formulario':formulario}, context_instance=RequestContext(request))
+
+# Cerrar session del usuario
+@login_required(login_url="/")
+def cerrar(request):
+	logout(request)
+	return HttpResponseRedirect('/')
 
 # GENERAR PASSWORD ALEATORIOO
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
@@ -46,6 +79,7 @@ def ver_hijos(request):
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
 def ver_lista_padres(request,username):
+
 	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
 	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
 	ctx = {'alumnos':alumnos}
@@ -56,7 +90,6 @@ def ver_lista_profesores(request,username):
 	profesores = Ensenia.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , cursogrado__grado__nombre=detalles_alumno.grado.nombre)
 	ctx = {'profesores':profesores}
  	return render_to_response('lista_profesores.html',ctx,context_instance=RequestContext(request))
-
 
 
 

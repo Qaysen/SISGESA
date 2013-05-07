@@ -1,9 +1,16 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from principal.views import *
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+	#############################################MEDIA
+	url(r'^media/(?P<path>.*)$','django.views.static.serve',
+		{'document_root':settings.MEDIA_ROOT,}
+	),
+	################################################
 
 	url(r'^alumno/registrar$' , 'principal.views.registrar_alumnos'),
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
@@ -14,4 +21,7 @@ urlpatterns = patterns('',
 	#############################################ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^$', "principal.views.inicio"),
+    url(r'^cerrar/', "principal.views.cerrar"),
 )
