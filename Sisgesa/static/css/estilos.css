@@ -360,9 +360,139 @@ a {
 .login form .boton button:hover {
   border-radius: 0;
 }
+.login .boton {
+  background-color: #eff4f6;
+  overflow: hidden;
+  padding: 20px;
+}
+.login .boton button {
+  background-color: #eeeef1;
+  border: 1px solid #d2d2d6;
+  border-radius: 2px;
+  color: #555;
+  float: right;
+  padding: 7.5px 15px;
+}
+.login .boton button:hover {
+  border-radius: 0;
+}
 .icono {
   color: #b2b2b2;
   font-size: 1.2em;
+}
+.informacion {
+  padding: 20px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.informacion form {
+  background-color: #fefefe;
+  width: 100%;
+}
+.informacion form legend {
+  font-size: 20pt;
+  margin-bottom: 1em;
+}
+.informacion form .inputs {
+  padding: 5px 25px;
+}
+.informacion form .inputs label,
+.informacion form .inputs input {
+  display: inline-block;
+}
+.informacion form .inputs label {
+  width: 20%;
+  margin: 10px 0;
+}
+.informacion form .inputs input {
+  position: relative;
+  margin-left: 20px;
+  background-color: #fbfbfb;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 7.5px 15px;
+  width: 30%;
+}
+.informacion form .inputs input:focus {
+  border-color: rgba(82,168,236,0.8);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.075);
+  outline: 0;
+}
+.informacion form .inputs:last-of-type {
+  margin-bottom: 45px;
+}
+.informacion form small {
+  margin-left: 1em;
+  color: #888;
+  font-style: italic;
+}
+.informacion form .boton {
+  margin: auto 0;
+  color: #fff;
+  padding: 7px 40px;
+  border-style: solid;
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: #307a9c;
+  background-color: #3483a8;
+}
+.informacion .comunicado-completo,
+.informacion .lista-comunicados {
+  vertical-align: top;
+  display: inline-block;
+}
+.informacion .lista-comunicados .item-comunicado {
+  height: 120px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.informacion .lista-comunicados .item-comunicado div {
+  border-style: solid;
+  width: 100%;
+  position: relative;
+}
+.informacion .lista-comunicados .item-comunicado .bot {
+  float: bottom;
+  top: 55px;
+}
+.informacion .lista-comunicados .item-comunicado p {
+  font-family: 'Open Sans';
+  font-size: 11pt;
+  margin: 0;
+}
+.informacion .lista-comunicados .item-comunicado .estado {
+  margin-right: 0.5em;
+}
+.informacion .lista-comunicados .item-comunicado .titulo,
+.informacion .lista-comunicados .item-comunicado .fecha {
+  display: inline-block;
+}
+.informacion .lista-comunicados .item-comunicado .titulo {
+  width: 70%;
+}
+.informacion .lista-comunicados .item-comunicado .fecha {
+  width: 30%;
+}
+.informacion .lista-comunicados .item-comunicado:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.informacion .lista-comunicados .item-comunicado-visto {
+  background-color: #d9d9d9;
+}
+.informacion .lista-comunicados .item-comunicado-viendo {
+  background-color: #54728c;
+  color: #fff;
+}
+.informacion .lista-comunicados {
+  width: 35%;
+}
+.informacion .comunicado-completo {
+  border-style: solid;
+  min-height: 100%;
+  height: auto !important;
+  overflow: hidden;
+  width: 65%;
 }
 .borde {
   background-color: rgba(0,0,0,0.01);
@@ -562,6 +692,7 @@ vertical-align
   vertical-align: top;
 }
 .contenido {
+  width: 100%;
   padding-left: 215px;
 }
 .contenido menu {

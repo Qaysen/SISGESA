@@ -2,14 +2,18 @@
 
 *
 	box-sizing border-box
+
 body
 	font-family "Open Sans"
+
 nav, ul, li, span, p
 	margin 0
 	padding 0
 	list-style none
+
 a
 	text-decoration none
+
 .login
 	background #ededed
 	color #404040
@@ -39,6 +43,7 @@ a
 		width 350px
 		.inputs
 			padding 25px
+
 			label, input
 				display block
 			label
@@ -66,10 +71,136 @@ a
 				padding 7.5px 15px
 				&:hover
 					border-radius 0
+
+
+	.boton
+		background-color rgb(239, 244, 246)
+		overflow hidden
+		padding 20px
+		button
+			background-color rgb(238, 238, 241)
+			border 1px solid rgb(210, 210, 214)
+			border-radius 2px
+			color #555
+			float right
+			padding 7.5px 15px
+			&:hover
+				border-radius 0
 // Generales
 .icono
 	color rgba(178, 178, 178, 1)
 	font-size 1.2em
+
+.informacion
+	padding 20px 20px
+	overflow hidden
+	white-space nowrap
+	
+	form
+		background-color #fefefe
+		width 100%
+
+		legend
+			font-size 20pt
+			margin-bottom 1em
+
+		.inputs
+			padding 5px 25px
+			label, input
+				display inline-block
+			label
+				width 20%
+				margin 10px 0
+			input
+				position relative
+				margin-left 20px
+				background-color #fbfbfb
+				border 1px solid #ccc
+				border-radius 2px
+				padding 7.5px 15px
+				width 30%
+				&:focus
+					border-color rgba(82, 168, 236, 0.8)
+					box-shadow inset 0 1px 3px rgba(0, 0, 0, 0.075)
+					outline 0	
+		.inputs:last-of-type
+			margin-bottom 45px
+
+		small
+			margin-left 1em
+			color #888
+			font-style italic
+
+		.boton
+			margin auto 0
+			color #fff
+			padding 7px 40px
+			border-style solid
+			border-radius 2px
+			border-width 2px
+			border-color hsl(199, 53%, 40%)
+			background-color hsl(199, 53%, 43%)
+	
+	.comunicado-completo,
+	.lista-comunicados
+		vertical-align top
+		display inline-block
+
+	.lista-comunicados
+		.item-comunicado
+			height 120px
+			width 100%
+			overflow hidden
+			white-space nowrap
+
+			div
+				border-style solid
+				width 100%
+				position relative
+			
+			.bot 
+				float bottom
+				top 55px
+			p				
+				font-family 'Open Sans'
+				font-size 11pt
+				margin 0
+				
+			
+			.estado
+				margin-right 0.5em
+
+			.titulo, .fecha
+				display inline-block
+
+			.titulo
+				width 70%
+
+			.fecha
+				width 30%
+
+		.item-comunicado:nth-child(odd)
+			background-color hsl(0, 0%, 95%)
+
+		.item-comunicado-visto
+			background-color hsl(0, 0%, 85%)
+
+		.item-comunicado-viendo
+			background-color #54728C
+			color #fff
+	
+	.lista-comunicados
+		width 35%
+
+	.comunicado-completo
+
+		border-style solid
+		min-height 100%
+		height auto !important
+		overflow hidden
+		width 65%
+
+
 .borde
 	background-color rgba(0, 0, 0, .01)
 	float right
@@ -230,7 +361,9 @@ a
 .contenido
 	display inline-block
 	vertical-align top
+
 .contenido
+	width 100%
 	padding-left 215px
 	menu
 		border 1px solid rgba(225, 225, 225, 1)
@@ -251,4 +384,3 @@ a
 				color rgb(88, 202, 88)
 				-webkit-text-stroke-color: rgb(48, 162, 48);
 				-webkit-text-stroke-width: 0.75px; 
-				
