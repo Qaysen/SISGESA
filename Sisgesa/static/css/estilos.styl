@@ -4,6 +4,7 @@
 	box-sizing border-box
 body
 	font-family "Open Sans"
+	min-width 780px
 nav, ul, li, span, p
 	margin 0
 	padding 0
@@ -82,7 +83,6 @@ a
 	color rgba(255,255,255,1)
 	height 50px
 	overflow hidden
-	width 100%
 	.titulo
 		width 100%
 		height 50px
@@ -102,6 +102,12 @@ a
 			border-right 1px solid #466176 !important
 		span, h1, .borde 
 			display inline-block
+	.opciones
+		margin 10px 20px
+		a
+			color white
+			margin-right 20px
+
 // Sidebar
 .sidebar
 	background-color #f9f9f9
@@ -110,7 +116,7 @@ a
 	width 215px
 	section
 		color #5e5e5e
-		width 205px
+		width 204px
 		.usuario
 			margin 10px 0
 			padding 0 10px
@@ -196,7 +202,7 @@ a
 	position fixed
 	width 200px
 	.lista_cursos
-		width 190px
+		width 189px
 		font-size 15px
 		.curso_grados
 			.nombre_curso
@@ -232,6 +238,59 @@ a
 	vertical-align top
 .contenido
 	padding-left 215px
+	width 100%
+	.informacion
+		font-size 14px
+		margin 0 20px
+		.setting
+			background-color rgb(245, 245, 245);
+			border 1px solid rgb(231, 231, 231);
+			border-radius 4px
+			overflow hidden
+			padding 20px
+		.unidad
+			margin-right 0px
+			label
+				margin-right 20px
+		.agregar-nota
+			float right
+			label
+				padding 0 15px
+			input
+				width 150px
+			button
+				background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
+				border: 1px solid #1c74b3;
+				border-top-color: #2c8ed1;
+				border-bottom-color: #0d5b97;
+				padding 2.5px 5px
+		.unidad
+		.agregar-nota
+			display inline-block
+		.lista-alumnos
+			margin-top 20px
+			.titulo-lista-alumnos
+				background-color rgb(245, 245, 245);
+				border 1px solid rgb(231, 231, 231);
+				border-bottom none
+				padding 10px 20px
+			table
+				font-family "Helvetica"
+				text-align center
+				width 100%
+				th
+					-webkit-transform: rotate(-90deg);
+					-moz-transform: rotate(-90deg);
+					border 1px solid rgb(231, 231, 231);
+					height 100px
+					padding 20px 0
+				td
+					border 1px solid rgb(231, 231, 231);
+					padding 10px
+					input
+						width 40px
+	.mensaje
+		margin 20px 0
 	menu
 		border 1px solid rgba(225, 225, 225, 1)
 		border-radius 2px

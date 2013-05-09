@@ -274,6 +274,7 @@
 }
 body {
   font-family: "Open Sans";
+  min-width: 780px;
 }
 nav,
 ul,
@@ -376,7 +377,6 @@ a {
   color: #fff;
   height: 50px;
   overflow: hidden;
-  width: 100%;
 }
 .cabecera .titulo {
   width: 100%;
@@ -404,6 +404,13 @@ a {
 .cabecera .titulo .borde {
   display: inline-block;
 }
+.cabecera .opciones {
+  margin: 10px 20px;
+}
+.cabecera .opciones a {
+  color: #fff;
+  margin-right: 20px;
+}
 .sidebar {
   background-color: #f9f9f9;
   height: 100%;
@@ -412,7 +419,7 @@ a {
 }
 .sidebar section {
   color: #5e5e5e;
-  width: 205px;
+  width: 204px;
 }
 .sidebar section .usuario {
   margin: 10px 0;
@@ -520,7 +527,7 @@ a {
   width: 200px;
 }
 #cursos .lista_cursos {
-  width: 190px;
+  width: 189px;
   font-size: 15px;
 }
 #cursos .lista_cursos .curso_grados .nombre_curso {
@@ -563,6 +570,75 @@ vertical-align
 }
 .contenido {
   padding-left: 215px;
+  width: 100%;
+}
+.contenido .informacion {
+  font-size: 14px;
+  margin: 0 20px;
+}
+.contenido .informacion .setting {
+  background-color: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 20px;
+}
+.contenido .informacion .unidad {
+  margin-right: 0px;
+}
+.contenido .informacion .unidad label {
+  margin-right: 20px;
+}
+.contenido .informacion .agregar-nota {
+  float: right;
+}
+.contenido .informacion .agregar-nota label {
+  padding: 0 15px;
+}
+.contenido .informacion .agregar-nota input {
+  width: 150px;
+}
+.contenido .informacion .agregar-nota button {
+  background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
+  border: 1px solid #1c74b3;
+  border-top-color: #2c8ed1;
+  border-bottom-color: #0d5b97;
+  padding: 2.5px 5px;
+}
+.contenido .informacion .unidad,
+.contenido .informacion .agregar-nota {
+  display: inline-block;
+}
+.contenido .informacion .lista-alumnos {
+  margin-top: 20px;
+}
+.contenido .informacion .lista-alumnos .titulo-lista-alumnos {
+  background-color: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  border-bottom: none;
+  padding: 10px 20px;
+}
+.contenido .informacion .lista-alumnos table {
+  font-family: "Helvetica";
+  text-align: center;
+  width: 100%;
+}
+.contenido .informacion .lista-alumnos table th {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  border: 1px solid #e7e7e7;
+  height: 100px;
+  padding: 20px 0;
+}
+.contenido .informacion .lista-alumnos table td {
+  border: 1px solid #e7e7e7;
+  padding: 10px;
+}
+.contenido .informacion .lista-alumnos table td input {
+  width: 40px;
+}
+.contenido .mensaje {
+  margin: 20px 0;
 }
 .contenido menu {
   border: 1px solid #e1e1e1;
