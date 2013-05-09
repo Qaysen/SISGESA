@@ -1,5 +1,10 @@
 {% extends "base-app.html" %}
 
+{% block additional-styles%}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/jquery.mCustomScrollbar.css">
+
+{% endblock additional-styles %}
+
 {% block contenido %}
         <div class="contenido">
             <header class="cabecera">
@@ -8,7 +13,7 @@
                 </div>
             </header>
             
-            <section class="informacion">
+            <section class="informacion" style="padding-bottom: 0;">
                 <section class="lista-comunicados">
 
                     <div class="item-comunicado">
@@ -110,9 +115,81 @@
                             <p class="remitente">enviado por <span>Institucion</span></p>
                         </div>           
                     </div>
+
+                    <div class="item-comunicado">
+                        <div class="top">
+                            <p class="titulo">Feriado</p>
+                            <p class="fecha"> 15 Enero</p>
+                        </div>
+                        
+                        <div class="mid">
+                            <p class="mensaje-parte"></p>
+                        </div>
+                        
+                        <div class="bot">
+                            <p class="remitente">enviado por <span>Institucion</span></p>
+                        </div>           
+                    </div>
+                    <div class="item-comunicado">
+                        <div class="top">
+                            <p class="titulo">Feriado</p>
+                            <p class="fecha"> 15 Enero</p>
+                        </div>
+                        
+                        <div class="mid">
+                            <p class="mensaje-parte"></p>
+                        </div>
+                        
+                        <div class="bot">
+                            <p class="remitente">enviado por <span>Institucion</span></p>
+                        </div>           
+                    </div>
                 </section>
+
+                
                 <section class="comunicado-completo">
+                    <p class="titulo">Entrega de exámenes parciales </p>
+                    
+                    <hr>
+                    
+                    <p class="mensaje">
+                    Hoy se entregarán examenes parciales de los siguientes cursos, tambien se
+                    subirán las notas en la plataforma virtual es necesaria su asistencia para
+                    cordinar acerca del viaje de promoción y de otras actividades
+                            Matemática, Física, Biología
+                    <br>
+                    <br>
+                    
+                    Atte.
+                    </p>
                 </section>
             </section>
         </div>
 {% endblock contenido %}
+
+{% block additional-scripts %}
+    <script src="{{STATIC_URL}}js/jquery.mCustomScrollbar.js"></script>
+    <script>
+    (function($){
+        $(window).load(function(){
+            $(".lista-comunicados").mCustomScrollbar({
+                advanced:{
+                    updateOnContentResize: true
+                }
+            });
+
+            $('.lista-comunicados').resize();
+            $('.comunicado-completo').resize();
+        });
+        
+        $(window).resize(function() {
+            var enc_alt = $('.cabecera').height();
+            
+            var alt = window.innerHeight-enc_alt - 45;
+            
+            $('.lista-comunicados').css('height', alt +'px');
+            $('.comunicado-completo').css('height', alt +'px');
+        });
+    })(jQuery);
+    </script>    
+{% endblock %}

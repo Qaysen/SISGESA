@@ -44,6 +44,17 @@ class Alumno(models.Model):
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
+	def agregarEnGrupo(self):
+		try:
+			grupoAlumno = Group.objects.get(name='alumno')
+		except:
+			grupoNoExistente = Group(name="alumno")
+			grupoNoExistente.save()
+		finally:
+			grupo = Group(name="alumno")
+
+		self.add(grupo)
+
 	def __unicode__(self):
 		return unicode(self.usuario)
 
