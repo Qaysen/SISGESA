@@ -5,7 +5,7 @@
 	<div class="contenido">
 		<header class="cabecera">
             <div class="titulo">
-                <p>REGISTRO PROFESORES</p>
+                <h1>Registrar nuevo profesor</h1>
             </div>
         </header>
 		<section class="informacion" >
@@ -25,6 +25,7 @@
 						<div class='inputs'>
 							<label> Apellidos:</label>
 							<input type='text' name='last_name' maxlength='30'>
+							<small>Ingrese apellido paterno primero y luego materno</small>
 							{{ formulario.last_name.errors }}
 						</div>
 
@@ -48,12 +49,13 @@
 						<div class="inputs">
 							<label> Telefono:</label>
 							<input type='tel' name='telefono' maxlength='20'>
-
+							<small> Ejemplo: 044-243501</small>
 						</div>
 						
 						<div class="inputs">
 							<label> celular:</label>
 							<input type='tel' name='celular' maxlength='20'>
+							<small> Ejemplo 94-2123424</small>
 						</div>
 						
 						<input type="submit" value="Registrar" class="boton">

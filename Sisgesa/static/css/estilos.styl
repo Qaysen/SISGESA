@@ -148,36 +148,46 @@ a
 
 	.lista-comunicados
 		.item-comunicado
+			border 1px solid hsl(0,0%,90%)
+			border-radius 4px
+			position relative
+			padding 10px
 			height 120px
 			width 100%
-			overflow hidden
-			white-space nowrap
-
-			div
-				border-style solid
-				width 100%
-				position relative
 			
-			.bot 
-				float bottom
-				top 55px
+			div				
+				white-space normal 
+				width 100%
+			
+			.bot
+				position absolute
+				padding-right 20px
+				bottom 15px
+								
 			p				
 				font-family 'Open Sans'
 				font-size 11pt
-				margin 0
-				
+				margin 0		
 			
-			.estado
-				margin-right 0.5em
+			.remitente
+				color hsl(0,0%,60%)
+				text-align right
+				span
+					font-style italic
 
-			.titulo, .fecha
-				display inline-block
-
+			.mensaje-parte
+				position absolute
+				top 35px
+			
 			.titulo
-				width 70%
-
+				font-family 'Arimo', sans-serif
+				position absolute
+				left 10px
+			
 			.fecha
-				width 30%
+				position absolute
+				right 10px
+				
 
 		.item-comunicado:nth-child(odd)
 			background-color hsl(0, 0%, 95%)
@@ -214,6 +224,8 @@ a
 	height 50px
 	overflow hidden
 	width 100%
+
+.sidebar
 	.titulo
 		width 100%
 		height 50px
@@ -233,6 +245,15 @@ a
 			border-right 1px solid #466176 !important
 		span, h1, .borde 
 			display inline-block
+
+.contenido
+	.titulo
+		h1
+			font-family 'Open Sans'
+			font-size 20pt
+			padding 6px 12px
+			margin 0
+
 // Sidebar
 .sidebar
 	background-color #f9f9f9

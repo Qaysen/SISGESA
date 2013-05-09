@@ -47,4 +47,4 @@ urlpatterns += patterns(
 	
 	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
 	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
-	)
+)
