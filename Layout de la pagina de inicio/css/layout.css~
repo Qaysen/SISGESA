@@ -5,14 +5,11 @@ body
 
 #beneficios
 {
-	margin-top: 100px;
 }
 
 .bloque-seccion
 {
 	background-image: url('../img/paper_fibers.png');
-	margin-left:25%;
-	margin-right:24.95%;
 }
 .boton
 {
@@ -29,7 +26,7 @@ body
 
 .contenido
 {
-
+	background-image: url("http://placekitten.com/g/1400/480");
 	background-color: #fff;
 }
 
@@ -88,12 +85,12 @@ iframe
 #intro
 {
 	padding: 20px 0 16px 0;
-	background-image: url("http://placekitten.com/g/1400/360");
+
 	background-repeat: no-repeat;
-	background-color: rgb(203, 219, 247);
-	height: 280px;
+	height: 430px;
 	
 }
+
 
 /* MENU SUPERIOR*/
 .cont-menu
@@ -132,12 +129,6 @@ iframe
 	text-decoration: None;
 }
 
-#menu li
-{
-	width: 33%
-	float: left;
-}
-
 /* OTRA COSA*/
 section .contenido
 {
@@ -147,7 +138,7 @@ section .contenido
 h2
 {
 	background-color: rgb(12, 12, 12);
-	color: #fff;
+	color: rgb(255, 255, 255);
 	padding-bottom: 30px;
 	padding-top: 30px;
 	margin: 0;
@@ -170,7 +161,7 @@ h2
 	margin: 0;
 	font-size: 20pt;
 	font-family: 'Noto Sans', sans-serif;
-	color: rgb(0, 99, 112);
+	color: rgb(0, 81, 92);
 	display:inline-block;
 	vertical-align: middle;
 }
@@ -190,7 +181,6 @@ h2
 .bloque-texto-interno p
 {
 	text-align: center;
-	margin-left: 40px;
 	font-size: 14pt;
 	font-family: 'Noto Sans', sans-serif;	
 }

@@ -18,6 +18,8 @@ urlpatterns = patterns('',
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
 	url(r'^padre/(?P<username>.*)/lista_padres$','principal.views.ver_lista_padres'),
 	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
+
+	
 		
 
 	#############################################ADMINNISTRADOR
@@ -34,4 +36,15 @@ urlpatterns = patterns('',
     url(r'^cerrar/', "principal.views.cerrar"),
     url(r'^profesor/registrar/$', 'principal.views.registrar_profesor'),
 
+
+
 )
+
+#### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS
+#### ELIMINAR LUEGO DE CREAR SUS VISTAS
+urlpatterns += patterns(
+	'django.views.generic.simple',
+	
+	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
+	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
+	)
