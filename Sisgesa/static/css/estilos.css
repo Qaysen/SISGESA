@@ -274,6 +274,19 @@
 }
 body {
   font-family: "Open Sans";
+  min-width: 780px;
+}
+nav,
+ul,
+li,
+span,
+p {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
 }
 .login {
   background: #ededed;
@@ -348,9 +361,160 @@ body {
 .login form .boton button:hover {
   border-radius: 0;
 }
+.login .boton {
+  background-color: #eff4f6;
+  overflow: hidden;
+  padding: 20px;
+}
+.login .boton button {
+  background-color: #eeeef1;
+  border: 1px solid #d2d2d6;
+  border-radius: 2px;
+  color: #555;
+  float: right;
+  padding: 7.5px 15px;
+}
+.login .boton button:hover {
+  border-radius: 0;
+}
 .icono {
   color: #b2b2b2;
   font-size: 1.2em;
+}
+.informacion {
+  padding: 20px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.informacion form {
+  background-color: #fefefe;
+  width: 100%;
+}
+.informacion form legend {
+  font-size: 20pt;
+  margin-bottom: 1em;
+}
+.informacion form .inputs {
+  padding: 5px 25px;
+}
+.informacion form .inputs label,
+.informacion form .inputs input {
+  display: inline-block;
+}
+.informacion form .inputs label {
+  width: 20%;
+  margin: 10px 0;
+}
+.informacion form .inputs input {
+  position: relative;
+  margin-left: 20px;
+  background-color: #fbfbfb;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 7.5px 15px;
+  width: 30%;
+}
+.informacion form .inputs input:focus {
+  border-color: rgba(82,168,236,0.8);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.075);
+  outline: 0;
+}
+.informacion form .inputs:last-of-type {
+  margin-bottom: 45px;
+}
+.informacion form small {
+  margin-left: 1em;
+  color: #888;
+  font-style: italic;
+}
+.informacion form .boton {
+  margin: auto 0;
+  color: #fff;
+  padding: 7px 40px;
+  border-style: solid;
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: #307a9c;
+  background-color: #3483a8;
+}
+.informacion .comunicado-completo,
+.informacion .lista-comunicados {
+  vertical-align: top;
+  display: inline-block;
+}
+.informacion .lista-comunicados {
+  width: 45%;
+  overflow: auto;
+}
+.informacion .lista-comunicados .item-comunicado {
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  position: relative;
+  padding: 10px;
+  height: 120px;
+  width: 100%;
+}
+.informacion .lista-comunicados .item-comunicado div {
+  white-space: normal;
+  width: 100%;
+}
+.informacion .lista-comunicados .item-comunicado .bot {
+  position: absolute;
+  padding-right: 20px;
+  bottom: 15px;
+}
+.informacion .lista-comunicados .item-comunicado p {
+  font-family: 'Open Sans';
+  font-size: 11pt;
+  margin: 0;
+}
+.informacion .lista-comunicados .item-comunicado .remitente {
+  color: #999;
+  text-align: right;
+}
+.informacion .lista-comunicados .item-comunicado .remitente span {
+  font-style: italic;
+}
+.informacion .lista-comunicados .item-comunicado .mensaje-parte {
+  position: absolute;
+  top: 35px;
+}
+.informacion .lista-comunicados .item-comunicado .titulo {
+  font-family: 'Arimo', sans-serif;
+  position: absolute;
+  left: 10px;
+}
+.informacion .lista-comunicados .item-comunicado .fecha {
+  position: absolute;
+  right: 10px;
+}
+.informacion .lista-comunicados .item-comunicado:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.informacion .lista-comunicados .item-comunicado-visto {
+  background-color: #d9d9d9;
+}
+.informacion .lista-comunicados .item-comunicado-viendo {
+  background-color: #54728c;
+  color: #fff;
+}
+.informacion .comunicado-completo {
+  padding: 20px;
+  overflow: hidden;
+  white-space: normal;
+  margin-left: 10px;
+  width: 54%;
+}
+.informacion .comunicado-completo hr {
+  border-color: rgba(128,128,128,0.45);
+  border-width: 1px;
+  border-radius: 1px;
+  border-style: solid;
+}
+.informacion .comunicado-completo .titulo {
+  padding-bottom: 1em;
+  font-size: 18pt;
+  font-family: 'Arimo', sans-serif;
 }
 .borde {
   background-color: rgba(0,0,0,0.01);
@@ -361,29 +525,49 @@ body {
 .cabecera {
   background-color: #54728c;
   border-bottom: 1.5px solid #35536c;
-  height: 50px;
-}
-.cabecera .titulo {
-  width: 215px;
-  height: 50px;
-}
-.cabecera .titulo h1 {
   color: #fff;
+  height: 50px;
+  overflow: hidden;
+  width: 100%;
+}
+.sidebar .titulo {
+  width: 100%;
+  height: 50px;
+}
+.sidebar .titulo h1 {
   font-family: "Cherry Swash";
   font-size: 2em;
   margin: 0;
   padding: 2.5px 1em;
   text-shadow: 1px 2px 4px #496780, 0 0 0 #000, 1px 2px 4px #496780, 0 1px 0 #67859e;
 }
-.cabecera .titulo h1,
-.cabecera .titulo .borde {
+.sidebar .titulo span {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0 0 10px;
+}
+.sidebar .titulo .borde {
+  background-color: #66829a !important;
+  border-left: 1px solid #466176 !important;
+  border-right: 1px solid #466176 !important;
+}
+.sidebar .titulo span,
+.sidebar .titulo h1,
+.sidebar .titulo .borde {
   display: inline-block;
 }
-.cabecera .titulo .borde {
-  background-color: #66829a;
-  border-left: 1px solid #466176;
-  border-right: 1px solid #466176;
-  width: 6px;
+.contenido .titulo h1 {
+  font-family: 'Open Sans';
+  font-size: 20pt;
+  padding: 6px 12px;
+  margin: 0;
+}
+.contenido .opciones {
+  margin: 10px 20px;
+}
+.contenido .opciones a {
+  color: #fff;
+  margin-right: 20px;
 }
 .sidebar {
   background-color: #f9f9f9;
@@ -393,7 +577,7 @@ body {
 }
 .sidebar section {
   color: #5e5e5e;
-  width: 205px;
+  width: 204px;
 }
 .sidebar section .usuario {
   margin: 10px 0;
@@ -429,6 +613,9 @@ body {
   color: #fff;
   text-decoration: none;
 }
+.sidebar section nav {
+  margin-top: 10px;
+}
 .sidebar section nav ul {
   padding-left: 0;
 }
@@ -446,12 +633,13 @@ body {
   width: 215px;
 }
 .sidebar section nav ul li:hover {
-  background-color: #fcfcfc;
+  background-color: #f0f0f0;
   border-top: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
+  box-shadow: inset 1px 1px 3px #e4e4e4, inset -1px -1px 3px #e4e4e4;
   margin-bottom: -1px;
   margin-top: -1px;
-  width: 209px;
+  width: 215px;
 }
 .sidebar section nav ul li .icono {
   color: #aaa;
@@ -488,13 +676,128 @@ body {
   border-left: 1px solid #dadada;
   border-right: 1px solid #dadada;
 }
+#cursos {
+  background-color: #f9f9f9;
+  display: none;
+  height: 100%;
+  left: 215px;
+  position: fixed;
+  width: 200px;
+}
+#cursos .lista_cursos {
+  width: 189px;
+  font-size: 15px;
+}
+#cursos .lista_cursos .curso_grados .nombre_curso {
+  background-color: #fff;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  box-shadow: 0px 1px 1px rgba(228,228,228,0.5);
+  padding: 5px 10px;
+  width: 194px;
+}
+#cursos .lista_cursos .curso_grados .nombre_curso .icono {
+  color: #aaa;
+  font-size: 1.2em;
+  width: 20px;
+}
+#cursos .lista_cursos .curso_grados .nombre_curso p {
+  width: 100px;
+}
+#cursos .lista_cursos .curso_grados .nombre_curso .icono,
+#cursos .lista_cursos .curso_grados .nombre_curso p {
+  display: inline-block;
+vertical-align
+}
+#cursos .lista_cursos .curso_grados ul li {
+  padding: 5px 20px;
+}
+#cursos .lista_cursos,
+#cursos .borde {
+  display: inline-block;
+}
+#cursos .borde {
+  background-color: #ececec;
+  border-left: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+}
 .sidebar,
 .contenido {
   display: inline-block;
   vertical-align: top;
 }
 .contenido {
+  width: 100%;
   padding-left: 215px;
+  width: 100%;
+}
+.contenido .informacion {
+  font-size: 14px;
+  margin: 0 20px;
+}
+.contenido .informacion .setting {
+  background-color: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 20px;
+}
+.contenido .informacion .unidad {
+  margin-right: 0px;
+}
+.contenido .informacion .unidad label {
+  margin-right: 20px;
+}
+.contenido .informacion .agregar-nota {
+  float: right;
+}
+.contenido .informacion .agregar-nota label {
+  padding: 0 15px;
+}
+.contenido .informacion .agregar-nota input {
+  width: 150px;
+}
+.contenido .informacion .agregar-nota button {
+  background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
+  border: 1px solid #1c74b3;
+  border-top-color: #2c8ed1;
+  border-bottom-color: #0d5b97;
+  padding: 2.5px 5px;
+}
+.contenido .informacion .unidad,
+.contenido .informacion .agregar-nota {
+  display: inline-block;
+}
+.contenido .informacion .lista-alumnos {
+  margin-top: 20px;
+}
+.contenido .informacion .lista-alumnos .titulo-lista-alumnos {
+  background-color: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  border-bottom: none;
+  padding: 10px 20px;
+}
+.contenido .informacion .lista-alumnos table {
+  font-family: "Helvetica";
+  text-align: center;
+  width: 100%;
+}
+.contenido .informacion .lista-alumnos table th {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  border: 1px solid #e7e7e7;
+  height: 100px;
+  padding: 20px 0;
+}
+.contenido .informacion .lista-alumnos table td {
+  border: 1px solid #e7e7e7;
+  padding: 10px;
+}
+.contenido .informacion .lista-alumnos table td input {
+  width: 40px;
+}
+.contenido .mensaje {
+  margin: 20px 0;
 }
 .contenido menu {
   border: 1px solid #e1e1e1;

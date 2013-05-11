@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.template import defaultfilters
 
 
@@ -44,16 +44,22 @@ class Alumno(models.Model):
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
-	def __unicode__(self):
-		return unicode(self.usuario)
+	# def agregarEnGrupo(self):
+	# 	try:
+	# 		grupoAlumno = Group.objects.get(name='alumno')
+	# 	except:
+	# 		grupoNoExistente = Group(name="alumno")
+	# 		grupoNoExistente.save()
+	# 	finally:
+	# 		grupo = Group(name="alumno")
+	# 	print self.usuario
+	# 	self.usuario.groups.add(grupo)
 
-class Alumno(models.Model):
-	usuario =models.OneToOneField(User)
-	apoderado = models.ForeignKey(Apoderado)
-	dni = models.CharField(max_length=8)
-	direccion =models.CharField(max_length=100,null=True,blank=True)
-	telefono =models.CharField(max_length=7,null=True,blank=True)
-	celular =models.CharField(max_length=10,null=True,blank=True)
+	# def save(self, *args, **kwargs):
+	# 	# self.agregarEnGrupo()
+		
+	# 	super(Alumno, self).save(*args, **kwargs)
+	# 	self.usuario.groups.add(Group(name="alumno"))
 
 	def __unicode__(self):
 		return unicode(self.usuario)

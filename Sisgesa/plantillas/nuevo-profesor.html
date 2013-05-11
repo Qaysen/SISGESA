@@ -1,59 +1,68 @@
 
-{% extends "base.html" %}
-
-{% block titulo %}	
-	<title>Registrar Profesor</title>
-{% endblock titulo %}	
+{% extends "base-app.html" %}
 
 {% block contenido %}	
-		<div >
+	<div class="contenido">
+		<header class="cabecera">
+            <div class="titulo">
+                <h1>Registrar nuevo profesor</h1>
+            </div>
+        </header>
+		<section class="informacion" >
 				<form method="POST">
 					{% csrf_token %}
-					<legend>Datos Principales</legend>
-					<br>
-					
-					<div>
-						<label> Nombres:</label>
-						<input type='text' name='first_name' maxlength='30'>
-						{{ formulario.first_name.errors }}
-					</div>
-					<br>
-					<div>
-						<label> Apellidos:</label>
-						<input type='text' name='last_name' maxlength='30'>
-						{{ formulario.last_name.errors }}
-					</div>
-					<br>
-					<div>
-						<label>Email :</label>
-						<input type='email' name='email' maxlength='30'>
-						{{ formulario.email.errors }}
-					</div>
-					<br>
-					<br>
-					<legend>Datos Secundarios</legend>
-					<br>
-					<div>
-						<label> Direccion:</label>
-						<input type='text' name='direccion' maxlength='20'>
-					</div>
-					<br>
-					<div>
-						<label> Telefono:</label>
-						<input type='tel' name='telefono' maxlength='20'>
 
+					<div class="grupo-form">
+						<legend>Datos Principales</legend>
+
+						<div class="inputs">
+							<label> Nombres:</label>
+							<input type='text' name='first_name' maxlength='30'>
+							<small>Ingrese cuantos nombres tenga separados por espacios</small>
+							{{ formulario.first_name.errors }}
+						</div>
+
+						<div class='inputs'>
+							<label> Apellidos:</label>
+							<input type='text' name='last_name' maxlength='30'>
+							<small>Ingrese apellido paterno primero y luego materno</small>
+							{{ formulario.last_name.errors }}
+						</div>
+
+						<div class="inputs">
+							<label>Email :</label>
+							<input type='email' name='email' maxlength='30'>
+							<small>Ejemplo: correo@hotmail.com</small>
+							{{ formulario.email.errors }}
+						</div>
 					</div>
-					<br>
-					<div>
-						<label> celular:</label>
-						<input type='tel' name='celular' maxlength='20'>
+					
+					
+					<div class="grupo-form">
+						<legend>Datos Secundarios</legend>
+						
+						<div class="inputs">
+							<label> Direccion:</label>
+							<input type='text' name='direccion' maxlength='20'>
+						</div>
+						
+						<div class="inputs">
+							<label> Telefono:</label>
+							<input type='tel' name='telefono' maxlength='20'>
+							<small> Ejemplo: 044-243501</small>
+						</div>
+						
+						<div class="inputs">
+							<label> celular:</label>
+							<input type='tel' name='celular' maxlength='20'>
+							<small> Ejemplo 94-2123424</small>
+						</div>
+						
+						<input type="submit" value="Registrar" class="boton">
 					</div>
-					<br>
-					<button >
-	                   	Registrar
-	                    <span class="inferior"></span>
-					</button>
+					
 				</form>
-		</div>
+		</section>
+	</div>
 
 {% endblock contenido %}

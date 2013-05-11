@@ -2,8 +2,19 @@
 
 *
 	box-sizing border-box
+
 body
 	font-family "Open Sans"
+	min-width 780px
+
+nav, ul, li, span, p
+	margin 0
+	padding 0
+	list-style none
+
+a
+	text-decoration none
+
 .login
 	background #ededed
 	color #404040
@@ -33,6 +44,7 @@ body
 		width 350px
 		.inputs
 			padding 25px
+
 			label, input
 				display block
 			label
@@ -60,10 +72,158 @@ body
 				padding 7.5px 15px
 				&:hover
 					border-radius 0
+
+
+	.boton
+		background-color rgb(239, 244, 246)
+		overflow hidden
+		padding 20px
+		button
+			background-color rgb(238, 238, 241)
+			border 1px solid rgb(210, 210, 214)
+			border-radius 2px
+			color #555
+			float right
+			padding 7.5px 15px
+			&:hover
+				border-radius 0
 // Generales
 .icono
 	color rgba(178, 178, 178, 1)
 	font-size 1.2em
+
+.informacion
+	padding 20px 20px
+	overflow hidden
+	white-space nowrap
+	
+	form
+		background-color #fefefe
+		width 100%
+
+		legend
+			font-size 20pt
+			margin-bottom 1em
+
+		.inputs
+			padding 5px 25px
+			label, input
+				display inline-block
+			label
+				width 20%
+				margin 10px 0
+			input
+				position relative
+				margin-left 20px
+				background-color #fbfbfb
+				border 1px solid #ccc
+				border-radius 2px
+				padding 7.5px 15px
+				width 30%
+				&:focus
+					border-color rgba(82, 168, 236, 0.8)
+					box-shadow inset 0 1px 3px rgba(0, 0, 0, 0.075)
+					outline 0	
+		.inputs:last-of-type
+			margin-bottom 45px
+
+		small
+			margin-left 1em
+			color #888
+			font-style italic
+
+		.boton
+			margin auto 0
+			color #fff
+			padding 7px 40px
+			border-style solid
+			border-radius 2px
+			border-width 2px
+			border-color hsl(199, 53%, 40%)
+			background-color hsl(199, 53%, 43%)
+	
+	.comunicado-completo,
+	.lista-comunicados
+		vertical-align top
+		display inline-block
+
+	.lista-comunicados
+		width 45%
+		
+		overflow auto
+		.item-comunicado
+			border 1px solid hsl(0,0%,90%)
+			border-radius 4px
+			position relative
+			padding 10px
+			height 120px
+			width 100%
+			
+			div				
+				white-space normal 
+				width 100%
+			
+			.bot
+				position absolute
+				padding-right 20px
+				bottom 15px
+								
+			p				
+				font-family 'Open Sans'
+				font-size 11pt
+				margin 0		
+			
+			.remitente
+				color hsl(0,0%,60%)
+				text-align right
+				span
+					font-style italic
+
+			.mensaje-parte
+				position absolute
+				top 35px
+			
+			.titulo
+				font-family 'Arimo', sans-serif
+				position absolute
+				left 10px
+			
+			.fecha
+				position absolute
+				right 10px
+				
+
+		.item-comunicado:nth-child(odd)
+			background-color hsl(0, 0%, 95%)
+
+		.item-comunicado-visto
+			background-color hsl(0, 0%, 85%)
+
+		.item-comunicado-viendo
+			background-color #54728C
+			color #fff
+
+	.comunicado-completo
+		// background-color hsl(0, 0%, 95%)
+		padding 20px		
+		overflow hidden
+		white-space normal 
+		margin-left 10px
+
+		width 54%
+		hr
+			border-color hsla(0,0%,50%,45%)
+			border-width 1px
+			border-radius 1px
+			border-style solid
+
+
+		.titulo
+				padding-bottom 1em
+				font-size 18pt
+				font-family 'Arimo', sans-serif
+
+
 .borde
 	background-color rgba(0, 0, 0, .01)
 	float right
@@ -73,24 +233,47 @@ body
 .cabecera
 	background-color #54728c
 	border-bottom 1.5px solid rgba(53, 83, 108, 1)
+	color rgba(255,255,255,1)
 	height 50px
+	overflow hidden
+	width 100%
+
+.sidebar
 	.titulo
-		width 215px
+		width 100%
 		height 50px
 		h1
-			color rgba(255,255,255,1)
 			font-family "Cherry Swash"
 			font-size 2em
 			margin 0
 			padding 2.5px 1em
 			text-shadow 1px 2px 4px rgba(73, 103, 128, 1),0 0 0 #000,1px 2px 4px rgba(73, 103, 128, 1),0 1px 0 rgba(103, 133, 158, 1)
-		h1, .borde 
-			display inline-block
+		span
+			font-size 18px
+			font-weight bold
+			margin 12px 0 0 10px
 		.borde
-			background-color #66829a
-			border-left 1px solid #466176
-			border-right 1px solid #466176
-			width 6px
+			background-color #66829a !important
+			border-left 1px solid #466176 !important
+			border-right 1px solid #466176 !important
+		span, h1, .borde 
+			display inline-block
+
+.contenido
+	.titulo
+		h1
+			font-family 'Open Sans'
+			font-size 20pt
+			padding 6px 12px
+			margin 0
+
+	.opciones
+		margin 10px 20px
+		a
+			color white
+			margin-right 20px
+
+
 // Sidebar
 .sidebar
 	background-color #f9f9f9
@@ -99,7 +282,7 @@ body
 	width 215px
 	section
 		color #5e5e5e
-		width 205px
+		width 204px
 		.usuario
 			margin 10px 0
 			padding 0 10px
@@ -128,6 +311,7 @@ body
 				color white
 				text-decoration none
 		nav
+			margin-top 10px
 			ul
 				padding-left 0
 				li
@@ -142,12 +326,13 @@ body
 						margin-top -1px
 						width 215px
 					&:hover
-						background-color rgba(252, 252, 252, 1)
+						background-color rgba(240, 240, 240, 1)
 						border-top 1px solid rgba(228, 228, 228, 1)
 						border-bottom 1px solid rgba(228, 228, 228, 1)
+						box-shadow inset 1px 1px 3px rgba(228, 228, 228, 1), inset -1px -1px 3px rgba(228, 228, 228, 1)
 						margin-bottom -1px
 						margin-top -1px
-						width 209px
+						width 215px
 					.icono
 						color #aaaaaa
 						font-size 1.2em
@@ -174,12 +359,106 @@ body
 		background-color #ececec
 		border-left 1px solid #dadada
 		border-right 1px solid #dadada
+// Menu de cursos
+#cursos
+	background-color #f9f9f9
+	display none
+	height 100%
+	left 215px
+	position fixed
+	width 200px
+	.lista_cursos
+		width 189px
+		font-size 15px
+		.curso_grados
+			.nombre_curso
+				background-color white
+				border-top 1px solid rgba(228, 228, 228, 1)
+				border-bottom 1px solid rgba(228, 228, 228, 1)
+				box-shadow 0px 1px 1px rgba(228, 228, 228, 0.5)
+				padding 5px 10px
+				width 194px
+				.icono
+					color #aaaaaa
+					font-size 1.2em
+					width 20px
+				p
+					width 100px
+				.icono, p
+					display inline-block
+					vertical-align
+			ul
+				li
+					padding 5px 20px
+	.lista_cursos
+	.borde
+		display inline-block
+	.borde
+		background-color #ececec
+		border-left 1px solid #dadada
+		border-right 1px solid #dadada
+
 .sidebar
 .contenido
 	display inline-block
 	vertical-align top
+
 .contenido
+	width 100%
 	padding-left 215px
+	width 100%
+	.informacion
+		font-size 14px
+		margin 0 20px
+		.setting
+			background-color rgb(245, 245, 245);
+			border 1px solid rgb(231, 231, 231);
+			border-radius 4px
+			overflow hidden
+			padding 20px
+		.unidad
+			margin-right 0px
+			label
+				margin-right 20px
+		.agregar-nota 
+			float right
+			label
+				padding 0 15px
+			input
+				width 150px
+			button
+				background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
+				border: 1px solid #1c74b3;
+				border-top-color: #2c8ed1;
+				border-bottom-color: #0d5b97;
+				padding 2.5px 5px
+		.unidad
+		.agregar-nota
+			display inline-block
+		.lista-alumnos
+			margin-top 20px
+			.titulo-lista-alumnos
+				background-color rgb(245, 245, 245);
+				border 1px solid rgb(231, 231, 231);
+				border-bottom none
+				padding 10px 20px
+			table
+				font-family "Helvetica"
+				text-align center
+				width 100%
+				th
+					-webkit-transform: rotate(-90deg);
+					-moz-transform: rotate(-90deg);
+					border 1px solid rgb(231, 231, 231);
+					height 100px
+					padding 20px 0
+				td
+					border 1px solid rgb(231, 231, 231);
+					padding 10px
+					input
+						width 40px
+	.mensaje
+		margin 20px 0
 	menu
 		border 1px solid rgba(225, 225, 225, 1)
 		border-radius 2px
@@ -199,4 +478,3 @@ body
 				color rgb(88, 202, 88)
 				-webkit-text-stroke-color: rgb(48, 162, 48);
 				-webkit-text-stroke-width: 0.75px; 
-				

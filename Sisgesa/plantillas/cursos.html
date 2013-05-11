@@ -1,0 +1,140 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="opciones">
+                    <a href="#notas">Notas</a>
+                    <a href="#asistencias">Asistencias</a>
+                </div>
+            </header>
+            
+            <section class="informacion">
+            <!--<menu>
+                <span><div class="icono icono-address-book"></div></span>
+
+                <span><div class="icono icono-checkmark"></div></span>
+
+                <span><div class="icono icono-phone"></div></span>
+
+                <span><div class="icono icono-bookmark"></div></span>
+            </menu>-->
+            <section class="informacion">
+                <h2>I Bimestre</h2>
+                <div class="setting">
+                    <div class="unidad">
+                        <label>Unidad</label>
+                        <select>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                        </select> 
+                    </div>
+                    <div class="agregar-nota">
+                        <form>
+                            <fieldset>
+                                <legend>Agregar nota</legend>
+                                <label>Motivo</label>
+                                <select>
+                                    <option>Examen</option>
+                                    <option>Practica</option>
+                                    <option>Oral</option>
+                                </select>
+                                <label>Alias</label>
+                                <input type="text">
+                                <button><div class="icono icono-plus"></div></button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="lista-alumnos">
+                    <div class="titulo-lista-alumnos">Lista de alumnos</div>
+                    <form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alumno</th>
+                                    <th>Exam 1</th>
+                                    <th>Expo 1</th>
+                                    <th>Trab 1</th>
+                                    <th>Nota 1</th>
+                                    <th>Nota 1</th>
+                                    <th>Promedio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Acuña Lozano</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td>03</td>
+                                    <td><input type="number" /></td>
+                                    <td>03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+                <div class="setting">
+                    <p>No te olvides de subir todas las notas de los alumnos.</p>
+                </div>
+            </section>
+        </div>
+{% endblock contenido %}

@@ -1,222 +1,270 @@
 @font-face {
-	font-family: 'sisgesa';
-	src:url('fonts/sisgesa.eot');
-	src:url('fonts/sisgesa.eot?#iefix') format('embedded-opentype'),
-		url('fonts/sisgesa.woff') format('woff'),
-		url('fonts/sisgesa.ttf') format('truetype'),
-		url('fonts/sisgesa.svg#sisgesa') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'sisgesa';
+  src: url("fonts/sisgesa.eot");
+  src: url("fonts/sisgesa.eot?#iefix") format('embedded-opentype'), url("fonts/sisgesa.woff") format('woff'), url("fonts/sisgesa.ttf") format('truetype'), url("fonts/sisgesa.svg#sisgesa") format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
-
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {
-	font-family: 'sisgesa';
-	content: attr(data-icon);
-	speak: none;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+  font-family: 'sisgesa';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
 }
-
-/* Use the following CSS code if you want to have a class per icon */
-/*
-Instead of a list of all class selectors,
-you can use the generic selector below, but it's slower:
-[class*="icono-"] {
-*/
-.icono-home, .icono-users, .icono-users-2, .icono-library, .icono-book, .icono-calendar, .icono-calendar-2, .icono-user, .icono-cog, .icono-lock, .icono-aid, .icono-cog-2, .icono-spell-check, .icono-checkmark, .icono-checkmark-2, .icono-spam, .icono-close, .icono-exit, .icono-enter, .icono-plus, .icono-file, .icono-feed, .icono-camera, .icono-tag, .icono-phone, .icono-gift, .icono-list, .icono-camera-2, .icono-bookmark, .icono-calendar-3, .icono-address-book, .icono-chat-alt-stroke, .icono-chat-alt-fill, .icono-comment-alt2-stroke, .icono-mail, .icono-document-alt-stroke, .icono-battery-empty, .icono-battery-half, .icono-battery-full, .icono-battery-charging, .icono-arrow-left-alt1, .icono-arrow-right, .icono-arrow-left, .icono-arrow-right-alt1, .icono-arrow-left-alt2, .icono-arrow-right-alt2, .icono-arrow-up, .icono-move-vertical, .icono-move-vertical-alt1, .icono-arrow-down-alt1, .icono-arrow-up-alt1, .icono-reload, .icono-trash-fill, .icono-trash-stroke, .icono-plus-alt, .icono-minus-alt, .icono-list-2, .icono-book-alt2, .icono-pen, .icono-pen-alt-stroke, .icono-paperclip {
-	font-family: 'sisgesa';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+.icono-home,
+.icono-users,
+.icono-users-2,
+.icono-library,
+.icono-book,
+.icono-calendar,
+.icono-calendar-2,
+.icono-user,
+.icono-cog,
+.icono-lock,
+.icono-aid,
+.icono-cog-2,
+.icono-spell-check,
+.icono-checkmark,
+.icono-checkmark-2,
+.icono-spam,
+.icono-close,
+.icono-exit,
+.icono-enter,
+.icono-plus,
+.icono-file,
+.icono-feed,
+.icono-camera,
+.icono-tag,
+.icono-phone,
+.icono-gift,
+.icono-list,
+.icono-camera-2,
+.icono-bookmark,
+.icono-calendar-3,
+.icono-address-book,
+.icono-chat-alt-stroke,
+.icono-chat-alt-fill,
+.icono-comment-alt2-stroke,
+.icono-mail,
+.icono-document-alt-stroke,
+.icono-battery-empty,
+.icono-battery-half,
+.icono-battery-full,
+.icono-battery-charging,
+.icono-arrow-left-alt1,
+.icono-arrow-right,
+.icono-arrow-left,
+.icono-arrow-right-alt1,
+.icono-arrow-left-alt2,
+.icono-arrow-right-alt2,
+.icono-arrow-up,
+.icono-move-vertical,
+.icono-move-vertical-alt1,
+.icono-arrow-down-alt1,
+.icono-arrow-up-alt1,
+.icono-reload,
+.icono-trash-fill,
+.icono-trash-stroke,
+.icono-plus-alt,
+.icono-minus-alt,
+.icono-list-2,
+.icono-book-alt2,
+.icono-pen,
+.icono-pen-alt-stroke,
+.icono-paperclip {
+  font-family: 'sisgesa';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
 }
 .icono-home:before {
-	content: "\e00c";
+  content: "\e00c";
 }
 .icono-users:before {
-	content: "\e000";
+  content: "\e000";
 }
 .icono-users-2:before {
-	content: "\e001";
+  content: "\e001";
 }
 .icono-library:before {
-	content: "\e002";
+  content: "\e002";
 }
 .icono-book:before {
-	content: "\e003";
+  content: "\e003";
 }
 .icono-calendar:before {
-	content: "\e004";
+  content: "\e004";
 }
 .icono-calendar-2:before {
-	content: "\e005";
+  content: "\e005";
 }
 .icono-user:before {
-	content: "\e006";
+  content: "\e006";
 }
 .icono-cog:before {
-	content: "\e007";
+  content: "\e007";
 }
 .icono-lock:before {
-	content: "\e008";
+  content: "\e008";
 }
 .icono-aid:before {
-	content: "\e009";
+  content: "\e009";
 }
 .icono-cog-2:before {
-	content: "\e00a";
+  content: "\e00a";
 }
 .icono-spell-check:before {
-	content: "\e00b";
+  content: "\e00b";
 }
 .icono-checkmark:before {
-	content: "\e00d";
+  content: "\e00d";
 }
 .icono-checkmark-2:before {
-	content: "\e00e";
+  content: "\e00e";
 }
 .icono-spam:before {
-	content: "\e00f";
+  content: "\e00f";
 }
 .icono-close:before {
-	content: "\e010";
+  content: "\e010";
 }
 .icono-exit:before {
-	content: "\e011";
+  content: "\e011";
 }
 .icono-enter:before {
-	content: "\e012";
+  content: "\e012";
 }
 .icono-plus:before {
-	content: "\e013";
+  content: "\e013";
 }
 .icono-file:before {
-	content: "\e014";
+  content: "\e014";
 }
 .icono-feed:before {
-	content: "\e015";
+  content: "\e015";
 }
 .icono-camera:before {
-	content: "\e016";
+  content: "\e016";
 }
 .icono-tag:before {
-	content: "\e017";
+  content: "\e017";
 }
 .icono-phone:before {
-	content: "\e018";
+  content: "\e018";
 }
 .icono-gift:before {
-	content: "\e019";
+  content: "\e019";
 }
 .icono-list:before {
-	content: "\e01a";
+  content: "\e01a";
 }
 .icono-camera-2:before {
-	content: "\e01b";
+  content: "\e01b";
 }
 .icono-bookmark:before {
-	content: "\e01c";
+  content: "\e01c";
 }
 .icono-calendar-3:before {
-	content: "\e01d";
+  content: "\e01d";
 }
 .icono-address-book:before {
-	content: "\e01e";
+  content: "\e01e";
 }
 .icono-chat-alt-stroke:before {
-	content: "\e01f";
+  content: "\e01f";
 }
 .icono-chat-alt-fill:before {
-	content: "\e020";
+  content: "\e020";
 }
 .icono-comment-alt2-stroke:before {
-	content: "\e021";
+  content: "\e021";
 }
 .icono-mail:before {
-	content: "\e022";
+  content: "\e022";
 }
 .icono-document-alt-stroke:before {
-	content: "\e023";
+  content: "\e023";
 }
 .icono-battery-empty:before {
-	content: "\e024";
+  content: "\e024";
 }
 .icono-battery-half:before {
-	content: "\e025";
+  content: "\e025";
 }
 .icono-battery-full:before {
-	content: "\e026";
+  content: "\e026";
 }
 .icono-battery-charging:before {
-	content: "\e027";
+  content: "\e027";
 }
 .icono-arrow-left-alt1:before {
-	content: "\e028";
+  content: "\e028";
 }
 .icono-arrow-right:before {
-	content: "\e029";
+  content: "\e029";
 }
 .icono-arrow-left:before {
-	content: "\e02a";
+  content: "\e02a";
 }
 .icono-arrow-right-alt1:before {
-	content: "\e02b";
+  content: "\e02b";
 }
 .icono-arrow-left-alt2:before {
-	content: "\e02c";
+  content: "\e02c";
 }
 .icono-arrow-right-alt2:before {
-	content: "\e02d";
+  content: "\e02d";
 }
 .icono-arrow-up:before {
-	content: "\e02e";
+  content: "\e02e";
 }
 .icono-move-vertical:before {
-	content: "\e02f";
+  content: "\e02f";
 }
 .icono-move-vertical-alt1:before {
-	content: "\e030";
+  content: "\e030";
 }
 .icono-arrow-down-alt1:before {
-	content: "\e031";
+  content: "\e031";
 }
 .icono-arrow-up-alt1:before {
-	content: "\e032";
+  content: "\e032";
 }
 .icono-reload:before {
-	content: "\e033";
+  content: "\e033";
 }
 .icono-trash-fill:before {
-	content: "\e034";
+  content: "\e034";
 }
 .icono-trash-stroke:before {
-	content: "\e035";
+  content: "\e035";
 }
 .icono-plus-alt:before {
-	content: "\e036";
+  content: "\e036";
 }
 .icono-minus-alt:before {
-	content: "\e037";
+  content: "\e037";
 }
 .icono-list-2:before {
-	content: "\e038";
+  content: "\e038";
 }
 .icono-book-alt2:before {
-	content: "\e039";
+  content: "\e039";
 }
 .icono-pen:before {
-	content: "\e03a";
+  content: "\e03a";
 }
 .icono-pen-alt-stroke:before {
-	content: "\e03b";
+  content: "\e03b";
 }
 .icono-paperclip:before {
-	content: "\e03c";
+  content: "\e03c";
 }

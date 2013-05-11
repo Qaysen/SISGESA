@@ -56,13 +56,10 @@
 					console.log(data);
 					profesores = "";
 					profesores_perfil = ""
-					for (var i = 0; i < data.length ; i++){
-			 			if ( data[i].fields.first_name == 'undefined'){	
+					for (var i = 0; i < data.length ; i++){	
 			 				profesores += data[i].fields.first_name+" "+data[i].fields.last_name+"<br><br>"
-			 			}
-			 			else{
-							profesores_perfil += data[i].fields.direccion+" "+data[i].fields.telefono+"<br><br>"			 				
-			 			}
+			 			
+			 			
 
 			 		}
 			 		
