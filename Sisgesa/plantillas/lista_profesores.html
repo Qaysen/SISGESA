@@ -6,6 +6,14 @@
 </head>
 <body>
 
+	hijosssss
+	<select>
+		{% for hijo in hijos %}
+		<option value={{hijo.usuario.id}}>{{ hijo.usuario.first_name }}  {{hijo.usuario.last_name}}</option>
+		{% endfor %}
+	</select>
+
+
 	<table width="1050px">
 		<tr>
 			<td width="200px" align="center">Profesor</td>
@@ -14,23 +22,64 @@
 			<td width="200px" align="center">Direccion</td>
 			<td width="100px" align="center">Telefono</td>
 			<td width="100px" align="center">Celular</td>
-			<td width="50px" align="center">CV</td>
 			<td width="100px" align="center">Dejar Mensaje</td>
 		</tr>
-		{% for i in profesores %}
-		<tr>
-			<td width="200px" align="center">{{ i.profesor.usuario.first_name }}</td>
-			<td width="200px" align="center">{{ i.cursogrado.curso.nombre }}</td>
-			<td width="100px" align="center">{{ i.profesor.usuario.email }}</td>
-			<td width="200px" align="center">{{ i.profesor.direccion }}</td>
-			<td width="100px" align="center">{{ i.profesor.telefono }}</td>
-			<td width="100px" align="center">{{ i.profesor.celular }}</td>
-			<td width="50px" align="center"><a href="{{MEDIA_URL}}{{i.profesor.cvitae}}">bajar</a></td>
-			<td width="100px" align="center"><a href="#">Dejar Mensaje</a></td>
-		</tr>
-		{% endfor %}
 
 	</table>	
 	
+	<div id = "profesores">
+
+
+	</div>
+	<div id = "profesores_perfil">
+
+
+	</div>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).on("ready",inicio);
+
+		function inicio(){
+			$("select").on("change",elegir);
+		}
+
+		function elegir(){
+			var id = $(this).val();
+			$.ajax({
+				data:{'id':id},
+				type: "GET",
+				url: "/ajax/profesores/",
+				success: function(data){
+					var longitud = data.length;
+					console.log(data);
+					profesores = "";
+					profesores_perfil = ""
+					for (var i = 0; i < data.length ; i++){
+			 			if ( data[i].fields.first_name == 'undefined'){	
+			 				profesores += data[i].fields.first_name+" "+data[i].fields.last_name+"<br><br>"
+			 			}
+			 			else{
+							profesores_perfil += data[i].fields.direccion+" "+data[i].fields.telefono+"<br><br>"			 				
+			 			}
+
+			 		}
+			 		
+					$("#profesores").html(profesores);
+					$("#profesores_perfil").html(profesores_perfil);
+					console.log(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+				
+			});
+
+		}
+
+	</script>
+
+
 </body>
 </html>

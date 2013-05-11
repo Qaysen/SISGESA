@@ -7,14 +7,13 @@
 <body>
 	<div>
 		<h2>Comunicados de Aula</h2>
-		{% for comunicado in lista_comunicados %}
+		{% for comunicado in comunicados_salon %}
 			{{ comunicado.comunicado.nombre }}<br>
 			{{ comunicado.comunicado.descripcion }}<br>
-			Para el alumno {{comunicado.}}
+
 			Escrito por {{comunicado.ensenia.profesor.usuario.first_name}}
 			<br><br>
 		{% endfor %}
-		
 	</div>
 
 	<div>

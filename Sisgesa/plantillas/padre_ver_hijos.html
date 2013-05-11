@@ -6,15 +6,15 @@
 	<table width="600px">
 		<tr>
 			<td width="200px" align="center">Hijo</td>
-			<td width="400px" align="center">Accion</td>
 		</tr>
 		{% for hijo in hijos %}
 		<tr>
 			<td width="200px" align="center">{{ hijo.usuario.first_name }}</td>
-			<td width="400px" align="center"><a href="{{hijo.usuario.username}}/lista_padres">ver lista de padres   </a><a href="{{hijo.usuario.username}}/lista_profesores">ver lista de profesores   </a>
-				<a href="ver_comunicados">Ver Comunicados</a></td>
 		</tr>
 		{% endfor %}
+
+		<a href="/padres/">ver lista de padres  </a>
+		<a href="/profesores/">ver lista de profesores</a>
 
 	</table>	
 		
