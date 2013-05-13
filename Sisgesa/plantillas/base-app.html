@@ -11,11 +11,14 @@
         <!--<meta name="viewport" content="width=device-width">-->
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+        <link href='http://fonts.googleapis.com/css?family=Arimo:700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Cherry+Swash' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/estilos.css">
+        {% block additional-styles %}
+
+        {% endblock %}
         <script src="{{STATIC_URL}}js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -168,5 +171,9 @@
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+
+        {% block additional-scripts %}
+            
+        {% endblock additional-scripts%}
     </body>
 </html>

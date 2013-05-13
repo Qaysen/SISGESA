@@ -441,38 +441,51 @@ a {
   vertical-align: top;
   display: inline-block;
 }
+.informacion .lista-comunicados {
+  width: 45%;
+  overflow: auto;
+}
 .informacion .lista-comunicados .item-comunicado {
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  position: relative;
+  padding: 10px;
   height: 120px;
   width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
 }
 .informacion .lista-comunicados .item-comunicado div {
-  border-style: solid;
+  white-space: normal;
   width: 100%;
-  position: relative;
 }
 .informacion .lista-comunicados .item-comunicado .bot {
-  float: bottom;
-  top: 55px;
+  position: absolute;
+  padding-right: 20px;
+  bottom: 15px;
 }
 .informacion .lista-comunicados .item-comunicado p {
   font-family: 'Open Sans';
   font-size: 11pt;
   margin: 0;
 }
-.informacion .lista-comunicados .item-comunicado .estado {
-  margin-right: 0.5em;
+.informacion .lista-comunicados .item-comunicado .remitente {
+  color: #999;
+  text-align: right;
 }
-.informacion .lista-comunicados .item-comunicado .titulo,
-.informacion .lista-comunicados .item-comunicado .fecha {
-  display: inline-block;
+.informacion .lista-comunicados .item-comunicado .remitente span {
+  font-style: italic;
+}
+.informacion .lista-comunicados .item-comunicado .mensaje-parte {
+  position: absolute;
+  top: 35px;
 }
 .informacion .lista-comunicados .item-comunicado .titulo {
-  width: 70%;
+  font-family: 'Arimo', sans-serif;
+  position: absolute;
+  left: 10px;
 }
 .informacion .lista-comunicados .item-comunicado .fecha {
-  width: 30%;
+  position: absolute;
+  right: 10px;
 }
 .informacion .lista-comunicados .item-comunicado:nth-child(odd) {
   background-color: #f2f2f2;
@@ -484,15 +497,23 @@ a {
   background-color: #54728c;
   color: #fff;
 }
-.informacion .lista-comunicados {
-  width: 35%;
-}
 .informacion .comunicado-completo {
-  border-style: solid;
-  min-height: 100%;
-  height: auto !important;
+  padding: 20px;
   overflow: hidden;
-  width: 65%;
+  white-space: normal;
+  margin-left: 10px;
+  width: 54%;
+}
+.informacion .comunicado-completo hr {
+  border-color: rgba(128,128,128,0.45);
+  border-width: 1px;
+  border-radius: 1px;
+  border-style: solid;
+}
+.informacion .comunicado-completo .titulo {
+  padding-bottom: 1em;
+  font-size: 18pt;
+  font-family: 'Arimo', sans-serif;
 }
 .borde {
   background-color: rgba(0,0,0,0.01);
@@ -506,37 +527,44 @@ a {
   color: #fff;
   height: 50px;
   overflow: hidden;
+  width: 100%;
 }
-.cabecera .titulo {
+.sidebar .titulo {
   width: 100%;
   height: 50px;
 }
-.cabecera .titulo h1 {
+.sidebar .titulo h1 {
   font-family: "Cherry Swash";
   font-size: 2em;
   margin: 0;
   padding: 2.5px 1em;
   text-shadow: 1px 2px 4px #496780, 0 0 0 #000, 1px 2px 4px #496780, 0 1px 0 #67859e;
 }
-.cabecera .titulo span {
+.sidebar .titulo span {
   font-size: 18px;
   font-weight: bold;
   margin: 12px 0 0 10px;
 }
-.cabecera .titulo .borde {
+.sidebar .titulo .borde {
   background-color: #66829a !important;
   border-left: 1px solid #466176 !important;
   border-right: 1px solid #466176 !important;
 }
-.cabecera .titulo span,
-.cabecera .titulo h1,
-.cabecera .titulo .borde {
+.sidebar .titulo span,
+.sidebar .titulo h1,
+.sidebar .titulo .borde {
   display: inline-block;
 }
-.cabecera .opciones {
+.contenido .titulo h1 {
+  font-family: 'Open Sans';
+  font-size: 20pt;
+  padding: 6px 12px;
+  margin: 0;
+}
+.contenido .opciones {
   margin: 10px 20px;
 }
-.cabecera .opciones a {
+.contenido .opciones a {
   color: #fff;
   margin-right: 20px;
 }

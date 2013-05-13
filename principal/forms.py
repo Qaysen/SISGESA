@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
 
-
 def validar(value):
 	print "hola"
 	if value.isalpha()!=1:
@@ -33,4 +32,4 @@ class RegistrarPadreForm(forms.ModelForm):
 class RegistrarAlumnoForm(forms.ModelForm):
 	class Meta:
 		model = Alumno
-		fields = ('user','apoderado','dni', 'direccion', 'telefono', 'celular')
+		fields = ('usuario','apoderado','dni', 'direccion', 'telefono', 'celular')

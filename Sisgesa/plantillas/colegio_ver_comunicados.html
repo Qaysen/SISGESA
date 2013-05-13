@@ -1,0 +1,21 @@
+<html>
+<head>
+
+	<title>Listaaa de Comunicados</title>
+
+</head>
+<body>
+
+	<div>
+		<h2>Comunicados del Colegio</h2>
+		{% for comunicado in comunicados_colegio %}
+			{{ comunicado.comunicado.nombre }}<br>
+			{{ comunicado.comunicado.descripcion }}<br>
+
+			Escrito por {{comunicado.administrador.usuario.first_name}}
+			<br><br>
+		{% endfor %}
+	</div>
+	
+</body>
+</html>

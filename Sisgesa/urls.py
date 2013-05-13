@@ -16,11 +16,13 @@ urlpatterns = patterns('',
 	url(r'^alumno/registrar$' , 'principal.views.registrar_alumnos'),
 	url(r'^padre/registrar$' , 'principal.views.registrar_padres'),
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
-	url(r'^padre/(?P<username>.*)/lista_padres$','principal.views.ver_lista_padres'),
-	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
-
+	url(r'^profesores/$','principal.views.ver_lista_profesores'),
+	url(r'^padre/ver_comunicados$' , 'principal.views.padre_ve_comunicados'),	
+	url(r'^padres/$' , 'principal.views.ver_lista_padres'),
+	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
+	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
 	
-		
+	
 
 	#############################################ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -43,12 +45,11 @@ urlpatterns = patterns('',
     url(r'^cerrar/', "principal.views.cerrar"),
     url(r'^profesor/registrar/$', 'principal.views.registrar_profesor'),
 
-
     # Llamados ajax
     url(r'^ajax/alumnos/$', "principal.views.ajax_alumnos"),
     url(r'^ajax/alumnos/2/$', "principal.views.ajax_alumnos_2"),
     url(r'^ajax/secciones/$', "principal.views.ajax_secciones"),
-)	
+)
 
 #### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS
 #### ELIMINAR LUEGO DE CREAR SUS VISTAS
@@ -57,4 +58,4 @@ urlpatterns += patterns(
 	
 	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
 	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
-	)
+)

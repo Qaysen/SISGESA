@@ -86,25 +86,88 @@ def registrar_alumnos(request):
 
 
 
-# VER TODOS LOS HIJOS DE UN PADREE , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL PADRE,
-# QUE VIENE DEL LOGIN
+# VER TODOS LOS HIJOS DE UN PADREE
+@login_required(login_url="/")
 def ver_hijos(request):
-	hijos = Alumno.objects.filter(apoderado__usuario__username = 'Carlos@gmail.com')#USERNAME DEL PADRE
+	usuario = request.user
+	hijos = Alumno.objects.filter(apoderado__usuario__username = usuario.username)#USERNAME DEL PADRE
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
-def ver_lista_padres(request,username):
 
-	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
-	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
-	ctx = {'alumnos':alumnos}
+# VER TODOS LOS COMUNICADOS DE UN ALUMNO , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL ALUMNO,
+# QUE VIENE DEL LOGIN
+@login_required(login_url="/")
+def padre_ve_comunicados(request):
+	padre = request.user
+	ctx = {}
+	lista_comunicados = []
+	hijos = list(Alumno.objects.filter(apoderado__usuario__username=padre.username))
+	for hijo in hijos:
+		username = hijo.usuario.username
+		detalle_alumno = Matricula.objects.get(alumno__usuario__username=username)
+		comunicados = list(Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre))
+		lista_comunicados.extend(comunicados)
+		#lista_comunicados.extend(hijo)
+	print lista_comunicados	
+	comunicados_colegio = Envia.objects.all()	
+	ctx = {'lista_comunicados' : lista_comunicados,'comunicados_colegio':comunicados_colegio}
+	return render_to_response('padre_ver_comunicados.html',ctx,context_instance=RequestContext(request))
+
+
+@login_required(login_url="/")
+def colegio_ve_comunicados(request):
+	comunicados_colegio = Envia.objects.all()	
+	ctx = {'comunicados_colegio':comunicados_colegio}
+	return render_to_response('colegio_ver_comunicados.html',ctx,context_instance=RequestContext(request))
+
+
+@login_required(login_url="/")
+def alumno_ve_comunicados(request):
+	alumno = request.user
+	detalle_alumno = Matricula.objects.get(alumno__usuario__username=alumno.username)
+	comunicados_salon = Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre)
+	comunicados_colegio = Envia.objects.all()	
+	ctx = {'comunicados_salon' : comunicados_salon , 'comunicados_colegio':comunicados_colegio}
+	return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))
+
+
+
+@login_required(login_url="/")
+def ver_lista_padres(request):
+	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
+	ctx = {'hijos':hijos}
  	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
 
-def ver_lista_profesores(request,username):
-	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
-	profesores = Ensenia.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , cursogrado__grado__nombre=detalles_alumno.grado.nombre)
-	ctx = {'profesores':profesores}
+def ajax_padres(request):
+	usuario_id = request.GET['id']
+	ctx ={}
+	detalle_alumno = Matricula.objects.get(alumno__usuario__id = usuario_id)
+	padres = Matricula.objects.filter(seccion__nombre=detalle_alumno.seccion.nombre , grado__nombre=detalle_alumno.grado.nombre)	
+	for padre in padres:
+		ctx[padre.alumno.apoderado.usuario] = {}
+		ctx[padre.alumno.usuario] = {}
+	data = serializers.serialize('json' , ctx )
+	return HttpResponse(data, mimetype='application/json')
+
+	
+@login_required(login_url="/")
+def ver_lista_profesores(request):
+	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
+	ctx = {'hijos':hijos}
  	return render_to_response('lista_profesores.html',ctx,context_instance=RequestContext(request))
+
+def ajax_profesores(request):
+	usuario_id = request.GET['id']
+	ctx = {}
+	detalle_alumno = Matricula.objects.get(alumno__usuario__id = usuario_id)
+	profesores = Ensenia.objects.filter(seccion__nombre=detalle_alumno.seccion.nombre , cursogrado__grado__nombre=detalle_alumno.grado.nombre)
+	
+	for profesor in profesores:
+		ctx[profesor.profesor] = {}
+	data = serializers.serialize('json',ctx,fields=('telefono','direccion','usuario'))
+	return HttpResponse(data , mimetype='application/json')
+
 
 #REGISTRO DEL APODERADO AL 100% LISTO CON ENVIO DE CLAVE A CORREO ELECTRONICO 
 def registrar_padres(request):
@@ -119,7 +182,6 @@ def registrar_padres(request):
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
 			usur2.save()
-			print usur2.id
 			usuario['usuario']=usur2.id
 			padre_form=RegistrarPadreForm(usuario)
 			if padre_form.is_valid():
