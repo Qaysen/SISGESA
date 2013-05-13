@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 import random
 from random import choice
+from django.utils import simplejson as json
+from django.core import serializers
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -166,4 +168,88 @@ def registrar_profesor(request):
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
     from random import choice
     return ''.join([choice(allowed_chars) for i in range(length)])
+
+def alumnos(request):
+	usuario = request.user
+	try:
+		profesor = Profesor.objects.get(user=usuario)
+	except:
+		profesor = ""
+	try:
+		apoderado = Apoderado.objects.get(user=usuario)
+	except:
+		apoderado = ""
+	try:
+		alumno = Alumno.objects.get(user=usuario)
+	except:
+		alumno = ""
+	try:
+		administrador = Administrador.objects.get(user=usuario)
+	except:
+		administrador = ""
+
+	# Si soy profesor quiero filtrar mis alumnos por grado y seccion
+	if profesor:
+		dictados = Ensenia.objects.filter(profesor=profesor)
+		data = dictados
+		return render_to_response('ajax_profesores.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy padre de familia quiero ver los alumnos que 
+	# estudian con mi hijo
+	elif apoderado:
+		alumnos = Alumno.objects.filter(apoderado= apoderado)
+		data = alumnos
+		return render_to_response('ajax_apoderados.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy alumno quiero ver a todos mis companeros
+	elif alumno:
+		matricula = Matricula.objects.get(alumno=alumno)
+		matriculas = Matricula.objects.filter(seccion=matricula.seccion, grado=matricula.grado)
+		data = matriculas
+		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy administrador quiero ver a todos los alumnos
+	elif administrador:
+		data = administrador.celular
+		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
+
+def ajax_alumnos(request):
+	usuario_id = request.GET['id']
+	matricula = Matricula.objects.get(alumno__user=usuario_id)
+	matriculas = Matricula.objects.filter(seccion=matricula.seccion, grado=matricula.grado)
+	alumnos = {}
+	for matricula in matriculas:
+		alumnos[matricula.alumno.user] = {}
+	data = serializers.serialize('json', alumnos, fields=('first_name','last_name'))
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_alumnos_2(request):
+	seccion = request.GET['seccion']
+	grado = request.GET['grado']
+	matriculas = Matricula.objects.filter(seccion=seccion, grado=grado)
+	alumnos = {}
+	for matricula in matriculas:
+		alumnos[matricula.alumno.user] = {}
+	data = serializers.serialize('json', alumnos, fields=('first_name','last_name'))
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_secciones(request):
+	cursogrado = request.GET['cursogrado']
+	profesor = request.GET['profesor']
+	ensenias = Ensenia.objects.filter(cursogrado=cursogrado, profesor=profesor)
+	secciones = {}
+	for ensenia in ensenias:
+		secciones[ensenia.seccion] = ensenia.seccion.nombre
+	data = serializers.serialize('json', secciones, fields=('nombre'))
+	return HttpResponse(data, mimetype="application/json")
+
+def prueba(request):
+	alumnos = Alumno.objects.all()
+	data = alumnos
+	return render_to_response('prueba.html', { "data": data }, context_instance=RequestContext(request))
+
+def ajax_prueba(request):
+	id_alumno = request.GET['id']
+	
+
+
+
+
 

@@ -4,40 +4,39 @@ from django.template import defaultfilters
 
 
 class Profesor(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 	
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 
 class Administrador(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 
 
 
 class Apoderado(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
-
+		return unicode(self.user)
 
 class Alumno(models.Model):
-	usuario =models.OneToOneField(User)
+	user =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
@@ -45,18 +44,7 @@ class Alumno(models.Model):
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	def __unicode__(self):
-		return unicode(self.usuario)
-
-class Alumno(models.Model):
-	usuario =models.OneToOneField(User)
-	apoderado = models.ForeignKey(Apoderado)
-	dni = models.CharField(max_length=8)
-	direccion =models.CharField(max_length=100,null=True,blank=True)
-	telefono =models.CharField(max_length=7,null=True,blank=True)
-	celular =models.CharField(max_length=10,null=True,blank=True)
-
-	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)
@@ -100,7 +88,6 @@ class Ensenia(models.Model):
 	
 	def __unicode__(self):
 		return '%s con %s en %s' %(self.cursogrado, self.profesor, self.seccion)
-
 
 class Evaluacion(models.Model):
 	tipo =models.CharField(max_length=10)

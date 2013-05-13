@@ -1,0 +1,38 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+	<div class="contenido">
+		<select name="" id="opciones">
+			{% for alumno in data %}
+				<option value="{{alumno.id}}">{{alumno}}</option>
+			{% endfor %}
+		</select>
+	</div>
+{% endblock contenido %}
+
+{% block script %}
+	<script>
+		$(document).on("ready", inicio);
+
+		function inicio()
+		{
+			$('#opciones').on('change', elegir);
+		}
+		function elegir()
+		{
+			var id = $(this).find('option:checked').val();
+			console.log(id);
+			$.ajax({
+				data: { 'id':id },
+				type: "GET",
+				url: "/ajax/prueba/",
+				success: function(data){
+					console.log(data);
+				},
+				error: function (data){
+					console.log(data);
+				}
+			});
+		}
+	</script>	
+{% endblock script %}

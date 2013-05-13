@@ -29,6 +29,13 @@ urlpatterns = patterns('',
     # Cursos
     url(r'^cursos/$', "principal.views.cursos"),
 
+    # Alumnos
+    url(r'^alumnos/$', "principal.views.alumnos"),
+
+    # Probando json y ajax
+	url(r'^prueba/$', "principal.views.prueba"),
+	url(r'^ajax/prueba/$', "principal.views.ajax_prueba"),    
+
     # Pagina de inicio (login)
     url(r'^$', "principal.views.inicio"),
 
@@ -37,8 +44,11 @@ urlpatterns = patterns('',
     url(r'^profesor/registrar/$', 'principal.views.registrar_profesor'),
 
 
-
-)
+    # Llamados ajax
+    url(r'^ajax/alumnos/$', "principal.views.ajax_alumnos"),
+    url(r'^ajax/alumnos/2/$', "principal.views.ajax_alumnos_2"),
+    url(r'^ajax/secciones/$', "principal.views.ajax_secciones"),
+)	
 
 #### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS
 #### ELIMINAR LUEGO DE CREAR SUS VISTAS

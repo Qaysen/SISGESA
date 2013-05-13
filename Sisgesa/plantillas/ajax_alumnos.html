@@ -1,0 +1,45 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="opciones">
+                    <a href="#notas">Notas</a>
+                    <a href="#asistencias">Asistencias</a>
+                </div>
+            </header>
+            
+            <!--<menu>
+                <span><div class="icono icono-address-book"></div></span>
+
+                <span><div class="icono icono-checkmark"></div></span>
+
+                <span><div class="icono icono-phone"></div></span>
+
+                <span><div class="icono icono-bookmark"></div></span>
+            </menu>-->
+            <section class="informacion">
+                <h2>Alumnos</h2>
+                <br>
+                <div id="resultado">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for alumno in data %}
+                            <tr>
+                                <td>{{alumno.user}}</td>
+                                <td>{{alumnos.user.firt_name}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+{% endblock contenido %}

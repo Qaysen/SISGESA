@@ -93,14 +93,11 @@ a
 	font-size 1.2em
 
 .informacion
-	padding 20px 20px
 	overflow hidden
 	white-space nowrap
-	
 	form
 		background-color #fefefe
 		width 100%
-
 		legend
 			font-size 20pt
 			margin-bottom 1em
@@ -371,10 +368,9 @@ a
 .contenido
 	width 100%
 	padding-left 215px
-	width 100%
 	.informacion
 		font-size 14px
-		margin 0 20px
+		margin 0 10px
 		.setting
 			background-color rgb(245, 245, 245);
 			border 1px solid rgb(231, 231, 231);
@@ -382,15 +378,21 @@ a
 			overflow hidden
 			padding 20px
 		.unidad
-			margin-right 0px
+			margin 10px
 			label
 				margin-right 20px
 		.agregar-nota
+			margin 10px
 			float right
+			form
+				background-color #f5f5f5
+				legend
+					font-size 1.3em
+					margin-bottom 0
 			label
 				padding 0 15px
 			input
-				width 150px
+				min-width 100px
 			button
 				background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
 				border: 1px solid #1c74b3;
@@ -407,22 +409,34 @@ a
 				border 1px solid rgb(231, 231, 231);
 				border-bottom none
 				padding 10px 20px
-			table
-				font-family "Helvetica"
-				text-align center
-				width 100%
-				th
-					-webkit-transform: rotate(-90deg);
-					-moz-transform: rotate(-90deg);
-					border 1px solid rgb(231, 231, 231);
-					height 100px
-					padding 20px 0
-				td
-					border 1px solid rgb(231, 231, 231);
-					padding 10px
-					input
-						width 40px
+				table
+					th
+						-webkit-transform: rotate(-90deg);
+						-moz-transform: rotate(-90deg);
+						height 100px
+						padding 20px 0
+	table
+		font-family "Helvetica"
+		text-align center
+		width 100%
+		th
+			border 1px solid rgb(231, 231, 231);
+			padding 10px 0
+		td
+			border 1px solid rgb(231, 231, 231);
+			padding 10px
+			input
+				width 40px
+	button
+		background-color #CD6560
+		border 1px solid rgb(202, 54, 47)
+		color white
+		float right
+		height 40px
+		margin 10px auto
+		width 200px
 	.mensaje
+		bdrs
 		margin 20px 0
 	menu
 		border 1px solid rgba(225, 225, 225, 1)
