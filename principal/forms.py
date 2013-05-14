@@ -17,11 +17,11 @@ class UserForm(forms.ModelForm):
 		model = User
 		fields = ('username', 'first_name', 'last_name', 'email','password')
 
-class RegistrarProfesorForm(ModelForm):   
-    class Meta:
-        model = Profesor
-        fields = ('usuario', 'direccion', 'telefono', 'celular')
-        
+class RegistrarProfesorForm(ModelForm):
+	class Meta:
+		model = Profesor
+		fields = ('usuario', 'direccion', 'telefono', 'celular')
+
 
 class RegistrarPadreForm(forms.ModelForm):
 	class Meta:

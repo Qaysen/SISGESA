@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.template import defaultfilters
-
+from django.dispatch import dispatcher
+from django.db.models import signals
 
 class Profesor(models.Model):
 	usuario = models.OneToOneField(User)
@@ -63,6 +64,12 @@ class Alumno(models.Model):
 
 	def __unicode__(self):
 		return unicode(self.usuario)
+
+def creando_alumno(sender, instance, signal, *args, **kwargs):
+	grupoAlumno, creado = Group.objects.get_or_create(name='alumno')
+	instance.usuario.groups.add(grupoAlumno)
+
+signals.pre_save.connect(creando_alumno, sender=Alumno)
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)

@@ -91,7 +91,23 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
-def ver_lista_padres(request,username):
+def user_in_group(user,group):
+	return 1 if user.groups.filter(name=group).exists() else 0
+
+@login_required(login_url="/")	
+def ver_lista_padres(request): #,username):
+
+	user = request.user
+	
+	if user_in_group(user,"alumno"):
+		print("alumno")
+		pass
+	elif user_in_group(user,"padre"):
+		print("padre")
+	elif user_in_group(user,"profesor"):
+		print("profesor")
+	else :
+		print("administrador")
 
 	detalles_alumno = Matricula.objects.get(alumno__usuario__username=username)
 	alumnos = Matricula.objects.filter(seccion__nombre=detalles_alumno.seccion.nombre , grado__nombre=detalles_alumno.grado.nombre)
@@ -107,6 +123,9 @@ def ver_lista_profesores(request,username):
 #REGISTRO DEL APODERADO AL 100% LISTO CON ENVIO DE CLAVE A CORREO ELECTRONICO 
 def registrar_padres(request):
 	if request.method=='POST':
+		usuario = UserForm(usuario)
+		usuario.save()
+		
 		usuario = request.POST.copy()
 		usuario['username']=usuario['email']		
 		usuario['password']=usuario['username']
@@ -116,8 +135,9 @@ def registrar_padres(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoPadre, creado = Group.objects.get_or_create(name='padre')
+			usur2.groups.add(grupoPadre)		
 			usur2.save()
-			print usur2.id
 			usuario['usuario']=usur2.id
 			padre_form=RegistrarPadreForm(usuario)
 			if padre_form.is_valid():
@@ -146,6 +166,8 @@ def registrar_profesor(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoProfesor, creado = Group.objects.get_or_create(name='profesor')
+			usur2.groups.add(grupoProfesor)
 			usur2.save()
 			usuario['usuario']=usur2.id
 			profesor_form=RegistrarProfesorForm(usuario)
