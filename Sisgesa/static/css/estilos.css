@@ -382,7 +382,6 @@ a {
   font-size: 1.2em;
 }
 .informacion {
-  padding: 20px 20px;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -729,11 +728,10 @@ vertical-align
 .contenido {
   width: 100%;
   padding-left: 215px;
-  width: 100%;
 }
 .contenido .informacion {
   font-size: 14px;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 .contenido .informacion .setting {
   background-color: #f5f5f5;
@@ -743,19 +741,27 @@ vertical-align
   padding: 20px;
 }
 .contenido .informacion .unidad {
-  margin-right: 0px;
+  margin: 10px;
 }
 .contenido .informacion .unidad label {
   margin-right: 20px;
 }
 .contenido .informacion .agregar-nota {
+  margin: 10px;
   float: right;
+}
+.contenido .informacion .agregar-nota form {
+  background-color: #f5f5f5;
+}
+.contenido .informacion .agregar-nota form legend {
+  font-size: 1.3em;
+  margin-bottom: 0;
 }
 .contenido .informacion .agregar-nota label {
   padding: 0 15px;
 }
 .contenido .informacion .agregar-nota input {
-  width: 150px;
+  min-width: 100px;
 }
 .contenido .informacion .agregar-nota button {
   background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
@@ -777,26 +783,39 @@ vertical-align
   border-bottom: none;
   padding: 10px 20px;
 }
-.contenido .informacion .lista-alumnos table {
+.contenido .informacion .lista-alumnos .titulo-lista-alumnos table th {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  height: 100px;
+  padding: 20px 0;
+}
+.contenido table {
   font-family: "Helvetica";
   text-align: center;
   width: 100%;
 }
-.contenido .informacion .lista-alumnos table th {
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
+.contenido table th {
   border: 1px solid #e7e7e7;
-  height: 100px;
-  padding: 20px 0;
+  padding: 10px 0;
 }
-.contenido .informacion .lista-alumnos table td {
+.contenido table td {
   border: 1px solid #e7e7e7;
   padding: 10px;
 }
-.contenido .informacion .lista-alumnos table td input {
+.contenido table td input {
   width: 40px;
 }
+.contenido button {
+  background-color: #cd6560;
+  border: 1px solid #ca362f;
+  color: #fff;
+  float: right;
+  height: 40px;
+  margin: 10px auto;
+  width: 200px;
+}
 .contenido .mensaje {
+bdrs
   margin: 20px 0;
 }
 .contenido menu {

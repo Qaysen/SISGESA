@@ -106,6 +106,11 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'Sisgesa.urls'
 
+# AUTH_PROFILE_MODULE = 'principal.Profesor'
+# AUTH_PROFILE_MODULE = 'principal.Apoderado'
+# AUTH_PROFILE_MODULE = 'principal.Administrador'
+# AUTH_PROFILE_MODULE = 'principal.Alumno'
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'Sisgesa.wsgi.application'
 
@@ -123,7 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'principal',
-
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -5,40 +5,39 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 
 class Profesor(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 	
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 
 class Administrador(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 
 
 
 class Apoderado(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
-
+		return unicode(self.user)
 
 class Alumno(models.Model):
-	usuario =models.OneToOneField(User)
+	user =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
@@ -113,7 +112,6 @@ class Ensenia(models.Model):
 	
 	def __unicode__(self):
 		return '%s con %s en %s' %(self.cursogrado, self.profesor, self.seccion)
-
 
 class Evaluacion(models.Model):
 	tipo =models.CharField(max_length=10)
@@ -197,7 +195,7 @@ class Asistencia(models.Model):
 
 class Comunicado(models.Model):
 	nombre =models.CharField(max_length=30)
-	descripcion =models.CharField(max_length=500)
+	descripcion =models.TextField(max_length=500)
 	
 	def __unicode__(self):
 		return unicode(self.nombre)

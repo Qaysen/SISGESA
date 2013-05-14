@@ -22,11 +22,10 @@ class RegistrarProfesorForm(ModelForm):
 		model = Profesor
 		fields = ('usuario', 'direccion', 'telefono', 'celular')
 
-
 class RegistrarPadreForm(forms.ModelForm):
 	class Meta:
 		model = Apoderado
-		fields = ('usuario', 'direccion', 'telefono', 'celular')
+		fields = ('user', 'direccion', 'telefono', 'celular')
 
 
 class RegistrarAlumnoForm(forms.ModelForm):
