@@ -1,0 +1,21 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="titulo">
+                   <h1>Lista de Evento</h1>
+                </div>
+            </header>
+			
+            {% for mes in meses %}
+                <h2>{{mes|date:"m"}}</h2>
+                {% for evento in mes %}
+                    <p>{{evento}}</p>
+                {%  endfor %}
+            {% endfor %}
+
+            	           
+	        
+        </div>
+{% endblock contenido %}

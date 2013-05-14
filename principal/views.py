@@ -10,9 +10,12 @@ from principal.forms import *
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 import random
+import datetime
 from random import choice
 from django.utils import simplejson as json
 from django.core import serializers
+import calendar
+from time import strptime
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -95,8 +98,7 @@ def ver_hijos(request):
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
 
-# VER TODOS LOS COMUNICADOS DE UN ALUMNO , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL ALUMNO,
-# QUE VIENE DEL LOGIN
+# VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
 	padre = request.user
@@ -225,6 +227,39 @@ def registrar_profesor(request):
 		user_form = UserForm()
 		profesor_form = RegistrarProfesorForm()
 	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
+
+def registrar_evento(request):
+	if request.method == 'POST':
+		evento = request.POST.copy()
+		evento['fecha_inicio']=evento['fecha_inicio'][8:10]+'/'+evento['fecha_inicio'][5:7]+'/'+evento['fecha_inicio'][0:4]
+		evento['fecha_fin']=evento['fecha_fin'][8:10]+'/'+evento['fecha_fin'][5:7]+'/'+evento['fecha_fin'][0:4]
+		formulario = RegistrarEventoForm(evento)
+		if formulario.is_valid():
+			formulario.save()
+	else:		
+		formulario = RegistrarEventoForm()	
+	ctx = {'formulario':formulario}
+	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
+
+
+def ver_eventos(request):
+	fecha_actual = datetime.date.today()
+	ctx  = {}
+	meses = ['Ene', 'Feb', 'Marzo', 'Abril', 'Mayo', 'Junio',
+			 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+	#value_meses = meses.values()
+	for mes in meses:
+		m = mes
+		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio')) 
+		ctx[mes] = []
+		ctx[mes].extend(eventos)
+
+	#ctx['meses'] = value_meses
+	print ctx
+	print meses
+	ct=dict(ctx,meses)
+#	print ct
+	return render_to_response('ver_eventos.html',ctx,context_instance=RequestContext(request))
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):

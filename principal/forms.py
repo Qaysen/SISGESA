@@ -32,4 +32,9 @@ class RegistrarPadreForm(forms.ModelForm):
 class RegistrarAlumnoForm(forms.ModelForm):
 	class Meta:
 		model = Alumno
-		fields = ('usuario','apoderado','dni', 'direccion', 'telefono', 'celular')
+		fields = ('usuario','apoderado','dni' , 'direccion', 'telefono', 'celular')
+
+class RegistrarEventoForm(forms.ModelForm):
+	class Meta:
+		model = Evento
+		fields = ('nombre','fecha_inicio','fecha_fin')

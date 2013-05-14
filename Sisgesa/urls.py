@@ -16,11 +16,15 @@ urlpatterns = patterns('',
 	url(r'^alumno/registrar$' , 'principal.views.registrar_alumnos'),
 	url(r'^padre/registrar$' , 'principal.views.registrar_padres'),
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
-	url(r'^profesores/$','principal.views.ver_lista_profesores'),
+	url(r'^profesores/$','principal.views.ver_lista_profesores',name='lista_profesores'),
 	url(r'^padre/ver_comunicados$' , 'principal.views.padre_ve_comunicados'),	
-	url(r'^padres/$' , 'principal.views.ver_lista_padres'),
+	url(r'^padres/$' , 'principal.views.ver_lista_padres' , name='lista_padres'),
 	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
 	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
+	url(r'^evento/registrar$' , 'principal.views.registrar_evento', name = 'registrar_evento'),
+	#url(r'^eventos/(?P<mes>.*)$' , 'principal.views.ver_eventos', name = 'ver_eventos'),
+	url(r'^eventos/$' , 'principal.views.ver_eventos', name = 'ver_eventos'),
+
 	
 	
 

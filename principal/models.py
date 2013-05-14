@@ -210,3 +210,11 @@ class Envia(models.Model):
 	
 	def __unicode__(self):
 		return '%s-%s' %(self.administrador, self.comunicado)
+
+class Evento(models.Model):
+	nombre = models.CharField(max_length=100)
+	fecha_inicio = models.DateField(auto_now=False)
+	fecha_fin = models.DateField(auto_now=False)
+
+	def __unicode__(self):
+		return self.nombre
