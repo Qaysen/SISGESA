@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
 	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
 	url(r'^evento/registrar$' , 'principal.views.registrar_evento', name = 'registrar_evento'),
-	url(r'^eventos/$' , 'principal.views.ver_eventos', name = 'ver_eventos'),
+	url(r'^eventos/$' , 'principal.views.ver_eventos_alumno', name = 'ver_eventos_alumno'),
 
 
 	

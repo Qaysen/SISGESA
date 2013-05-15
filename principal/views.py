@@ -266,7 +266,7 @@ def registrar_evento(request):
 	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
 
 
-def ver_eventos(request):
+def ver_eventos_alumno(request):
 	fecha_actual = datetime.date.today()
 	ctx  = {}
 	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
@@ -279,7 +279,7 @@ def ver_eventos(request):
 		meses_eventos.append(dict([(mes,eventos)]))
 
 	diccionario = {"meses":meses_eventos}
-	return render_to_response('ver_eventos.html',diccionario,context_instance=RequestContext(request))
+	return render_to_response('ver_cal.html',diccionario,context_instance=RequestContext(request))
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
