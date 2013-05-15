@@ -64,11 +64,13 @@ class Alumno(models.Model):
 	def __unicode__(self):
 		return unicode(self.user)
 
+
 def creando_alumno(sender, instance, signal, *args, **kwargs):
 	grupoAlumno, creado = Group.objects.get_or_create(name='alumno')
 	instance.user.groups.add(grupoAlumno)
 
 signals.pre_save.connect(creando_alumno, sender=Alumno)
+
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)

@@ -1,3 +1,4 @@
+#encoding:utf-8
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -24,8 +25,6 @@ urlpatterns = patterns('',
 	url(r'^evento/registrar$' , 'principal.views.registrar_evento', name = 'registrar_evento'),
 	url(r'^eventos/$' , 'principal.views.ver_eventos_alumno', name = 'ver_eventos_alumno'),
 
-
-	
 	
 	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
 
@@ -59,6 +58,15 @@ urlpatterns = patterns('',
     url(r'^ajax/alumnos/$', "principal.views.ajax_alumnos"),
     url(r'^ajax/alumnos/2/$', "principal.views.ajax_alumnos_2"),
     url(r'^ajax/secciones/$', "principal.views.ajax_secciones"),
+    url(r'^ajax/secciones/3$', "principal.views.ajax_secciones_3"),
+
+    #profesores
+    url(r'^profesoress/$', "principal.views.profesores"),
+    url(r'^ajax/profesores/2/$', "principal.views.ajax_profesores_2"),
+    url(r'^ajax/profesores/$', "principal.views.ajax_profesores"),
+	url(r'^ajax/secciones/1/$', "principal.views.ajax_secciones_1"),
+
+
 )
 
 #### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS

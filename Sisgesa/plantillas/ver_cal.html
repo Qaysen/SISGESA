@@ -85,7 +85,7 @@
 
 
 			events:[
-				
+
 				{%  for mes in meses %}
 	            	{% for nombre, eventos in mes.items %}
 	                    {% for evento in eventos %}
@@ -94,6 +94,10 @@
 	                    	start: '{{evento.fecha_inicio|date:"Y-m-d"}}',
 	                    	end: '{{evento.fecha_fin|date:"Y-m-d"}}'
 	                    },
+	                    {
+	                    	title: 'Cumpleaños de {{evento.nombre}} {{evento.apellido}}',
+	                    	start: '{{evento.fecha|date:"Y-m-d"}}'
+	                    },
 
 	                    {% endfor %}
 	                {% endfor %}
@@ -101,6 +105,10 @@
 	            ],
 
 	            eventColor: '#febf01'
+	                    
+	                    
+			
+
 		});
 
 
