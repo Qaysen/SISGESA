@@ -1,0 +1,118 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="opciones">
+                    <a href="#notas">Notas</a>
+                    <a href="#asistencias">Asistencias</a>
+                </div>
+            </header>
+            
+            <!--<menu>
+                <span><div class="icono icono-address-book"></div></span>
+
+                <span><div class="icono icono-checkmark"></div></span>
+
+                <span><div class="icono icono-phone"></div></span>
+
+
+                <span><div class="icono icono-bookmark"></div></span>
+            </menu>-->
+            <section class="informacion">
+                <h2>Profesores</h2>
+                <div class="setting">
+                    <label>Elija el grado</label>
+                    <select id="elegir_grado">
+                        <option id="elegir_uno">Elige Uno</option>
+                    {% for dicta in data %}
+                        <option value="{{dicta.id}}">{{dicta.nombre}} {{dicta.nivel}}</option>
+                    {% endfor %}
+                    </select>
+                    <br>
+                    <label>Elija la Seccion en la que enseña</label>
+                    <select name="" id="elegir_seccion">
+                    </select>
+                </div>
+                <br>
+                <div id="resultado">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+{% endblock contenido %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).on("ready", inicio);
+
+        function inicio() 
+        {
+            $('#elegir_grado').on("change", elegirGrado);
+        }
+        function elegirGrado() 
+        {
+            var grado = $(this).val();
+            console.log(grado);
+            $.ajax({
+                data: { 'grado':grado},
+                type: "GET",
+                url: "/ajax/secciones/1/",
+                success: function(data) {
+                    html = "<option>Selecciona una seccion</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<option data-seccion='"+data[i].pk+"'>" + data[i].fields.nombre + "</option>";
+                        console.log(data[i].fields.nombre);
+                    };
+                    $("#elegir_seccion").html(html);
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+            $('#elegir_seccion').on("change", elegirSeccion);
+        }
+        function elegirSeccion()
+        {
+            var grado = $("#elegir_grado").val();
+            var seccion = $("#elegir_seccion").find('option:selected').data('seccion');
+            console.log(seccion);
+            $.ajax({
+                data: {'seccion':seccion, 'grado':grado},
+                type: "GET",
+                url: "/ajax/alumnos/2/",
+                success: function(data){
+                    html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr>";
+                        html += "<td>" + data[i].fields.first_name + "</td>";
+                        html += "<td>" + data[i].fields.last_name + "</td>";
+                        html += "<td></td>";
+                        html += "</tr>";
+                    };
+                    $('tbody').html(html);
+                    console.log(data);
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+{% endblock script %}

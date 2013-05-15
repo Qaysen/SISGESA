@@ -61,7 +61,7 @@ class Alumno(models.Model):
 	# 	self.usuario.groups.add(Group(name="alumno"))
 
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)
