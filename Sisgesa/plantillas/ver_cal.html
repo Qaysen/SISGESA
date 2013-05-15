@@ -22,6 +22,20 @@
 		margin: 0 auto;
 		}
 
+	.contenido {
+
+		padding-bottom: 100px;
+
+	}
+
+	.contenido header{
+		margin-bottom: 40px;
+	}
+
+	.contenido table th{
+		background: rgb(223, 177, 235);
+	}
+
 </style>
 {% endblock %}
 
@@ -29,8 +43,13 @@
 
 {% block contenido %}
 <div class="contenido">
-<div id='loading' style='display:none'>loading...</div>
-<div id='calendar'></div>
+	<header class="cabecera">
+		<div class="titulo">
+			<h1>Eventos Académicos</h1>
+		</div>
+	</header>
+	<div id='loading' style='display:none'>loading...</div>
+	<div id='calendar'></div>
 </div>
 {% endblock contenido %}
 
@@ -66,21 +85,22 @@
 
 
 			events:[
-				{
-					title: 'dia de la patria',
-					start: '2013-07-28'
-				},
+				
 				{%  for mes in meses %}
 	            	{% for nombre, eventos in mes.items %}
 	                    {% for evento in eventos %}
 	                    {
 	                    	title: '{{evento}}',
-	                    	start: '{{evento.fecha_inicio|date:"Y-m-d"}}'
+	                    	start: '{{evento.fecha_inicio|date:"Y-m-d"}}',
+	                    	end: '{{evento.fecha_fin|date:"Y-m-d"}}'
 	                    },
+
 	                    {% endfor %}
 	                {% endfor %}
-	            {% endfor %}			]
-			
+	            {% endfor %}			
+	            ],
+
+	            eventColor: '#febf01'
 		});
 
 
