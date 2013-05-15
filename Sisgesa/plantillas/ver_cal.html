@@ -1,0 +1,94 @@
+{% extends "base-app.html" %}
+{% block additional-styles %}
+<link href='{{STATIC_URL}}css/fullcalendar.css' rel='stylesheet' />
+<link href='{{STATIC_URL}}css/fullcalendar.print.css' rel='stylesheet' media='print' />
+
+<style>
+
+	body {
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+		
+	#loading {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		}
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+
+</style>
+{% endblock %}
+
+
+
+{% block contenido %}
+<div class="contenido">
+<div id='loading' style='display:none'>loading...</div>
+<div id='calendar'></div>
+</div>
+{% endblock contenido %}
+
+{% block additional-scripts %}
+
+	<script src='{{STATIC_URL}}js/jquery-1.9.1.min.js'></script>
+	<script src='{{STATIC_URL}}js/jquery-ui-1.10.2.custom.min.js'></script>
+	<script src='{{STATIC_URL}}js/fullcalendar.min.js'></script>
+	<script src='{{STATIC_URL}}js/gcal.js'></script>
+
+	<script>
+
+	$(document).ready(function() {
+	
+		$('#calendar').fullCalendar({
+		
+			// US Holidays
+		
+			eventClick: function(event) {
+				// opens events in a popup window
+				window.open(event.url, 'gcalevent', 'width=700,height=600');
+				return false;
+			},
+			
+			loading: function(bool) {
+				if (bool) {
+					$('#loading').show();
+				}else{
+					$('#loading').hide();
+				}
+			},
+
+
+
+			events:[
+				{%  for mes in meses %}
+	            	{% for nombre, eventos in mes.items %}
+	                    {% for evento in eventos %}
+	                    {
+	                    	title: '{{evento}}',
+	                    	start: '{{evento.fecha_inicio|date:"Y-m-d"}}'
+	                    },
+	                    {
+	                    	title: 'Cumpleaños de {{evento.nombre}} {{evento.apellido}}',
+	                    	start: '{{evento.fecha|date:"Y-m-d"}}'
+	                    },
+	                    {% endfor %}
+	                {% endfor %}
+	            {% endfor %}			
+	           ]
+			
+		});
+
+
+		
+	});
+
+</script>
+            
+{% endblock additional-scripts%}
+
