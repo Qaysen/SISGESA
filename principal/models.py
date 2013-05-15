@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.template import defaultfilters
-
+from django.dispatch import dispatcher
+from django.db.models import signals
 
 class Profesor(models.Model):
 	user = models.OneToOneField(User)
@@ -24,7 +25,6 @@ class Administrador(models.Model):
 		return unicode(self.user)
 
 
-
 class Apoderado(models.Model):
 	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
@@ -39,6 +39,7 @@ class Alumno(models.Model):
 	user =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
+	fecha_nacimiento = models.DateField(auto_now=False)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
@@ -62,6 +63,14 @@ class Alumno(models.Model):
 
 	def __unicode__(self):
 		return unicode(self.user)
+
+
+def creando_alumno(sender, instance, signal, *args, **kwargs):
+	grupoAlumno, creado = Group.objects.get_or_create(name='alumno')
+	instance.user.groups.add(grupoAlumno)
+
+signals.pre_save.connect(creando_alumno, sender=Alumno)
+
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)
@@ -208,3 +217,11 @@ class Envia(models.Model):
 	
 	def __unicode__(self):
 		return '%s-%s' %(self.administrador, self.comunicado)
+
+class Evento(models.Model):
+	nombre = models.CharField(max_length=100)
+	fecha_inicio = models.DateField(auto_now=False)
+	fecha_fin = models.DateField(auto_now=False)
+
+	def __unicode__(self):
+		return self.nombre

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from principal.views import *
+
 from django.conf import settings
 admin.autodiscover()
 
@@ -16,14 +16,24 @@ urlpatterns = patterns('',
 	url(r'^alumno/registrar$' , 'principal.views.registrar_alumnos'),
 	url(r'^padre/registrar$' , 'principal.views.registrar_padres'),
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
-	url(r'^profesores/$','principal.views.ver_lista_profesores'),
+	url(r'^profesores/$','principal.views.ver_lista_profesores',name='lista_profesores'),
 	url(r'^padre/ver_comunicados$' , 'principal.views.padre_ve_comunicados'),	
-	url(r'^padres/$' , 'principal.views.ver_lista_padres'),
+	url(r'^padres/$' , 'principal.views.ver_lista_padres' , name='lista_padres'),
 	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
 	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
-	
-	
+	url(r'^evento/registrar$' , 'principal.views.registrar_evento', name = 'registrar_evento'),
+	url(r'^eventos/$' , 'principal.views.ver_eventos_alumno', name = 'ver_eventos_alumno'),
 
+
+	
+	
+	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
+
+	url(r'^profesores/$','principal.views.ver_lista_profesores'),
+	url(r'^padre/ver_comunicados$' , 'principal.views.padre_ve_comunicados'),	
+	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
+	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
+		
 	#############################################ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),

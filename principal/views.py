@@ -10,9 +10,12 @@ from principal.forms import *
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 import random
+import datetime
 from random import choice
 from django.utils import simplejson as json
 from django.core import serializers
+import calendar
+from time import strptime
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -94,9 +97,25 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
+def user_in_group(user,group):
+	return 1 if user.groups.filter(name=group).exists() else 0
 
-# VER TODOS LOS COMUNICADOS DE UN ALUMNO , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL ALUMNO,
-# QUE VIENE DEL LOGIN
+@login_required(login_url="/")	
+def ver_lista_padres(request): #,username):
+
+	user = request.user
+	
+	if user_in_group(user,"alumno"):
+		print("alumno")
+		pass
+	elif user_in_group(user,"padre"):
+		print("padre")
+	elif user_in_group(user,"profesor"):
+		print("profesor")
+	else :
+		print("administrador")
+
+# VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
 	padre = request.user
@@ -133,11 +152,11 @@ def alumno_ve_comunicados(request):
 
 
 
-@login_required(login_url="/")
-def ver_lista_padres(request):
-	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
-	ctx = {'hijos':hijos}
- 	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
+# @login_required(login_url="/")
+# def ver_lista_padres(request):
+# 	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
+# 	ctx = {'hijos':hijos}
+#  	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
 
 def ajax_padres(request):
 	usuario_id = request.GET['id']
@@ -172,6 +191,9 @@ def ajax_profesores(request):
 #REGISTRO DEL APODERADO AL 100% LISTO CON ENVIO DE CLAVE A CORREO ELECTRONICO 
 def registrar_padres(request):
 	if request.method=='POST':
+		usuario = UserForm(usuario)
+		usuario.save()
+		
 		usuario = request.POST.copy()
 		usuario['username']=usuario['email']		
 		usuario['password']=usuario['username']
@@ -181,6 +203,8 @@ def registrar_padres(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoPadre, creado = Group.objects.get_or_create(name='padre')
+			usur2.groups.add(grupoPadre)		
 			usur2.save()
 			usuario['usuario']=usur2.id
 			padre_form=RegistrarPadreForm(usuario)
@@ -210,6 +234,8 @@ def registrar_profesor(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoProfesor, creado = Group.objects.get_or_create(name='profesor')
+			usur2.groups.add(grupoProfesor)
 			usur2.save()
 			usuario['usuario']=usur2.id
 			profesor_form=RegistrarProfesorForm(usuario)
@@ -225,6 +251,35 @@ def registrar_profesor(request):
 		user_form = UserForm()
 		profesor_form = RegistrarProfesorForm()
 	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
+
+def registrar_evento(request):
+	if request.method == 'POST':
+		evento = request.POST.copy()
+		evento['fecha_inicio']=evento['fecha_inicio'][8:10]+'/'+evento['fecha_inicio'][5:7]+'/'+evento['fecha_inicio'][0:4]
+		evento['fecha_fin']=evento['fecha_fin'][8:10]+'/'+evento['fecha_fin'][5:7]+'/'+evento['fecha_fin'][0:4]
+		formulario = RegistrarEventoForm(evento)
+		if formulario.is_valid():
+			formulario.save()
+	else:		
+		formulario = RegistrarEventoForm()	
+	ctx = {'formulario':formulario}
+	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
+
+
+def ver_eventos_alumno(request):
+	fecha_actual = datetime.date.today()
+	ctx  = {}
+	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
+			 7:'Julio', 8:'Agosto', 9:'Septiembre', 10:'Octubre', 11:'Noviembre', 12:'Diciembre'}
+
+	value_meses = meses.values()
+	meses_eventos = []
+	for key, mes in meses.iteritems():
+		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
+		meses_eventos.append(dict([(mes,eventos)]))
+
+	diccionario = {"meses":meses_eventos}
+	return render_to_response('ver_cal.html',diccionario,context_instance=RequestContext(request))
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
