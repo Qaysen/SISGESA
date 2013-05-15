@@ -252,6 +252,7 @@ def registrar_profesor(request):
 		profesor_form = RegistrarProfesorForm()
 	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
 
+
 def registrar_evento(request):
 	if request.method == 'POST':
 		evento = request.POST.copy()
@@ -266,7 +267,12 @@ def registrar_evento(request):
 	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
 
 
-def ver_eventos(request):
+@login_required(login_url="/")
+def ver_eventos_alumno(request):
+	alumno = request.user
+	detalle_alumno = Matricula.objects.get(alumno__user__username=alumno.username)
+	alumnos = Matricula.objects.filter(seccion__nombre=detalle_alumno.seccion.nombre , grado__nombre=detalle_alumno.grado.nombre)
+	
 	fecha_actual = datetime.date.today()
 	ctx  = {}
 	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
@@ -279,6 +285,7 @@ def ver_eventos(request):
 		meses_eventos.append(dict([(mes,eventos)]))
 
 	diccionario = {"meses":meses_eventos}
+	print diccionario
 	return render_to_response('ver_eventos.html',diccionario,context_instance=RequestContext(request))
 
 
