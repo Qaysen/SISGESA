@@ -1,60 +1,33 @@
-<html>
+{% extends 'base-app.html' %}
+<!-- <html>
 <head>
 	<title>Listaaa de Hijoss</title>
 </head>
 <body>
 	<title>Listaaa de Padres</title>
 </head>
-<body>
-	hijosssss
-	<select>
-		{% for hijo in hijos %}
-		<option value={{hijo.usuario.id}}>{{ hijo.usuario.first_name }}  {{hijo.usuario.last_name}}</option>
-		{% endfor %}
-	</select>
-			
-	<div id = "alumnos">
+<body> -->
+	{% block contenido %}
+		<div class="contenido">
+			<header class="cabecera">
+	            <div class="titulo">
+                <h1>Lista de padres</h1>
+	            </div>
+	        </header>
+			<section class="informacion" >
+				{% block selector %}
 
-	</div>
+				{% endblock %}
+				<div id = "alumnos">
 
-	<div id="padres">
+				</div>
 
-	</div>
+				<div id="padres">
 
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+				</div>
+			</section>
+		</div>			
 
-	<script type="text/javascript">
-		$(document).on("ready",inicio);
-
-		function inicio(){
-			$("select").on("change",elegir)
-		}
-
-		function elegir(){
-			 var id = $(this).val();
-			 $.ajax({
-			 	data:{'id':id},
-			 	type: "GET",
-			 	url: "/ajax/padres/",
-			 	success: function(data){
-			 		var alumnos = "";
-			 		var padres = "";
-			 		for (var i = 1; i < data.length ; i=i+2){
-			 			alumnos += data[i].fields.first_name+" "+data[i].fields.last_name+"<br><br>"
-			 		}
-			 		for (var i = 0; i < data.length ; i=i+2){
-			 			padres += data[i].fields.first_name+" "+data[i].fields.last_name+"<br><br>"
-			 		}
-			 		$('#alumnos').html(alumnos);
-			 		$('#padres').html(padres);
-			 		console.log(data);
-			 	},
-			 	error: function(data){
-			 		console.log(data);
-			 	}
-			 });
-		}
-
-	</script>	
-</body>
-</html>
+	{% endblock %}
+<!-- </body>
+</html> -->

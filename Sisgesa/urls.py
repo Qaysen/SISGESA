@@ -18,11 +18,11 @@ urlpatterns = patterns('',
 	url(r'^padre/ver_hijos$' , 'principal.views.ver_hijos'),
 	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
 
+	url(r'^padres/$','principal.views.ver_lista_padres'),
 	url(r'^profesores/$','principal.views.ver_lista_profesores'),
 	url(r'^padre/ver_comunicados$' , 'principal.views.padre_ve_comunicados'),	
 	url(r'^alumno/ver_comunicados$' , 'principal.views.alumno_ve_comunicados'),
-	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),
-		
+	url(r'^colegio/ver_comunicados$' , 'principal.views.colegio_ve_comunicados'),		
 
 	#############################################ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

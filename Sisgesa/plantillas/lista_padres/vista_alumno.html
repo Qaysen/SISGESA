@@ -1,0 +1,10 @@
+{% extends "lista_padres.html" %}
+
+{% block selector %}
+	<select>
+		{% for hijo in hijos %}
+		<option value={{hijo.usuario.id}}>{{ hijo.usuario.first_name }}  {{hijo.usuario.last_name}}</option>
+		{% endfor %}
+	</select>
+{% endblock %}
+

@@ -1,18 +1,20 @@
 #encondig:utf-8
-from principal.models import *
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from principal.forms import *
-from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
-import random
-from random import choice
 from django.utils import simplejson as json
-from django.core import serializers
+from principal.forms import *
+from principal.models import *
+from principal import lista_padres
+from random import choice
+
+import random
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -103,14 +105,13 @@ def ver_lista_padres(request): #,username):
 	user = request.user
 	
 	if user_in_group(user,"alumno"):
-		print("alumno")
-		pass
+		return lista_padres.alumno_viendo(request)
 	elif user_in_group(user,"padre"):
-		print("padre")
+		return lista_padres.padre_viendo(request)
 	elif user_in_group(user,"profesor"):
-		print("profesor")
+		return lista_padres.profesor_viendo(request)
 	else :
-		print("administrador")
+		return lista_padres.admin_viendo(request)
 
 # VER TODOS LOS COMUNICADOS DE UN ALUMNO , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL ALUMNO,
 # QUE VIENE DEL LOGIN
