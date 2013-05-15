@@ -97,6 +97,23 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
+def user_in_group(user,group):
+	return 1 if user.groups.filter(name=group).exists() else 0
+
+@login_required(login_url="/")	
+def ver_lista_padres(request): #,username):
+
+	user = request.user
+	
+	if user_in_group(user,"alumno"):
+		print("alumno")
+		pass
+	elif user_in_group(user,"padre"):
+		print("padre")
+	elif user_in_group(user,"profesor"):
+		print("profesor")
+	else :
+		print("administrador")
 
 # VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
@@ -135,11 +152,11 @@ def alumno_ve_comunicados(request):
 
 
 
-@login_required(login_url="/")
-def ver_lista_padres(request):
-	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
-	ctx = {'hijos':hijos}
- 	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
+# @login_required(login_url="/")
+# def ver_lista_padres(request):
+# 	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
+# 	ctx = {'hijos':hijos}
+#  	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
 
 def ajax_padres(request):
 	usuario_id = request.GET['id']
@@ -174,6 +191,9 @@ def ajax_profesores(request):
 #REGISTRO DEL APODERADO AL 100% LISTO CON ENVIO DE CLAVE A CORREO ELECTRONICO 
 def registrar_padres(request):
 	if request.method=='POST':
+		usuario = UserForm(usuario)
+		usuario.save()
+		
 		usuario = request.POST.copy()
 		usuario['username']=usuario['email']		
 		usuario['password']=usuario['username']
@@ -183,6 +203,8 @@ def registrar_padres(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoPadre, creado = Group.objects.get_or_create(name='padre')
+			usur2.groups.add(grupoPadre)		
 			usur2.save()
 			usuario['usuario']=usur2.id
 			padre_form=RegistrarPadreForm(usuario)
@@ -212,6 +234,8 @@ def registrar_profesor(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
+			grupoProfesor, creado = Group.objects.get_or_create(name='profesor')
+			usur2.groups.add(grupoProfesor)
 			usur2.save()
 			usuario['usuario']=usur2.id
 			profesor_form=RegistrarProfesorForm(usuario)
@@ -245,24 +269,104 @@ def registrar_evento(request):
 def ver_eventos(request):
 	fecha_actual = datetime.date.today()
 	ctx  = {}
-	meses = ['Ene', 'Feb', 'Marzo', 'Abril', 'Mayo', 'Junio',
-			 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-	#value_meses = meses.values()
-	for mes in meses:
-		m = mes
-		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio')) 
-		ctx[mes] = []
-		ctx[mes].extend(eventos)
+	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
+			 7:'Julio', 8:'Agosto', 9:'Septiembre', 10:'Octubre', 11:'Noviembre', 12:'Diciembre'}
 
-	#ctx['meses'] = value_meses
-	print ctx
-	print meses
-	ct=dict(ctx,meses)
-#	print ct
-	return render_to_response('ver_eventos.html',ctx,context_instance=RequestContext(request))
+	value_meses = meses.values()
+	meses_eventos = []
+	for key, mes in meses.iteritems():
+		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
+		meses_eventos.append(dict([(mes,eventos)]))
+
+	diccionario = {"meses":meses_eventos}
+	return render_to_response('ver_eventos.html',diccionario,context_instance=RequestContext(request))
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
     from random import choice
     return ''.join([choice(allowed_chars) for i in range(length)])
+
+def alumnos(request):
+	usuario = request.user
+	try:
+		profesor = Profesor.objects.get(user=usuario)
+	except:
+		profesor = ""
+	try:
+		apoderado = Apoderado.objects.get(user=usuario)
+	except:
+		apoderado = ""
+	try:
+		alumno = Alumno.objects.get(user=usuario)
+	except:
+		alumno = ""
+	try:
+		administrador = Administrador.objects.get(user=usuario)
+	except:
+		administrador = ""
+
+	# Si soy profesor quiero filtrar mis alumnos por grado y seccion
+	if profesor:
+		dictados = Ensenia.objects.filter(profesor=profesor)
+		data = dictados
+		return render_to_response('ajax_profesores.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy padre de familia quiero ver los alumnos que 
+	# estudian con mi hijo
+	elif apoderado:
+		alumnos = Alumno.objects.filter(apoderado= apoderado)
+		data = alumnos
+		return render_to_response('ajax_apoderados.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy alumno quiero ver a todos mis companeros
+	elif alumno:
+		matricula = Matricula.objects.get(alumno=alumno)
+		matriculas = Matricula.objects.filter(seccion=matricula.seccion, grado=matricula.grado)
+		data = matriculas
+		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy administrador quiero ver a todos los alumnos
+	elif administrador:
+		data = administrador.celular
+		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
+
+def ajax_alumnos(request):
+	usuario_id = request.GET['id']
+	matricula = Matricula.objects.get(alumno__user=usuario_id)
+	matriculas = Matricula.objects.filter(seccion=matricula.seccion, grado=matricula.grado)
+	alumnos = {}
+	for matricula in matriculas:
+		alumnos[matricula.alumno.user] = {}
+	data = serializers.serialize('json', alumnos, fields=('first_name','last_name'))
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_alumnos_2(request):
+	seccion = request.GET['seccion']
+	grado = request.GET['grado']
+	matriculas = Matricula.objects.filter(seccion=seccion, grado=grado)
+	alumnos = {}
+	for matricula in matriculas:
+		alumnos[matricula.alumno.user] = {}
+	data = serializers.serialize('json', alumnos, fields=('first_name','last_name'))
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_secciones(request):
+	cursogrado = request.GET['cursogrado']
+	profesor = request.GET['profesor']
+	ensenias = Ensenia.objects.filter(cursogrado=cursogrado, profesor=profesor)
+	secciones = {}
+	for ensenia in ensenias:
+		secciones[ensenia.seccion] = ensenia.seccion.nombre
+	data = serializers.serialize('json', secciones, fields=('nombre'))
+	return HttpResponse(data, mimetype="application/json")
+
+def prueba(request):
+	alumnos = Alumno.objects.all()
+	data = alumnos
+	return render_to_response('prueba.html', { "data": data }, context_instance=RequestContext(request))
+
+def ajax_prueba(request):
+	id_alumno = request.GET['id']
+	
+
+
+
+
 

@@ -1,45 +1,45 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.template import defaultfilters
-
+from django.dispatch import dispatcher
+from django.db.models import signals
 
 class Profesor(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 	
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
 
 class Administrador(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
-
+		return unicode(self.user)
 
 
 class Apoderado(models.Model):
-	usuario = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.usuario)
-
+		return unicode(self.user)
 
 class Alumno(models.Model):
-	usuario =models.OneToOneField(User)
+	user =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
+	fecha_nacimiento = models.DateField(auto_now=False)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
@@ -62,7 +62,13 @@ class Alumno(models.Model):
 	# 	self.usuario.groups.add(Group(name="alumno"))
 
 	def __unicode__(self):
-		return unicode(self.usuario)
+		return unicode(self.user)
+
+def creando_alumno(sender, instance, signal, *args, **kwargs):
+	grupoAlumno, creado = Group.objects.get_or_create(name='alumno')
+	instance.user.groups.add(grupoAlumno)
+
+signals.pre_save.connect(creando_alumno, sender=Alumno)
 		
 class Curso(models.Model):
 	nombre =models.CharField(max_length=10)
@@ -106,7 +112,6 @@ class Ensenia(models.Model):
 	
 	def __unicode__(self):
 		return '%s con %s en %s' %(self.cursogrado, self.profesor, self.seccion)
-
 
 class Evaluacion(models.Model):
 	tipo =models.CharField(max_length=10)
