@@ -39,7 +39,7 @@ class Alumno(models.Model):
 	usuario =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
-	#fecha_nacimiento = models.DateField(auto_now=False)
+	fecha_nacimiento = models.DateField(auto_now=False)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=6,null=True,blank=True)
 	celular =models.CharField(max_length=9,null=True,blank=True)

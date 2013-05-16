@@ -255,34 +255,38 @@ def registrar_evento(request):
 @login_required(login_url="/")
 def ver_eventos_alumno(request):
 	user = request.user
-	print user.groups.all()
-	if user.groups.filter(name='padre'):
-		detalle_alumno = Matricula.objects.get(alumno__apoderado__user__username=user.username)
-	if user.groups.filter(name='alumno'):
-		detalle_alumno = Matricula.objects.get(alumno__user__username=user.username)
+	if user_in_group(user,"padre"):
+		detalle_alumno = Matricula.objects.get(alumno__apoderado__usuario__username=user.username)
+	if user_in_group(user,"alumno"):
+		detalle_alumno = Matricula.objects.get(alumno__usuario__username=user.username)
 	
 	fecha_actual = datetime.date.today()
 	ctx  = {}
 	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
 			 7:'Julio', 8:'Agosto', 9:'Septiembre', 10:'Octubre', 11:'Noviembre', 12:'Diciembre'}
 
-
-	value_meses = meses.values()
 	meses_eventos = []
+	value_meses = meses.values()
 	for key, mes in meses.iteritems():
 		eventos_mes = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
 		cumples = list(Matricula.objects.filter(seccion__nombre=detalle_alumno.seccion.nombre, grado__nombre=detalle_alumno.grado.nombre,alumno__fecha_nacimiento__month=key))
 		alumnos = [cumple.alumno for cumple in cumples]
+		
+		eventos = []
+		for evento in eventos_mes:
+			dic_mes = {"tipo":"evento" , "nombre":evento.nombre,"fecha_inicio":evento.fecha_inicio , "fecha_fin":fecha_fin}
+			eventos.append(dic_mes)
+
 		cumpleanos = []
 		for cumple in cumples:
-			nombre = cumple.alumno.user.first_name
-			apellido = cumple.alumno.user.last_name
+			nombre = "%s %s" % (cumple.alumno.usuario.first_name, cumple.alumno.usuario.last_name)
 			nac = cumple.alumno.fecha_nacimiento
-			fecha = datetime.date(fecha_actual.year,nac.month,nac.day)
-			elemento = {"nombre":nombre, "apellido":apellido , "fecha":fecha}
-			cumpleanos.append(elemento)
+			fecha_inicio = datetime.date(fecha_actual.year,nac.month,nac.day)
+			fecha_fin = datetime.date(fecha_actual.year,nac.month,nac.day)
+			dic_mes = {"tipo":"cumple" , "nombre":nombre, "fecha_inicio":fecha_inicio}
+			cumpleanos.append(dic_mes)
 
-		eventos_all = eventos_mes + cumpleanos
+		eventos_all = eventos + cumpleanos
 		meses_eventos.append(dict([(mes,eventos_all)]))
 	diccionario = {"meses":meses_eventos}
 	return render_to_response('ver_cal.html',diccionario,context_instance=RequestContext(request))
