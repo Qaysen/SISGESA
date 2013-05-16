@@ -1,21 +1,25 @@
 #encondig:utf-8
-from principal.models import *
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from principal.forms import *
-from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives #ENVIAR HTML
-import random
-import datetime
-from random import choice
 from django.utils import simplejson as json
-from django.core import serializers
-import calendar
+from principal import lista_padres
+from principal.forms import *
+from principal.models import *
+from random import choice
 from time import strptime
+from principal.funciones import *
+import calendar
+import datetime
+import random
+
+
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -97,11 +101,6 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
-def user_in_group(user,group):
-	return 1 if user.groups.filter(name=group).exists() else 0
-
-
-
 @login_required(login_url="/")	
 def ver_lista_padres(request): #,username):
 
@@ -117,6 +116,7 @@ def ver_lista_padres(request): #,username):
 	else :
 		print("administrador")
 
+>>>>>>> 78504430511ede3cd535c2f4539ec013956b5ea2
 # VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
@@ -143,14 +143,6 @@ def colegio_ve_comunicados(request):
 	return render_to_response('colegio_ver_comunicados.html',ctx,context_instance=RequestContext(request))
 
 
-
-
-
-# @login_required(login_url="/")
-# def ver_lista_padres(request):
-# 	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
-# 	ctx = {'hijos':hijos}
-#  	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
 
 def ajax_padres(request):
 	usuario_id = request.GET['id']
@@ -302,7 +294,6 @@ def ver_eventos_alumno(request):
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
-    from random import choice
     return ''.join([choice(allowed_chars) for i in range(length)])
 
 def alumnos(request):
@@ -387,49 +378,29 @@ def prueba(request):
 def ajax_prueba(request):
 	id_alumno = request.GET['id']
 	
-
-
-
-
-
+login_required('.')
 def profesores(request):
-	usuario = request.user
-	try:
-		profesor = Profesor.objects.get(user=usuario)
-	except:
-		profesor = ""
-	try:
-		apoderado = Apoderado.objects.get(user=usuario)
-	except:
-		apoderado = ""
-	try:
-		alumno = Alumno.objects.get(user=usuario)
-	except:
-		alumno = ""
-	try:
-		administrador = Administrador.objects.get(user=usuario)
-	except:
-		administrador = ""
-
+	user = request.user
+	
 	# Si soy profesor quiero filtrar mis alumnos por grado y seccion
-	if profesor:
+	if user_in_group(user,"profesor"):
 		dictados = Ensenia.objects.filter(profesor=profesor)
 		data = dictados
 		return render_to_response('ajax_profesores_part-profesores.html', { "data": data }, context_instance=RequestContext(request))
 	# Si soy padre de familia quiero ver los alumnos que 
 	# estudian con mi hijo
-	elif apoderado:
+	elif user_in_group(user,"padre"):
 		alumnos = Alumno.objects.filter(apoderado= apoderado)
 		data = alumnos
 		return render_to_response('ajax_profesores_part-apoderado.html', { "data": data }, context_instance=RequestContext(request))
 	# Si soy alumno quiero ver a todos mis companeros
-	elif alumno:
+	elif user_in_group(user,"alumno"):
 		matricula = Matricula.objects.get(alumno=alumno)
 		matriculas = Ensenia.objects.filter(seccion=matricula.seccion, cursogrado__grado=matricula.grado)
 		data = matriculas
 		return render_to_response('ajax_profesores_part-alumno.html', { "data": data }, context_instance=RequestContext(request))
 	# Si soy administrador quiero ver a todos los alumnos
-	elif administrador:
+	else:
 		grados=Grado.objects.all()
 		data = grados
 		print data
@@ -444,6 +415,7 @@ def ajax_profesores_2(request):
 	profesores = {}
 	for matricula in matriculas:
 		profesores[matricula.profesor.user] = {}
+	
 	data = serializers.serialize('json', profesores, fields=('first_name','last_name'))
 	return HttpResponse(data, mimetype="application/json")
 
@@ -467,7 +439,10 @@ def ajax_profesores(request):
 	print data 
 	return HttpResponse(data, mimetype="application/json")
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9bdbd9522bc41cf8794a350ab9bbe9b231aa2149
 def ajax_secciones_1(request):
 	grado = request.GET['grado']
 	ensenias = Ensenia.objects.filter(cursogrado__grado=grado)

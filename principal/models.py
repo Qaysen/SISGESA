@@ -43,7 +43,10 @@ class Alumno(models.Model):
 	telefono =models.CharField(max_length=6,null=True,blank=True)
 	celular =models.CharField(max_length=9,null=True,blank=True)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9bdbd9522bc41cf8794a350ab9bbe9b231aa2149
 	def __unicode__(self):
 		return unicode(self.usuario)
 
