@@ -51,10 +51,6 @@ def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-# Cursos
-@login_required(login_url="/")
-def cursos(request):
-	return render_to_response('cursos.html',context_instance=RequestContext(request))
 
 # GENERAR PASSWORD ALEATORIOO
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
@@ -545,7 +541,7 @@ def ajax_secciones_4(request):
 	print data 
 	return HttpResponse(data, mimetype="application/json")
 
-########## Registrar comunicados
+#Registrar comunicados
 
 @login_required(login_url="/")
 def reg_comunicado(request):
@@ -615,18 +611,36 @@ def ajax_seccion_profesores(request):
 		return HttpResponseRedirect('/')
 
 
-####VEr comunicados alumnos
+#  VEr comunicados alumnos
+
 @login_required(login_url="/")
 def alumno_ver_comunicados(request):
-	alumno = request.user
-	
-	detalle_alumno = Matricula.objects.get(alumno__usuario__username=alumno.username)
-	# detalle_alumno = Matricula.objects.all()
+	user = request.user
+	if user_in_group(user,"alumno"): 
 
-	print detalle_alumno.seccion
-	print detalle_alumno.grado
-	
-	comunicados_profesor= Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre)
-	print comunicados_profesor
-	ctx = {'comunicados_profesor' : comunicados_profesor}
-	return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))
+		alumno = request.user		
+		detalle_alumno = Matricula.objects.get(alumno__usuario__username=alumno.username)
+		
+		print detalle_alumno.seccion
+		print detalle_alumno.grado
+		
+		comunicados_profesor= Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre)
+		print comunicados_profesor
+		ctx = {'comunicados_profesor' : comunicados_profesor}
+		return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))
+
+	else:
+		return HttpResponseRedirect('/')
+
+# Administrar Cursos, Notas
+
+@login_required(login_url="/")
+def cursos(request):
+	user = request.user
+	if user_in_group(user,"profesor"): 
+		profesor = request.user	
+
+	else:
+		return HttpResponseRedirect('/')
+
+	return render_to_response('cursos.html',context_instance=RequestContext(request))

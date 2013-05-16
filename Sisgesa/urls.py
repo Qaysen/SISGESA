@@ -35,15 +35,15 @@ urlpatterns = patterns('',
 
 	url(r'^profesores/$','principal.views.ver_lista_profesores'),
 
-	########################################Registrar Comunicados
+	# Registrar Comunicados
 	url(r'^profesor/reg_comunicado/$','principal.views.reg_comunicado'),
 	url(r'^ajax/grado_profesores/$','principal.views.ajax_grado_profesores'),
 	url(r'^ajax/seccion_profesores/$','principal.views.ajax_seccion_profesores'),
 	url(r'^ajax/reg_comunicado/$','principal.views.ajax_reg_comunicado'),	
-	#########################################Ver Comunicado Alumnos
+	#Ver Comunicado Alumnos
 	url(r'^alumno/ver_comunicados/$' , 'principal.views.alumno_ver_comunicados'),
 
-	#############################################ADMINNISTRADOR
+	#ADMINNISTRADOR
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
@@ -86,11 +86,3 @@ urlpatterns = patterns('',
 
 )
 
-#### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS
-#### ELIMINAR LUEGO DE CREAR SUS VISTAS
-# urlpatterns += patterns(
-# 	'django.views.generic.simple',
-	
-# 	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
-# 	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
-# )

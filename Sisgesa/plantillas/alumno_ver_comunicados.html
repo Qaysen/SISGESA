@@ -1,22 +1,97 @@
-<html>
-<head>
 
-	<title>Listaaa de Comunicados</title>
+{% extends "base-app.html" %}
 
-</head>
-<body>
-	<div>
-		<h2>Comunicados del Profesor</h2>
-		{% for comunicado in comunicados_profesor %}
-			{{ comunicado.comunicado.titulo }}<br>
-			{{ comunicado.comunicado.descripcion }}<br>
-			{{ comunicado.fecha }}<br>
+{% block additional-styles%}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/jquery.mCustomScrollbar.css">
 
-			Escrito por {{comunicado.ensenia.profesor.usuario}}
-			<br><br>
-		{% endfor %}
-	</div>
+{% endblock additional-styles %}
 
-	
-</body>
-</html>
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="titulo">
+                    <h1>Comunicados del Profesor</h1>
+                </div>
+            </header>
+            
+            <section class="informacion" style="padding-bottom: 0;">
+                <section class="lista-comunicados">
+
+                	{% for comunicado in comunicados_profesor %}
+						<div class="item-comunicado">
+	                        <div class="top">
+	                            <p class="titulo comtitulo">{{ comunicado.comunicado.titulo }}</p>
+	                            <p class="fecha"> {{ comunicado.fecha }}</p>
+	                        </div>
+                        
+	                        <div class="mid">
+	                            <p class="mensaje-parte comdescr">
+	                           {{ comunicado.comunicado.descripcion }}
+	                            </p>
+	                        </div>
+                        
+	                        <div class="bot">
+	                            <p class="remitente" >Enviado por <span>{{comunicado.ensenia.profesor.usuario}}</span></p>
+	                        </div>                   
+                    	</div>
+
+
+					{% endfor %}                
+
+                    
+                    
+                    
+                </section>
+
+                
+                <section class="comunicado-completo">
+                    
+                </section>
+            </section>
+        </div>
+{% endblock contenido %}
+
+{% block additional-scripts %}
+    <script src="{{STATIC_URL}}js/jquery.mCustomScrollbar.js"></script>
+    <script>
+    (function($){
+        $(window).load(function(){
+            $(".lista-comunicados").mCustomScrollbar({
+                advanced:{
+                    updateOnContentResize: true
+                }
+            });
+
+            $('.lista-comunicados').resize();
+            $('.comunicado-completo').resize();
+        });
+        
+        $(window).resize(function() {
+            var enc_alt = $('.cabecera').height();
+            
+            var alt = window.innerHeight-enc_alt - 45;
+            
+            $('.lista-comunicados').css('height', alt +'px');
+            $('.comunicado-completo').css('height', alt +'px');
+        });
+    })(jQuery);
+
+    $(document).on("ready", inicio);
+
+		function inicio(){
+			$(".item-comunicado").on("click",detalle_comunicado);
+			
+		}
+		function detalle_comunicado()
+		{ 
+			var titulo=$(".comtitulo");			
+			var descripcion=$(".comdescr");	
+			
+			html="<p class='titulo'>"+titulo.text()+"</p><hr><p class='mensaje'>"+descripcion.text()+"<br><br>Atte.</p>"
+			$(".comunicado-completo").html(html);
+		}
+
+    
+
+    </script>    
+{% endblock %}
