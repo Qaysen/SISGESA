@@ -1,75 +1,51 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.template import defaultfilters
-from django.dispatch import dispatcher
-from django.db.models import signals
+
 
 class Profesor(models.Model):
-	user = models.OneToOneField(User)
+	usuario = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
-	
+	cvitae=models.FileField(upload_to='cvitae/')
 	
 	def __unicode__(self):
-		return unicode(self.user)
+		return unicode(self.usuario)
 
 class Administrador(models.Model):
-	user = models.OneToOneField(User)
+	usuario = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.user)
+		return unicode(self.usuario)
 
 
 class Apoderado(models.Model):
-	user = models.OneToOneField(User)
+	usuario = models.OneToOneField(User)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
 	telefono =models.CharField(max_length=7,null=True,blank=True)
 	celular =models.CharField(max_length=10,null=True,blank=True)
 
 	
 	def __unicode__(self):
-		return unicode(self.user)
+		return unicode(self.usuario)
+
 
 class Alumno(models.Model):
-	user =models.OneToOneField(User)
+	usuario =models.OneToOneField(User)
 	apoderado = models.ForeignKey(Apoderado)
 	dni = models.CharField(max_length=8)
-	fecha_nacimiento = models.DateField(auto_now=False)
 	direccion =models.CharField(max_length=100,null=True,blank=True)
-	telefono =models.CharField(max_length=7,null=True,blank=True)
-	celular =models.CharField(max_length=10,null=True,blank=True)
+	telefono =models.CharField(max_length=6,null=True,blank=True)
+	celular =models.CharField(max_length=9,null=True,blank=True)
 
-	# def agregarEnGrupo(self):
-	# 	try:
-	# 		grupoAlumno = Group.objects.get(name='alumno')
-	# 	except:
-	# 		grupoNoExistente = Group(name="alumno")
-	# 		grupoNoExistente.save()
-	# 	finally:
-	# 		grupo = Group(name="alumno")
-	# 	print self.usuario
-	# 	self.usuario.groups.add(grupo)
-
-	# def save(self, *args, **kwargs):
-	# 	# self.agregarEnGrupo()
-		
-	# 	super(Alumno, self).save(*args, **kwargs)
-	# 	self.usuario.groups.add(Group(name="alumno"))
 
 	def __unicode__(self):
-		return unicode(self.user)
-
-
-def creando_alumno(sender, instance, signal, *args, **kwargs):
-	grupoAlumno, creado = Group.objects.get_or_create(name='alumno')
-	instance.user.groups.add(grupoAlumno)
-
-signals.pre_save.connect(creando_alumno, sender=Alumno)
+		return unicode(self.usuario)
 
 		
 class Curso(models.Model):
@@ -114,6 +90,7 @@ class Ensenia(models.Model):
 	
 	def __unicode__(self):
 		return '%s con %s en %s' %(self.cursogrado, self.profesor, self.seccion)
+
 
 class Evaluacion(models.Model):
 	tipo =models.CharField(max_length=10)
@@ -196,18 +173,22 @@ class Asistencia(models.Model):
 		return '%s-%s' %(self.alumno, self.estado)
 
 class Comunicado(models.Model):
-	nombre =models.CharField(max_length=30)
+	titulo =models.CharField(max_length=30)
 	descripcion =models.TextField(max_length=500)
 	
 	def __unicode__(self):
-		return unicode(self.nombre)
+		return unicode(self.titulo)
+
 
 class Comunica(models.Model):
 	comunicado = models.ForeignKey(Comunicado)
 	ensenia = models.ForeignKey(Ensenia)
+	fecha = models.DateField(auto_now=True)
+	
 		
 	def __unicode__(self):
 		return '%s-%s' %(self.comunicado, self.ensenia)
+
 
 class Envia(models.Model):
 	administrador = models.ForeignKey(Administrador)
@@ -217,11 +198,3 @@ class Envia(models.Model):
 	
 	def __unicode__(self):
 		return '%s-%s' %(self.administrador, self.comunicado)
-
-class Evento(models.Model):
-	nombre = models.CharField(max_length=100)
-	fecha_inicio = models.DateField(auto_now=False)
-	fecha_fin = models.DateField(auto_now=False)
-
-	def __unicode__(self):
-		return self.nombre

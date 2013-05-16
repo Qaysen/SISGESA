@@ -143,14 +143,6 @@ def colegio_ve_comunicados(request):
 	return render_to_response('colegio_ver_comunicados.html',ctx,context_instance=RequestContext(request))
 
 
-@login_required(login_url="/")
-def alumno_ve_comunicados(request):
-	alumno = request.user
-	detalle_alumno = Matricula.objects.get(alumno__usuario__username=alumno.username)
-	comunicados_salon = Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre)
-	comunicados_colegio = Envia.objects.all()	
-	ctx = {'comunicados_salon' : comunicados_salon , 'comunicados_colegio':comunicados_colegio}
-	return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))
 
 
 
@@ -236,11 +228,11 @@ def registrar_profesor(request):
 			usur2=User.objects.get(username=usuario['username'])
 			mi_clave=make_random_password()
 			usur2.set_password(mi_clave)
-			grupoProfesor, creado = Group.objects.get_or_create(name='profesor')
-			usur2.groups.add(grupoProfesor)
 			usur2.save()
 			usuario['usuario']=usur2.id
-			profesor_form=RegistrarProfesorForm(usuario)
+			# profesor_form=RegistrarProfesorForm(usuario)
+			profesor_form = RegistrarProfesorForm(usuario, request.FILES)
+
 			if profesor_form.is_valid():
 				profesor_form.save()
 				to_alumno = usur2.email
@@ -249,10 +241,13 @@ def registrar_profesor(request):
 				msg.attach_alternative(html_contenido,'text/html')#Definir el contenido como html
 				msg.send()				
 			return HttpResponseRedirect('/')
+		else:
+			user_form = UserForm()
+			profesor_form = RegistrarProfesorForm()
 	else:
 		user_form = UserForm()
 		profesor_form = RegistrarProfesorForm()
-	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
+	return render_to_response('registrar_profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
 
 
 def registrar_evento(request):
@@ -473,9 +468,6 @@ def ajax_profesores(request):
 	return HttpResponse(data, mimetype="application/json")
 
 
-
-
-
 def ajax_secciones_1(request):
 	grado = request.GET['grado']
 	ensenias = Ensenia.objects.filter(cursogrado__grado=grado)
@@ -495,3 +487,89 @@ def ajax_secciones_3(request):
 		secciones[ensenia.seccion] = ensenia.seccion.nombre
 	data = serializers.serialize('json', secciones, fields=('nombre'))
 	return HttpResponse(data, mimetype="application/json")
+
+########## Registrar comunicados
+
+@login_required(login_url="/")
+def reg_comunicado(request):
+	user = request.user
+	if user_in_group(user,"profesor"):
+		profesores = Profesor.objects.all()	
+		return render_to_response('reg_comunicado.html', {'profesores':profesores}, context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect('/')
+
+@login_required(login_url="/")
+def ajax_reg_comunicado(request):
+	user = request.user
+	if user_in_group(user,"profesor"):
+
+		if request.is_ajax():
+			usuario_id = request.POST['id']
+			grado = request.POST['grado']
+			seccion = request.POST['seccion']
+			titulo = request.POST['titulo']
+			descripcion = request.POST['descripcion']	
+			
+			try:
+				ensenia = Ensenia.objects.get(seccion__id= seccion, cursogrado__id=grado, profesor__usuario__id=usuario_id)
+				crea_comunicado=Comunicado(titulo=titulo, descripcion=descripcion)
+				crea_comunicado.save()
+				crea_comunica=Comunica(comunicado_id=crea_comunicado.id, ensenia_id=ensenia.id)
+				crea_comunica.save()
+				dato=True
+			except:
+				dato=False
+			return HttpResponse(dato)
+		else:
+			raise Http404
+	else:
+		return HttpResponseRedirect('/')
+
+@login_required(login_url="/")
+def ajax_grado_profesores(request):
+	user = request.user
+	if user_in_group(user,"profesor"):
+
+		usuario_id = request.GET['id']	
+		ctx = {}	
+		grados = Ensenia.objects.filter(profesor__usuario__id=usuario_id)		
+		for grado in grados:
+			ctx[grado.cursogrado.grado] = {}	
+		data = serializers.serialize('json',ctx)	
+		return HttpResponse(data , mimetype='application/json')
+	else:
+		return HttpResponseRedirect('/')
+
+@login_required(login_url="/")
+def ajax_seccion_profesores(request):
+	user = request.user
+	if user_in_group(user,"profesor"):
+
+		grado = request.GET['grado']	
+		usuario_id = request.GET['id']
+		ctx = {}	
+		secciones = Ensenia.objects.filter(profesor__usuario__id=usuario_id, cursogrado__grado__id=grado)
+		for seccion in secciones:
+			ctx[seccion.seccion] = {}	
+		data = serializers.serialize('json',ctx)
+		return HttpResponse(data , mimetype='application/json')
+	else:
+		return HttpResponseRedirect('/')
+
+
+####VEr comunicados alumnos
+@login_required(login_url="/")
+def alumno_ver_comunicados(request):
+	alumno = request.user
+	
+	detalle_alumno = Matricula.objects.get(alumno__usuario__username=alumno.username)
+	# detalle_alumno = Matricula.objects.all()
+
+	print detalle_alumno.seccion
+	print detalle_alumno.grado
+	
+	comunicados_profesor= Comunica.objects.filter(ensenia__seccion__nombre=detalle_alumno.seccion.nombre , ensenia__cursogrado__grado__nombre=detalle_alumno.grado.nombre)
+	print comunicados_profesor
+	ctx = {'comunicados_profesor' : comunicados_profesor}
+	return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))

@@ -1,0 +1,180 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="titulo">
+                   <h1>Registro Comunicado</h1>
+                </div>
+            </header>
+			
+			<section class="informacion">
+				
+						<legend>Registrar Comunicado</legend>
+								{% csrf_token %}
+
+
+								<div class="inputs">
+									<label>Profesores:</label>
+									<select id="profesores">
+                                    <option>Seleccione profesor: </option>
+									{% for prof in profesores %}									
+									<option value="{{prof.usuario.id}}">{{ prof.usuario}}</option>
+									{% endfor %}
+									</select>
+									<br>
+									<label>Para: </label>
+									<select id="elegir_grado">
+                                        <option>Selecciona una grado: </option>
+                   					</select>
+                   					<select id="elegir_seccion">
+                                        <option>Selecciona una seccion: </option>
+                    				</select>
+									
+								</div> 																
+
+								<div class="inputs">
+									<label> Titulo:</label>
+									<input type='text' name='titulo' id="titulo" maxlength='20'>
+									
+								</div>
+								<div class="inputs">
+									<label> Descripcion</label>
+									<input type='text' name='descripcion' id="descripcion" maxlength='20'>									
+								</div>		
+
+								
+								<br>
+								<a class="boton">Registrar</a>
+				
+	            <div class="asistencias">
+	            </div>
+	        </section>
+        </div>
+{% endblock contenido %}
+
+
+
+{% block script %}
+    <script type="text/javascript">
+       
+        $(document).on("ready", inicio);
+
+		function inicio(){
+			$("#profesores").on("change",elegir_grado);
+			$('#elegir_grado').on("change", elegir_seccion);
+			$('.boton').on("click", reg_comunicado);
+		}
+
+		function elegir_grado()
+		{
+			var id = $(this).val();
+			$.ajax({
+				data:{'id':id},
+				type: "GET",
+				url: "/ajax/grado_profesores/",
+				success: function(data)
+				{
+					 html = "<option>Selecciona una grado: </option>";
+                    for (var i = 0; i < data.length; i++) 
+                    {
+                html += "<option value='"+data[i].pk+"'>" + data[i].fields.nombre + " de "+data[i].fields.nivel+ "</option>";
+                    
+                    };
+                    $("#elegir_grado").html(html);		 		
+					
+				},
+				 error: function(data) {
+                    console.log(data);
+                }
+				
+				
+			});
+
+			
+
+		}
+
+		function elegir_seccion()
+        {
+            var grado = $("#elegir_grado").val();
+            var id = $("#profesores").val();
+
+            
+            $.ajax({
+                data: {'grado':grado,'id':id},
+                type: "GET",
+                url: "/ajax/seccion_profesores/",
+                success: function(data)
+				{
+					 html = "<option>Selecciona Seccion: </option>";
+                    for (var i = 0; i < data.length; i++) 
+                    {
+                html += "<option value='"+data[i].pk+"'>" + data[i].fields.nombre + "</option>";
+                    
+                    };
+                    $("#elegir_seccion").html(html);		 		
+					
+				},
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+		function reg_comunicado()
+        {
+            var id = $("#profesores").val();
+            var grado = $("#elegir_grado").val();
+			var seccion = $("#elegir_seccion").val();
+			var titulo=$("#titulo").val();
+			var descripcion=$("#descripcion").val();
+            
+            
+             $.ajax({
+                data: {'grado':grado,'id':id,'seccion':seccion, 'titulo':titulo,'descripcion':descripcion},
+                type: "POST",
+                url: "/ajax/reg_comunicado/",
+                success: function(data)
+				{
+					console.log(data);		 		
+					
+				},
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+        
+            
+            $(document).on("ready", setup);
+          function setup(){
+            $.ajaxSetup({
+              beforeSend: function(xhr, settings) {
+                function getCookie(name) {
+                  var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                      var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                          var cookie = jQuery.trim(cookies[i]);
+                          // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                            }
+                        }
+                    }
+                return cookieValue;
+                }
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+              // Only send the token to relative URLs i.e. locally.
+                  xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+              }
+            });
+          }
+
+       
+    </script>
+{% endblock script %}
