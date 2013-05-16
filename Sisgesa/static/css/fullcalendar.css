@@ -120,7 +120,7 @@ html .fc,
 	}
 	
 .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
-	background: #fcf8e3;
+	background:  #6bba70;
 	}
 	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
@@ -305,15 +305,15 @@ a.fc-event,
 .fc-ltr .fc-event-hori.fc-event-start,
 .fc-rtl .fc-event-hori.fc-event-end {
 	border-left-width: 1px;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
 	}
 
 .fc-ltr .fc-event-hori.fc-event-end,
 .fc-rtl .fc-event-hori.fc-event-start {
 	border-right-width: 1px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 	}
 	
 /* resizable */

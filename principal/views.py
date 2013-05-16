@@ -101,6 +101,22 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
+@login_required(login_url="/")	
+def ver_lista_padres(request): #,username):
+
+	user = request.user
+	
+	if user_in_group(user,"alumno"):
+		print("alumno")
+		pass
+	elif user_in_group(user,"padre"):
+		print("padre")
+	elif user_in_group(user,"profesor"):
+		print("profesor")
+	else :
+		print("administrador")
+
+>>>>>>> 78504430511ede3cd535c2f4539ec013956b5ea2
 # VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
@@ -230,6 +246,7 @@ def registrar_profesor(request):
 		profesor_form = RegistrarProfesorForm()
 	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
 
+
 def registrar_evento(request):
 	if request.method == 'POST':
 		evento = request.POST.copy()
@@ -244,20 +261,41 @@ def registrar_evento(request):
 	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
 
 
+@login_required(login_url="/")
 def ver_eventos_alumno(request):
+	user = request.user
+	print user.groups.all()
+	if user.groups.filter(name='padre'):
+		detalle_alumno = Matricula.objects.get(alumno__apoderado__user__username=user.username)
+	if user.groups.filter(name='alumno'):
+		detalle_alumno = Matricula.objects.get(alumno__user__username=user.username)
+	
 	fecha_actual = datetime.date.today()
 	ctx  = {}
 	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
 			 7:'Julio', 8:'Agosto', 9:'Septiembre', 10:'Octubre', 11:'Noviembre', 12:'Diciembre'}
 
+
 	value_meses = meses.values()
 	meses_eventos = []
 	for key, mes in meses.iteritems():
-		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
-		meses_eventos.append(dict([(mes,eventos)]))
+		eventos_mes = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
+		cumples = list(Matricula.objects.filter(seccion__nombre=detalle_alumno.seccion.nombre, grado__nombre=detalle_alumno.grado.nombre,alumno__fecha_nacimiento__month=key))
+		alumnos = [cumple.alumno for cumple in cumples]
+		cumpleanos = []
+		for cumple in cumples:
+			nombre = cumple.alumno.user.first_name
+			apellido = cumple.alumno.user.last_name
+			nac = cumple.alumno.fecha_nacimiento
+			fecha = datetime.date(fecha_actual.year,nac.month,nac.day)
+			elemento = {"nombre":nombre, "apellido":apellido , "fecha":fecha}
+			cumpleanos.append(elemento)
 
+		eventos_all = eventos_mes + cumpleanos
+		meses_eventos.append(dict([(mes,eventos_all)]))
 	diccionario = {"meses":meses_eventos}
 	return render_to_response('ver_cal.html',diccionario,context_instance=RequestContext(request))
+
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):

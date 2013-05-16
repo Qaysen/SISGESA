@@ -8,13 +8,12 @@
                 </div>
             </header>
 			
-            {%  for mes in meses %}
+            {% for mes in meses %}
                 {% for nombre, eventos in mes.items %}
                     <h2>{{nombre}}</h2>
                     {% for evento in eventos %}
-                        <p>{{evento}}</p>
-                        <p>{{evento.fecha_inicio}}</p>
-                        <p>{{evento.fecha_fin}}</p>
+                        <p>{{evento.nombre}} {{evento.apellido}}</p>
+                        <p>{{evento.fecha}}</p>
                         <br>
                     {% endfor %}
                 {% endfor %}

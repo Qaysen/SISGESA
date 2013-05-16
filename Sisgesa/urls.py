@@ -1,3 +1,4 @@
+#encoding:utf-8
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -23,8 +24,6 @@ urlpatterns = patterns('',
 	url(r'^evento/registrar$' , 'principal.views.registrar_evento', name = 'registrar_evento'),
 	url(r'^eventos/$' , 'principal.views.ver_eventos_alumno', name = 'ver_eventos_alumno'),
 
-
-	
 	
 	url(r'^padre/(?P<username>.*)/lista_profesores$','principal.views.ver_lista_profesores'),
 
