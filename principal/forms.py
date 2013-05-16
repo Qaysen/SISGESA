@@ -47,10 +47,10 @@ class ComunicadoForm(forms.ModelForm):
 
 class ComunicaForm(forms.ModelForm):
 	class Meta:
-<<<<<<< HEAD
 		model = Comunica
 		fields = ('ensenia','comunicado')
-=======
+
+class RegistrarEventoForm(forms.ModelForm):
+	class Meta:
 		model = Evento
 		fields = ('nombre','fecha_inicio','fecha_fin')
->>>>>>> 9bdbd9522bc41cf8794a350ab9bbe9b231aa2149

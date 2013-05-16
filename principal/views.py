@@ -116,7 +116,7 @@ def ver_lista_padres(request): #,username):
 	else :
 		print("administrador")
 
->>>>>>> 78504430511ede3cd535c2f4539ec013956b5ea2
+
 # VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
@@ -439,10 +439,7 @@ def ajax_profesores(request):
 	print data 
 	return HttpResponse(data, mimetype="application/json")
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 9bdbd9522bc41cf8794a350ab9bbe9b231aa2149
 def ajax_secciones_1(request):
 	grado = request.GET['grado']
 	ensenias = Ensenia.objects.filter(cursogrado__grado=grado)

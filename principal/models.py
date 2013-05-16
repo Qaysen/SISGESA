@@ -43,10 +43,6 @@ class Alumno(models.Model):
 	telefono =models.CharField(max_length=6,null=True,blank=True)
 	celular =models.CharField(max_length=9,null=True,blank=True)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bdbd9522bc41cf8794a350ab9bbe9b231aa2149
 	def __unicode__(self):
 		return unicode(self.usuario)
 
@@ -201,3 +197,11 @@ class Envia(models.Model):
 	
 	def __unicode__(self):
 		return '%s-%s' %(self.administrador, self.comunicado)
+
+class Evento(models.Model):
+	nombre = models.CharField(max_length=100)
+	fecha_inicio = models.DateField(auto_now=False)
+	fecha_fin = models.DateField(auto_now=False)
+
+	def __unicode__(self):
+		return self.nombre
