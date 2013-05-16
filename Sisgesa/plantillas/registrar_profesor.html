@@ -1,0 +1,74 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="titulo">
+                   <h1>Registro Profesor</h1>
+                </div>
+            </header>
+			
+			<section class="informacion">
+				<form method="POST" enctype="multipart/form-data">
+						<legend>Registrar Profesor</legend>
+								{% csrf_token %}
+								<div class="inputs">
+									<label> {{formulario.first_name.label}}</label>
+									<input type='text' name='first_name' maxlength='20'>
+									<small>{{formulario.first_name.help_text}}</small>
+									<span style="color:red">{{ formulario.first_name.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{formulario.last_name.label}}</label>
+									<input type='text' name='last_name' maxlength='20'>
+									<small>{{formulario.last_name.help_text}}</small>
+									<span style="color:red">{{ formulario.last_name.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{formulario.email.label}}</label>
+									<input type='email' name='email' maxlength='20'>
+									<small>{{formulario.email.help_text}}</small>
+									<span style="color:red">{{ formulario.email.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{profesor_form.direccion.label}}</label>
+									<input type='text' name='direccion' maxlength='20'>
+									<small>{{profesor_form.direccion.help_text}}</small>
+									<span style="color:red">{{ profesor_form.direccion.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{profesor_form.telefono.label}}</label>
+									<input type='tel' name='telefono' maxlength='20'>
+									<small>{{profesor_form.telefono.help_text}}</small>
+									<span style="color:red">{{ profesor_form.telefono.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{profesor_form.celular.label}}</label>
+									<input type='tel' name='celular' maxlength='20'>
+									<small>{{profesor_form.celular.help_text}}</small>
+									<span style="color:red">{{ profesor_form.celular.errors }}</span>
+								</div>
+
+								<div class="inputs">
+									<label> {{profesor_form.cvitae.label}}</label>
+									<input type='file' name='cvitae' maxlength='20'>
+									<small>{{profesor_form.cvitae.help_text}}</small>
+									<span style="color:red">{{ profesor_form.cvitae.errors }}</span>
+								</div>
+								
+								
+								<br>
+								<input type="submit" value="Registrar" class="boton">
+				</form>
+	            <div class="asistencias">
+	            </div>
+	        </section>
+        </div>
+{% endblock contenido %}
+
+

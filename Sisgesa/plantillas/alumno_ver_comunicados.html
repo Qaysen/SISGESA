@@ -6,26 +6,17 @@
 </head>
 <body>
 	<div>
-		<h2>Comunicados de Aula</h2>
-		{% for comunicado in comunicados_salon %}
-			{{ comunicado.comunicado.nombre }}<br>
+		<h2>Comunicados del Profesor</h2>
+		{% for comunicado in comunicados_profesor %}
+			{{ comunicado.comunicado.titulo }}<br>
 			{{ comunicado.comunicado.descripcion }}<br>
+			{{ comunicado.fecha }}<br>
 
-			Escrito por {{comunicado.ensenia.profesor.usuario.first_name}}
+			Escrito por {{comunicado.ensenia.profesor.usuario}}
 			<br><br>
 		{% endfor %}
 	</div>
 
-	<div>
-		<h2>Comunicados del Colegio</h2>
-		{% for comunicado in comunicados_colegio %}
-			{{ comunicado.comunicado.nombre }}<br>
-			{{ comunicado.comunicado.descripcion }}<br>
-
-			Escrito por {{comunicado.administrador.usuario.first_name}}
-			<br><br>
-		{% endfor %}
-	</div>
 	
 </body>
 </html>

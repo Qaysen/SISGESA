@@ -1,0 +1,101 @@
+{% extends "lista_padres.html" %}
+
+{% block selector %}
+	<select id="elegir_grado">
+       	<option id="elegir_uno">Elige Uno</option>
+        {% for dicta in data %}
+        	<option value="{{dicta.id}}">
+        		{{dicta.nombre}} {{dicta.nivel}}
+        	</option>
+    	{% endfor %}
+    </select>
+
+    <label>Elija las Seccion que enseñan</label>
+    
+    <select name="" id="elegir_seccion">
+	</select>
+
+	<div id="resultado">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres y Apellidos</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
+                    <th>Direccion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+   <script type="text/javascript">
+        $(document).on("ready", inicio);
+
+        function inicio() 
+        {
+            $('#elegir_grado').on("change", elegirGrado);
+            $('#elegir_seccion').on("change", elegirSeccion);
+        }
+        function elegirGrado() 
+        {
+            var grado = $(this).val();
+            console.log(grado);
+            $.ajax({
+                data: { 'grado':grado},
+                type: "GET",
+                url: "/ajax/secciones/1/",
+                success: function(data) {
+                    html = "<option>Selecciona una seccion</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<option data-seccion='"+data[i].pk+"'>" + data[i].fields.nombre + "</option>";
+                        console.log(data[i].fields.nombre);
+                    };
+                    $("#elegir_seccion").html(html);
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+            
+        }
+        function elegirSeccion()
+        {
+            var grado = $("#elegir_grado").val();
+            var seccion = $("#elegir_seccion").find('option:selected').data('seccion');
+            console.log(seccion);
+            $.ajax({
+                data: {'seccion':seccion, 'grado':grado},
+                type: "GET",
+                url: "/padres",
+                success: function(data){
+                    html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr>";
+                        html += "<td>" + data[i].fields.nombre + "</td>";
+                        html += "<td>" + data[i].fields.telefono + "</td>";
+                        html += "<td>" + data[i].fields.celular + "</td>";
+                        html += "<td>" + data[i].fields.direccion + "</td>";
+                        html += "</tr>";
+                    };
+                    $('tbody').html(html);
+                    console.log(data);
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+{% endblock script %}

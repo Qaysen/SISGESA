@@ -1,0 +1,29 @@
+{% extends "lista_padres.html" %}
+
+{% block selector %}
+	
+	<div id="resultado">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres y Apellidos</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
+                    <th>Direccion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            	{% for apoderado in apoderados%}
+                <tr>
+                    <td>{{apoderado.nombre}}</td>
+                    <td>{{apoderado.telefono}}</td>
+                    <td>{{apoderado.celular}}</td>
+                    <td>{{apoderado.direccion}}</td>
+                </tr>                
+				{% endfor %}	
+            </tbody>
+        </table>
+    </div>		
+{% endblock %}
+

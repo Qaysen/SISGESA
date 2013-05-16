@@ -1,0 +1,73 @@
+{% extends "lista_padres.html" %}
+
+{% block selector %}
+    <p>
+        Selecciones uno de ellos
+    </p>
+    <select id="elegir_hijo">
+        {% for hijo in hijos %}
+            <option value="{{hijo.id}}">
+                {{hijo}}
+            </option>
+        {% endfor %}
+    </select>
+
+	<div id="resultado">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres y Apellidos</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
+                    <th>Direccion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+   <script type="text/javascript">
+        $(document).on("ready", inicio);
+
+        function inicio() 
+        {
+            $('#elegir_hijo').on("change", elegirHijo);
+        }
+        
+        function elegirHijo()
+        {
+            var id_alumno = $("#elegir_hijo").val();
+            $.ajax({
+                data: {'id_alumno':id_alumno},
+                type: "GET",
+                url: "/padres",
+                success: function(data){
+                    html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr>";
+                        html += "<td>" + data[i].fields.nombre + "</td>";
+                        html += "<td>" + data[i].fields.telefono + "</td>";
+                        html += "<td>" + data[i].fields.celular + "</td>";
+                        html += "<td>" + data[i].fields.direccion + "</td>";
+                        html += "</tr>";
+                    };
+                    $('tbody').html(html);
+                    console.log(data);
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+{% endblock script %}
