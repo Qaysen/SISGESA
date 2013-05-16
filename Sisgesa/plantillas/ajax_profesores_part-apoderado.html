@@ -1,0 +1,74 @@
+{% extends "base-app.html" %}
+
+{% block contenido %}
+        <div class="contenido">
+            <header class="cabecera">
+                <div class="opciones">
+                    <a href="#notas">Notas</a>
+                    <a href="#asistencias">Asistencias</a>
+                </div>
+            </header>
+            
+            <section class="informacion">
+                <h2>Alumnos</h2>
+                <div class="setting">
+                    <label>Elige un hijo para que veas sus compañeros</label>
+                    <select>
+                        <option id="elegir_uno">Elige Uno</option>
+                    {% for alumno in data %}
+                        <option value="{{alumno.user.id}}">{{alumno.user}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div id="resultado">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+{% endblock contenido %}
+
+{% block script %}
+    <script type="text/javascript">
+        console.log("{{data}}")
+        $(document).on("ready", inicio);
+
+        function inicio() {
+            $('select').on("change", elegir);
+        }
+        function elegir() {
+            $('#elegir_uno').attr('disabled', 'disabled');
+            var id = $(this).val();
+            // console.log(id);
+            $.ajax({
+                data: { 'id':id },
+                type: "GET",
+                url: "/ajax/profesores/",
+                success: function(data) {
+                    var html = "";
+                    for (var i=0;i<data.length;i++) {
+                        html += "<tr><td>" + data[i].curso + "</td><td>" + data[i].nombres + "</td><td> " + data[i].apellidos+ "</td><td></td></tr>";
+                    }
+                    $('#resultado tbody').html(html);
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                    var html = "";
+                    $('#resultado tbody').html(html);
+                }
+            });
+        }
+    </script>
+{% endblock script %}

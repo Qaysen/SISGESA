@@ -21,13 +21,15 @@
             <section class="informacion">
                 <h2>Alumnos</h2>
                 <div class="setting">
-                    <label>Elige un hijo para que veas sus compañeros</label>
+                    <label>Elija el grado</label>
                     <select id="elegir_grado">
                         <option id="elegir_uno">Elige Uno</option>
                     {% for dicta in data %}
                         <option value="{{dicta.cursogrado.id}}" data-profesor="{{dicta.profesor.id}}" data-grado="{{dicta.cursogrado.grado.id}}">{{dicta.cursogrado.grado.nombre}} {{dicta.cursogrado.grado.nivel}}</option>
                     {% endfor %}
                     </select>
+                    <br>
+                    <label>Elija la Seccion en la que enseña</label>
                     <select name="" id="elegir_seccion">
                     </select>
                 </div>

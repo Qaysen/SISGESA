@@ -1,19 +1,16 @@
 {% extends "lista_padres.html" %}
 
 {% block selector %}
-	<select id="elegir_grado">
-       	<option id="elegir_uno">Elige Uno</option>
-        {% for dicta in data %}
-        	<option value="{{dicta.id}}">
-        		{{dicta.nombre}} {{dicta.nivel}}
-        	</option>
-    	{% endfor %}
+    <p>
+        Selecciones uno de ellos
+    </p>
+    <select id="elegir_hijo">
+        {% for hijo in hijos %}
+            <option value="{{hijo.id}}">
+                {{hijo}}
+            </option>
+        {% endfor %}
     </select>
-
-    <label>Elija las Seccion que enseñan</label>
-    
-    <select name="" id="elegir_seccion">
-	</select>
 
 	<div id="resultado">
         <table>
@@ -44,39 +41,14 @@
 
         function inicio() 
         {
-            $('#elegir_grado').on("change", elegirGrado);
-            $('#elegir_seccion').on("change", elegirSeccion);
+            $('#elegir_hijo').on("change", elegirHijo);
         }
-        function elegirGrado() 
+        
+        function elegirHijo()
         {
-            var grado = $(this).val();
-            console.log(grado);
+            var id_alumno = $("#elegir_hijo").val();
             $.ajax({
-                data: { 'grado':grado},
-                type: "GET",
-                url: "/ajax/secciones/1/",
-                success: function(data) {
-                    html = "<option>Selecciona una seccion</option>";
-                    for (var i = 0; i < data.length; i++) {
-                        html += "<option data-seccion='"+data[i].pk+"'>" + data[i].fields.nombre + "</option>";
-                        console.log(data[i].fields.nombre);
-                    };
-                    $("#elegir_seccion").html(html);
-                    console.log(data);
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-            
-        }
-        function elegirSeccion()
-        {
-            var grado = $("#elegir_grado").val();
-            var seccion = $("#elegir_seccion").find('option:selected').data('seccion');
-            console.log(seccion);
-            $.ajax({
-                data: {'seccion':seccion, 'grado':grado},
+                data: {'id_alumno':id_alumno},
                 type: "GET",
                 url: "/padres",
                 success: function(data){

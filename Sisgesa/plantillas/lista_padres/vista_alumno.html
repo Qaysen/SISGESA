@@ -1,10 +1,29 @@
 {% extends "lista_padres.html" %}
 
 {% block selector %}
-	<select>
-		{% for hijo in hijos %}
-		<option value={{hijo.usuario.id}}>{{ hijo.usuario.first_name }}  {{hijo.usuario.last_name}}</option>
-		{% endfor %}
-	</select>
+	
+	<div id="resultado">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres y Apellidos</th>
+                    <th>Telefono</th>
+                    <th>Celular</th>
+                    <th>Direccion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            	{% for apoderado in apoderados%}
+                <tr>
+                    <td>{{apoderado.nombre}}</td>
+                    <td>{{apoderado.telefono}}</td>
+                    <td>{{apoderado.celular}}</td>
+                    <td>{{apoderado.direccion}}</td>
+                </tr>                
+				{% endfor %}	
+            </tbody>
+        </table>
+    </div>		
 {% endblock %}
 

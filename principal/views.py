@@ -9,12 +9,17 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import simplejson as json
+from principal import lista_padres
 from principal.forms import *
 from principal.models import *
-from principal import lista_padres
 from random import choice
-
+from time import strptime
+from principal.funciones import *
+import calendar
+import datetime
 import random
+
+
 
 # Si esta logueado le envia a la pagina principal de la aplicacion, de lo contrario
 # le envia a una pagina para loguearse
@@ -96,25 +101,7 @@ def ver_hijos(request):
 	ctx = {'hijos':hijos}
 	return render_to_response('padre_ver_hijos.html',ctx,context_instance=RequestContext(request))
 
-def user_in_group(user,group):
-	return 1 if user.groups.filter(name=group).exists() else 0
-
-@login_required(login_url="/")	
-def ver_lista_padres(request): #,username):
-
-	user = request.user
-	
-	if user_in_group(user,"alumno"):
-		return lista_padres.alumno_viendo(request)
-	elif user_in_group(user,"padre"):
-		return lista_padres.padre_viendo(request)
-	elif user_in_group(user,"profesor"):
-		return lista_padres.profesor_viendo(request)
-	else :
-		return lista_padres.admin_viendo(request)
-
-# VER TODOS LOS COMUNICADOS DE UN ALUMNO , FALTAA MANDARLE COMO PARAMETRO EL USERNAME DEL ALUMNO,
-# QUE VIENE DEL LOGIN
+# VER TODOS LOS COMUNICADOS DE UN ALUMNO 
 @login_required(login_url="/")
 def padre_ve_comunicados(request):
 	padre = request.user
@@ -149,14 +136,6 @@ def alumno_ve_comunicados(request):
 	ctx = {'comunicados_salon' : comunicados_salon , 'comunicados_colegio':comunicados_colegio}
 	return render_to_response('alumno_ver_comunicados.html',ctx,context_instance=RequestContext(request))
 
-
-
-# @login_required(login_url="/")
-# def ver_lista_padres(request):
-# 	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
-# 	ctx = {'hijos':hijos}
-#  	return render_to_response('lista_padres.html',ctx,context_instance=RequestContext(request))
-
 def ajax_padres(request):
 	usuario_id = request.GET['id']
 	ctx ={}
@@ -171,7 +150,7 @@ def ajax_padres(request):
 	
 @login_required(login_url="/")
 def ver_lista_profesores(request):
-	hijos = Alumno.objects.filter(apoderado__usuario__username=request.user.username)
+	hijos = Alumno.objects.filter(apoderado__user__username=request.user.username)
 	ctx = {'hijos':hijos}
  	return render_to_response('lista_profesores.html',ctx,context_instance=RequestContext(request))
 
@@ -251,9 +230,37 @@ def registrar_profesor(request):
 		profesor_form = RegistrarProfesorForm()
 	return render_to_response('nuevo-profesor.html', {'formulario':user_form,'profesor_form': profesor_form }, context_instance=RequestContext(request))
 
+def registrar_evento(request):
+	if request.method == 'POST':
+		evento = request.POST.copy()
+		evento['fecha_inicio']=evento['fecha_inicio'][8:10]+'/'+evento['fecha_inicio'][5:7]+'/'+evento['fecha_inicio'][0:4]
+		evento['fecha_fin']=evento['fecha_fin'][8:10]+'/'+evento['fecha_fin'][5:7]+'/'+evento['fecha_fin'][0:4]
+		formulario = RegistrarEventoForm(evento)
+		if formulario.is_valid():
+			formulario.save()
+	else:		
+		formulario = RegistrarEventoForm()	
+	ctx = {'formulario':formulario}
+	return render_to_response('registrar_evento.html',ctx,context_instance=RequestContext(request))
+
+
+def ver_eventos_alumno(request):
+	fecha_actual = datetime.date.today()
+	ctx  = {}
+	meses = {1:'Enero', 2:'Febrero', 3:'Marzo', 4:'Abril', 5:'Mayo', 6:'Junio',
+			 7:'Julio', 8:'Agosto', 9:'Septiembre', 10:'Octubre', 11:'Noviembre', 12:'Diciembre'}
+
+	value_meses = meses.values()
+	meses_eventos = []
+	for key, mes in meses.iteritems():
+		eventos = list(Evento.objects.filter(fecha_inicio__year=fecha_actual.year,fecha_inicio__month=key).order_by('fecha_inicio'))
+		meses_eventos.append(dict([(mes,eventos)]))
+
+	diccionario = {"meses":meses_eventos}
+	return render_to_response('ver_cal.html',diccionario,context_instance=RequestContext(request))
+
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
-    from random import choice
     return ''.join([choice(allowed_chars) for i in range(length)])
 
 def alumnos(request):
@@ -290,12 +297,15 @@ def alumnos(request):
 	elif alumno:
 		matricula = Matricula.objects.get(alumno=alumno)
 		matriculas = Matricula.objects.filter(seccion=matricula.seccion, grado=matricula.grado)
+		print matriculas
 		data = matriculas
 		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
 	# Si soy administrador quiero ver a todos los alumnos
 	elif administrador:
-		data = administrador.celular
-		return render_to_response('ajax_alumnos.html', { "data": data }, context_instance=RequestContext(request))
+		grados=Grado.objects.all()
+		data = grados
+		print data
+		return render_to_response('ajax_alumnos_part-administrador.html', { "data": data }, context_instance=RequestContext(request))
 
 def ajax_alumnos(request):
 	usuario_id = request.GET['id']
@@ -335,8 +345,83 @@ def prueba(request):
 def ajax_prueba(request):
 	id_alumno = request.GET['id']
 	
+login_required('.')
+def profesores(request):
+	user = request.user
+	
+	# Si soy profesor quiero filtrar mis alumnos por grado y seccion
+	if user_in_group(user,"profesor"):
+		dictados = Ensenia.objects.filter(profesor=profesor)
+		data = dictados
+		return render_to_response('ajax_profesores_part-profesores.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy padre de familia quiero ver los alumnos que 
+	# estudian con mi hijo
+	elif user_in_group(user,"padre"):
+		alumnos = Alumno.objects.filter(apoderado= apoderado)
+		data = alumnos
+		return render_to_response('ajax_profesores_part-apoderado.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy alumno quiero ver a todos mis companeros
+	elif user_in_group(user,"alumno"):
+		matricula = Matricula.objects.get(alumno=alumno)
+		matriculas = Ensenia.objects.filter(seccion=matricula.seccion, cursogrado__grado=matricula.grado)
+		data = matriculas
+		return render_to_response('ajax_profesores_part-alumno.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy administrador quiero ver a todos los alumnos
+	else:
+		grados=Grado.objects.all()
+		data = grados
+		print data
+		return render_to_response('ajax_profesores_part-administrador.html', { "data": data }, context_instance=RequestContext(request))
 
 
+def ajax_profesores_2(request):
+	seccion = request.GET['seccion']
+	grado = request.GET['grado']
+	matriculas = Ensenia.objects.filter(seccion=seccion, cursogrado__grado=grado)
+	print matriculas
+	profesores = {}
+	for matricula in matriculas:
+		profesores[matricula.profesor.user] = {}
+	
+	data = serializers.serialize('json', profesores, fields=('first_name','last_name'))
+	return HttpResponse(data, mimetype="application/json")
 
 
+def ajax_profesores(request):
+	usuario_id = request.GET['id']
+	matricula = Matricula.objects.get(alumno__user=usuario_id)
+	matriculas = Ensenia.objects.filter(seccion=matricula.seccion, cursogrado__grado=matricula.grado)
+	print matriculas
+	alumnos=[]
+	for indice, elemento in enumerate(matriculas):
+		print matriculas[indice].cursogrado.curso.nombre
+		alumnos.append({	'curso':matriculas[indice].cursogrado.curso.nombre,
+							'nombres':matriculas[indice].profesor.user.first_name,
+							'apellidos':matriculas[indice].profesor.user.last_name,
+						})
 
+	#for matricula in matriculas:
+	#	alumnos[matricula.alumno.user] = {}
+	data = json.dumps( alumnos)
+	print data 
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_secciones_1(request):
+	grado = request.GET['grado']
+	ensenias = Ensenia.objects.filter(cursogrado__grado=grado)
+	print ensenias
+	secciones = {}
+	for ensenia in ensenias:
+		secciones[ensenia.seccion] = ensenia.seccion.nombre
+	data = serializers.serialize('json', secciones, fields=('nombre'))
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_secciones_3(request):
+	grado = request.GET['grado']
+	ensenias = Ensenia.objects.filter(cursogrado__grado=grado)
+	print ensenias
+	secciones = {}
+	for ensenia in ensenias:
+		secciones[ensenia.seccion] = ensenia.seccion.nombre
+	data = serializers.serialize('json', secciones, fields=('nombre'))
+	return HttpResponse(data, mimetype="application/json")

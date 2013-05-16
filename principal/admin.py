@@ -23,5 +23,6 @@ admin.site.register(Asistencia)
 admin.site.register(Comunicado)
 admin.site.register(Comunica)
 admin.site.register(Envia)
+admin.site.register(Evento)
 
 
