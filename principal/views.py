@@ -471,3 +471,87 @@ def ajax_secciones_3(request):
 		secciones[ensenia.seccion] = ensenia.seccion.nombre
 	data = serializers.serialize('json', secciones, fields=('nombre'))
 	return HttpResponse(data, mimetype="application/json")
+
+
+
+
+
+#SOLO ESTA HABILITADA PARA EL PROFESOR
+def asistencia(request):
+	usuario = request.user
+	try:
+		profesor = Profesor.objects.get(user=usuario)
+	except:
+		profesor = ""
+	try:
+		apoderado = Apoderado.objects.get(user=usuario)
+	except:
+		apoderado = ""
+	try:
+		alumno = Alumno.objects.get(user=usuario)
+	except:
+		alumno = ""
+	try:
+		administrador = Administrador.objects.get(user=usuario)
+	except:
+		administrador = ""
+
+	# Si soy profesor quiero filtrar mis alumnos por grado y seccion
+	if profesor:
+		dictados = Ensenia.objects.filter(profesor=profesor).values('cursogrado__grado__nivel','cursogrado__id','profesor__id','cursogrado__curso','cursogrado__grado__nombre').distinct()
+		data = dictados
+		return render_to_response('ajax_asistencia_part-profesores.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy padre de familia quiero ver los alumnos que 
+	# estudian con mi hijo
+	elif apoderado:
+		alumnos = Alumno.objects.filter(apoderado= apoderado)
+		data = alumnos
+		print "lokilloooo"
+		return render_to_response('ajax_asistencia_part-apoderado.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy alumno quiero ver a todos mis companeros
+	elif alumno:
+		matricula = Matricula.objects.get(alumno=alumno)
+		matriculas = Ensenia.objects.filter(seccion=matricula.seccion, cursogrado__grado=matricula.grado)
+		data = matriculas
+		return render_to_response('ajax_profesores_part-alumno.html', { "data": data }, context_instance=RequestContext(request))
+	# Si soy administrador quiero ver a todos los alumnos
+	else:
+		grados=Grado.objects.all()
+		data = grados
+		print data
+		return render_to_response('ajax_profesores_part-administrador.html', { "data": data }, context_instance=RequestContext(request))
+
+def ajax_asistencias_2(request):
+	ensenia = request.GET['ensenia']
+	lista_alumnos = Asistencia.objects.filter(ensenia=ensenia)
+	lista=lista_alumnos.values('alumno__id','alumno__user__first_name','alumno__user__last_name').distinct()
+	alumnos=[]
+	for indice1,elemento1 in enumerate(lista):
+		x=lista_alumnos.filter(alumno__id=elemento1['alumno__id'])
+		mis_asistencias=[]
+		for indice2,elemento2 in enumerate(x):
+			mis_asistencias.append({
+				'asistencia':elemento2.estado
+				})
+		alumnos.append({
+			'alumno_nombre':elemento1['alumno__user__first_name'],
+			'alumno_apellido':elemento1['alumno__user__last_name'],
+			'asistencias':mis_asistencias
+			})
+	data = json.dumps(alumnos)
+	return HttpResponse(data, mimetype="application/json")
+
+def ajax_secciones_4(request):
+	cursogrado = request.GET['cursogrado']
+	profesor = request.GET['profesor']
+	ensenias = Ensenia.objects.filter(cursogrado=cursogrado, profesor=profesor)
+	secciones = []
+	for indice,elemento in enumerate(ensenias):
+		secciones.append({
+				'nombre':ensenias[indice].seccion.nombre,
+				'id_ensenia':ensenias[indice].id
+
+			})
+	data = json.dumps( secciones)
+	print data 
+	return HttpResponse(data, mimetype="application/json")

@@ -68,13 +68,20 @@ urlpatterns = patterns('',
 	url(r'^ajax/secciones/1/$', "principal.views.ajax_secciones_1"),
 
 
+	#asistencias
+	url(r'^asistencia/$', "principal.views.asistencia"),
+	url(r'^ajax/asistencias/2/$', 'principal.views.ajax_asistencias_2'),
+    url(r'^ajax/secciones/4$', "principal.views.ajax_secciones_4"),
+
+
+
 )
 
 #### USAR ESTO PARA PROBAR TEMPLATES ANTES DE CREAR LAS VISTAS, LOS QUE SE ENCARGUEN DE LAS VISTAS
 #### ELIMINAR LUEGO DE CREAR SUS VISTAS
-urlpatterns += patterns(
-	'django.views.generic.simple',
+# urlpatterns += patterns(
+# 	'django.views.generic.simple',
 	
-	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
-	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
-)
+# 	######ELIMINAR LA SIGUIENTE LINEA POR LA VISTA ADECUADA, LA ESTOY USANDO SOLO PARA PROBAR EL HTML
+# 	(r'^comunicados/$', 'direct_to_template', {'template': 'comunicados.html'}),
+# )
